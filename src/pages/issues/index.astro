@@ -1,0 +1,139 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const issues = (await getCollection('issues', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.number - a.data.number
+);
+
+const dateFmt = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<Layout
+  title="All issues · Jaseci Digest"
+  description="The complete archive of Jaseci Digest: every biweekly issue from the Jaseci & Jac open-source ecosystem."
+>
+  <section class="archive">
+    <p class="eyebrow">Archive</p>
+    <h1 class="display">All issues.</h1>
+
+    {
+      issues.length === 0 ? (
+        <p class="muted">No issues published yet. Check back soon.</p>
+      ) : (
+        <ul class="issue-list">
+          {issues.map((issue) => (
+            <li>
+              <a href={`/issues/${issue.slug}`}>
+                <span class="issue-num">N.{String(issue.data.number).padStart(2, '0')}</span>
+                <span class="issue-meta">
+                  <span class="issue-title">{issue.data.title}</span>
+                  <span class="issue-description muted">{issue.data.description}</span>
+                </span>
+                <span class="issue-date muted">{dateFmt.format(issue.data.date)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Layout>
+
+<style>
+  .archive {
+    margin: 2rem 0;
+    max-width: var(--content-width);
+  }
+
+  .issue-list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .issue-list li {
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .issue-list a {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.75rem;
+    align-items: baseline;
+    padding: 1.5rem 0.25rem 1.5rem 1.25rem;
+    text-decoration: none;
+    color: var(--text);
+    position: relative;
+    transition: background 0.15s ease, padding 0.15s ease;
+  }
+
+  .issue-list a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.18s ease;
+  }
+
+  .issue-list a:hover {
+    background: var(--accent-soft);
+  }
+
+  .issue-list a:hover::before {
+    transform: scaleY(1);
+  }
+
+  .issue-list a:hover .issue-num {
+    color: var(--accent);
+  }
+
+  .issue-num {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.02em;
+    padding-top: 0.2rem;
+    transition: color 0.15s ease;
+  }
+
+  .issue-meta {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .issue-title {
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+
+  .issue-description {
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .issue-date {
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .issue-list a {
+      grid-template-columns: auto 1fr;
+    }
+    .issue-date {
+      grid-column: 2;
+    }
+  }
+</style>

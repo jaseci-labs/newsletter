@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SubscribeForm from '../components/SubscribeForm.astro';
+---
+
+<Layout
+  title="About · Jaseci Digest"
+  description="About Jaseci Digest, a community newsletter for the Jaseci and Jac open-source ecosystem."
+>
+  <article class="about">
+    <p class="eyebrow">About</p>
+    <h1 class="display">A biweekly window<br />into Jaseci & Jac.</h1>
+
+    <p>
+      <strong>Jaseci Digest</strong> is a community newsletter for everyone building with
+      <a href="https://www.jaseci.org" target="_blank" rel="noopener">Jaseci</a> and the
+      <a href="https://www.jaseci.org" target="_blank" rel="noopener">Jac</a> programming language,
+      an AI-native, graph-shaped stack out of Jaseci Labs at the University of Michigan.
+    </p>
+
+    <p>
+      Every other Thursday we publish a short digest of what shipped, what was written,
+      and what's worth your attention from across the ecosystem. Five minutes, no fluff.
+    </p>
+
+    <h2 class="section-heading">What's inside.</h2>
+    <ul>
+      <li><strong>Featured:</strong> the story of the fortnight, often with a deep-dive article alongside.</li>
+      <li><strong>Built with Jac:</strong> community projects shipping on the stack.</li>
+      <li><strong>Articles:</strong> long-form posts and deep dives from across the community.</li>
+      <li><strong>Community:</strong> talks, RFCs, Discord highlights, JacHacks notes, jobs.</li>
+      <li><strong>Tools &amp; libraries:</strong> packages, plugins, and CLI utilities worth knowing about.</li>
+      <li><strong>Releases:</strong> what shipped across jaclang, byllm, jac-client, jac-scale, jac-super, jac-mcp, and jaseci.</li>
+    </ul>
+
+    <SubscribeForm />
+  </article>
+</Layout>
+
+<style>
+  .about {
+    margin: 2rem auto;
+    max-width: var(--content-width);
+  }
+</style>

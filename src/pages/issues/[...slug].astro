@@ -1,0 +1,241 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import SubscribeForm from '../../components/SubscribeForm.astro';
+
+export async function getStaticPaths() {
+  const issues = await getCollection('issues', ({ data }) => !data.draft);
+  return issues.map((issue) => ({
+    params: { slug: issue.slug },
+    props: { issue },
+  }));
+}
+
+interface Props {
+  issue: CollectionEntry<'issues'>;
+}
+
+const { issue } = Astro.props;
+const { Content } = await issue.render();
+
+const dateFmt = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const padded = String(issue.data.number).padStart(2, '0');
+---
+
+<Layout
+  title={`${issue.data.title} · Jaseci Digest Issue N.${padded}`}
+  description={issue.data.description}
+  issueNumber={issue.data.number}
+  tagline={issue.data.description}
+>
+  <article class="issue">
+    <header class="issue-header">
+      <div class="issue-meta">
+        <span class="issue-date">{dateFmt.format(issue.data.date)}</span>
+      </div>
+      <div class="issue-title-block">
+        <p class="eyebrow">Jaseci Digest</p>
+        <h1 class="display">N.{padded}</h1>
+        <p class="sr-only">{issue.data.title}</p>
+        <p class="issue-description">{issue.data.description}</p>
+      </div>
+    </header>
+
+    <div class="issue-body">
+      <Content />
+    </div>
+
+    <hr />
+
+    <section class="issue-subscribe" id="subscribe">
+      <p class="eyebrow">Get the next one in your inbox</p>
+      <SubscribeForm />
+    </section>
+
+    <nav class="issue-nav">
+      <a href="/issues">← All issues</a>
+    </nav>
+  </article>
+</Layout>
+
+<style>
+  .issue {
+    margin: 2rem auto;
+    max-width: var(--content-width);
+  }
+
+  .issue-header {
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) 4fr;
+    gap: 2.5rem;
+    align-items: start;
+    margin: 2rem 0 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .issue-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-top: 0.5rem;
+    border-top: 3px solid var(--accent);
+  }
+
+  .issue-number {
+    font-family: var(--font-mono);
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .issue-date {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+  }
+
+  .issue-title-block .display {
+    margin-top: 0.25rem;
+  }
+
+  .issue-description {
+    font-size: 1.15rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+    max-width: 52ch;
+    margin: 0.75rem 0 0;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 640px) {
+    .issue-header {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding-bottom: 1.75rem;
+    }
+    .issue-meta {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 1rem;
+      padding-top: 0.4rem;
+    }
+  }
+
+  /*
+   * Section headings (h2) — magazine-flag style with an orange bar marker,
+   * making each section scannable in a sectioned biweekly issue.
+   */
+  .issue-body :global(h2) {
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.1;
+    margin: 3.5rem 0 1.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--rule-soft);
+    position: relative;
+  }
+
+  .issue-body :global(h2::before) {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 2.5rem;
+    height: 3px;
+    background: var(--accent);
+  }
+
+  /*
+   * Item titles inside a section (h3) — sentence case, lighter weight.
+   * Reads as a list of links rather than blocky uppercase subheadings.
+   * For deep-dive "numbered chapter" subheadings (e.g. "1. The core idea…"),
+   * use class="numbered-subhead" on raw HTML instead.
+   */
+  .issue-body :global(h3) {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 1.75rem 0 0.4rem;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+
+  .issue-body :global(h3 a) {
+    color: var(--text);
+    text-decoration: none;
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-size: 0% 1.5px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.18s ease, color 0.15s ease;
+    padding-bottom: 2px;
+  }
+
+  .issue-body :global(h3 a:hover) {
+    color: var(--accent);
+    background-size: 100% 1.5px;
+  }
+
+  /* Deep-dive numbered subheadings (opt-in via class) */
+  .issue-body :global(.numbered-subhead) {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 600;
+    margin: 2.25rem 0 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  .issue-body :global(p) {
+    margin: 0 0 1.1rem;
+  }
+
+  .issue-body :global(ul),
+  .issue-body :global(ol) {
+    margin: 0 0 1.1rem;
+    padding-left: 1.5rem;
+  }
+
+  .issue-body :global(li) {
+    margin: 0.4rem 0;
+  }
+
+  .issue-body :global(blockquote) {
+    border-left: 3px solid var(--rule);
+    margin: 1.75rem 0;
+    padding: 0.25rem 1.25rem;
+    font-style: normal;
+    font-size: 1.15rem;
+    color: var(--text);
+  }
+
+  .issue-body :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .issue-nav {
+    margin: 2rem 0 1rem;
+  }
+</style>

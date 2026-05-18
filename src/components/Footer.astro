@@ -1,0 +1,111 @@
+---
+interface Props {
+  issueNumber?: number | string;
+  tagline?: string;
+}
+
+const { issueNumber, tagline } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col footer-col--left">
+      <a href="https://www.jaseci.org" target="_blank" rel="noopener">WWW.JASECI.ORG</a>
+    </div>
+
+    <div class="footer-col footer-col--center">
+      {
+        issueNumber !== undefined && (
+          <div class="issue-meta">
+            <span class="issue-label">ISSUE<br />N.{String(issueNumber).padStart(2, '0')}</span>
+            {tagline && <span class="issue-tagline">{tagline}</span>}
+          </div>
+        )
+      }
+    </div>
+
+    <div class="footer-col footer-col--right">
+      <a href="/" aria-label="Jaseci Digest home">
+        <img src="/logo.png" alt="Jaseci" width="40" height="40" class="footer-logo" />
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 5rem;
+    padding: 1.75rem 0 2.5rem;
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .footer-col a {
+    text-decoration: none;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.82rem;
+  }
+
+  .footer-col--left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .footer-col--right {
+    justify-self: end;
+  }
+
+  .footer-logo {
+    display: block;
+    width: 40px;
+    height: 40px;
+  }
+
+  .issue-meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .issue-label {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .issue-tagline {
+    font-size: 0.85rem;
+    line-height: 1.35;
+    color: var(--text);
+    max-width: 28ch;
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid {
+      grid-template-columns: 1fr auto;
+      gap: 1.25rem;
+    }
+    .footer-col--center {
+      grid-column: 1 / -1;
+      order: 3;
+    }
+    .footer-col--right {
+      justify-self: end;
+    }
+    .issue-meta {
+      grid-template-columns: auto 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,49 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  issueNumber?: number | string;
+  tagline?: string;
+}
+
+const {
+  title,
+  description = 'A biweekly digest of the Jaseci open-source ecosystem: releases, talks, RFCs, and community highlights from the world of Jac and Jaseci.',
+  issueNumber,
+  tagline,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={new URL('/logo.png', Astro.site).toString()} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content={new URL('/logo.png', Astro.site).toString()} />
+    <link rel="alternate" type="application/rss+xml" title="Jaseci Digest" href="/rss.xml" />
+  </head>
+  <body>
+    <Header />
+    <main class="container">
+      <slot />
+    </main>
+    <Footer issueNumber={issueNumber} tagline={tagline} />
+  </body>
+</html>

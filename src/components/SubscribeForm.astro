@@ -1,0 +1,168 @@
+<form class="subscribe" data-subscribe-form novalidate>
+  <label class="eyebrow" for="bd-email">Subscribe. Biweekly, free, no spam.</label>
+  <div class="row">
+    <input
+      id="bd-email"
+      type="email"
+      name="email"
+      placeholder="you@example.com"
+      required
+      autocomplete="email"
+    />
+    <button type="submit" class="cta-pill" data-submit>Subscribe</button>
+  </div>
+  <p class="small muted form-help">
+    By subscribing you'll receive Jaseci Digest every other Thursday. Unsubscribe anytime.
+  </p>
+  <p class="form-status" data-status hidden></p>
+</form>
+
+<script>
+  const forms = document.querySelectorAll<HTMLFormElement>('[data-subscribe-form]');
+
+  forms.forEach((form) => {
+    const input = form.querySelector<HTMLInputElement>('input[name="email"]')!;
+    const button = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const status = form.querySelector<HTMLParagraphElement>('[data-status]')!;
+    const buttonDefault = button.textContent ?? 'Subscribe';
+
+    function setStatus(message: string, kind: 'success' | 'error' | '') {
+      status.textContent = message;
+      status.hidden = !message;
+      status.dataset.kind = kind;
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      setStatus('', '');
+
+      const email = input.value.trim();
+      if (!email) {
+        setStatus('Please enter your email address.', 'error');
+        input.focus();
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = 'Subscribing…';
+
+      try {
+        const response = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+        const data = await response.json().catch(() => ({}));
+
+        if (response.ok && data?.ok) {
+          if (data.alreadySubscribed) {
+            setStatus("You're already on the list. See you Thursday.", 'success');
+          } else {
+            setStatus("You're in. The next issue lands on Thursday.", 'success');
+          }
+          form.reset();
+        } else {
+          setStatus(data?.error ?? 'Something went wrong. Try again in a moment.', 'error');
+        }
+      } catch {
+        setStatus('Network error. Check your connection and try again.', 'error');
+      } finally {
+        button.disabled = false;
+        button.textContent = buttonDefault;
+      }
+    });
+  });
+</script>
+
+<style>
+  .subscribe {
+    position: relative;
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 2.25rem 2rem;
+    margin: 3rem 0;
+    display: grid;
+    gap: 0.9rem;
+    overflow: hidden;
+  }
+
+  .subscribe::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 5px;
+    background: var(--accent);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+
+  input[type='email'] {
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--bg);
+    border: 1px solid var(--text);
+    color: var(--text);
+    padding: 0.85rem 1.1rem;
+    font: inherit;
+    border-radius: 999px;
+    min-width: 0;
+  }
+
+  input[type='email']::placeholder {
+    color: var(--text-muted);
+  }
+
+  input[type='email']:focus {
+    outline: 2px solid var(--text);
+    outline-offset: 2px;
+  }
+
+  button[type='submit'] {
+    cursor: pointer;
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+    font-family: inherit;
+  }
+
+  button[type='submit']:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: var(--bg);
+    opacity: 1;
+  }
+
+  button[type='submit']:disabled {
+    cursor: progress;
+    opacity: 0.75;
+  }
+
+  .form-help {
+    margin: 0;
+  }
+
+  .form-status {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .form-status[data-kind='success'] {
+    color: #1f6b53;
+  }
+
+  .form-status[data-kind='error'] {
+    color: #a8341a;
+  }
+
+  @media (max-width: 480px) {
+    .row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

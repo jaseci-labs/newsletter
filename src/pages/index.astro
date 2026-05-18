@@ -1,0 +1,182 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import SubscribeForm from '../components/SubscribeForm.astro';
+
+const issues = (await getCollection('issues', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.number - a.data.number
+);
+
+const latest = issues[0];
+const previous = issues.slice(1, 4);
+
+const dateFmt = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<Layout title="Jaseci Digest · biweekly newsletter for the Jaseci & Jac ecosystem">
+  <section class="hero">
+    <p class="eyebrow">A biweekly digest · Jaseci & Jac</p>
+    <h1 class="display">Build with Jac.<br />Stay in the loop.</h1>
+    <p class="lede">
+      Releases, articles, talks, and community highlights from the Jaseci open-source
+      ecosystem, delivered to your inbox every other Thursday.
+    </p>
+  </section>
+
+  <section id="subscribe">
+    <SubscribeForm />
+  </section>
+
+  {
+    latest && (
+      <section class="latest">
+        <p class="eyebrow">Latest issue</p>
+        <h2 class="section-heading">
+          <a href={`/issues/${latest.slug}`}>{latest.data.title}</a>
+        </h2>
+        <p class="muted">
+          Issue N.{String(latest.data.number).padStart(2, '0')} ·{' '}
+          {dateFmt.format(latest.data.date)}
+        </p>
+        <p>{latest.data.description}</p>
+        <p>
+          <a class="cta-pill" href={`/issues/${latest.slug}`}>
+            Read issue N.{String(latest.data.number).padStart(2, '0')}
+          </a>
+        </p>
+      </section>
+    )
+  }
+
+  {
+    previous.length > 0 && (
+      <section class="archive-teaser">
+        <p class="eyebrow">Previous issues</p>
+        <ul class="issue-list">
+          {previous.map((issue) => (
+            <li>
+              <a href={`/issues/${issue.slug}`}>
+                <span class="issue-num">N.{String(issue.data.number).padStart(2, '0')}</span>
+                <span class="issue-title">{issue.data.title}</span>
+                <span class="issue-date muted">{dateFmt.format(issue.data.date)}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p>
+          <a href="/issues">See all issues →</a>
+        </p>
+      </section>
+    )
+  }
+</Layout>
+
+<style>
+  .hero {
+    padding: 3.5rem 0 2.5rem;
+    max-width: var(--content-width);
+    position: relative;
+  }
+
+  .hero::after {
+    content: '';
+    display: block;
+    width: 3.5rem;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 2rem;
+  }
+
+  .lede {
+    font-size: 1.15rem;
+    line-height: 1.5;
+    max-width: 50ch;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  .latest,
+  .archive-teaser {
+    margin: 3rem 0;
+    max-width: var(--content-width);
+  }
+
+  .issue-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  .issue-list li {
+    border-bottom: 1px solid var(--rule-soft);
+  }
+
+  .issue-list a {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.25rem;
+    align-items: baseline;
+    padding: 1rem 0.25rem 1rem 1rem;
+    text-decoration: none;
+    color: var(--text);
+    position: relative;
+    transition: background 0.15s ease;
+  }
+
+  .issue-list a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.18s ease;
+  }
+
+  .issue-list a:hover {
+    background: var(--accent-soft);
+  }
+
+  .issue-list a:hover::before {
+    transform: scaleY(1);
+  }
+
+  .issue-list a:hover .issue-num {
+    color: var(--accent);
+  }
+
+  .issue-num {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.02em;
+    transition: color 0.15s ease;
+  }
+
+  .issue-title {
+    font-weight: 500;
+  }
+
+  .issue-date {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 540px) {
+    .issue-list a {
+      grid-template-columns: auto 1fr;
+    }
+    .issue-date {
+      grid-column: 2;
+      font-size: 0.8rem;
+    }
+  }
+</style>

@@ -1,0 +1,15 @@
+.git
+.gitignore
+.github
+node_modules
+dist
+.astro
+.env
+.env.*
+!.env.example
+.vscode
+.idea
+.DS_Store
+README.md
+*.log
+deploy

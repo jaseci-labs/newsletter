@@ -1,0 +1,145 @@
+# Minimal Kubernetes manifest for Jaseci Digest on EKS.
+#
+# Before applying, your DevOps person should:
+#   1. Push the Docker image and update `image:` below with the full ECR path + tag.
+#   2. Create the `jaseci-digest-secrets` Secret with BUTTONDOWN_API_KEY:
+#        kubectl create secret generic jaseci-digest-secrets \
+#          -n jaseci-digest \
+#          --from-literal=BUTTONDOWN_API_KEY=<the key>
+#      Or better: have it materialized from AWS Secrets Manager via External Secrets Operator.
+#   3. Set the Ingress `host:` to the real domain (e.g. newsletter.jaseci.org) and the
+#      annotations for whichever ingress controller / cert-manager setup you use.
+#
+# Then:  kubectl apply -f deploy/k8s.yaml
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jaseci-digest
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jaseci-digest
+  namespace: jaseci-digest
+  labels:
+    app: jaseci-digest
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: jaseci-digest
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: jaseci-digest
+    spec:
+      containers:
+        - name: web
+          # TODO: replace with your ECR image URI, e.g.
+          # 123456789012.dkr.ecr.us-east-1.amazonaws.com/jaseci-digest:<tag>
+          image: REPLACE_ME/jaseci-digest:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 4321
+              protocol: TCP
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: HOST
+              value: 0.0.0.0
+            - name: PORT
+              value: "4321"
+            - name: PUBLIC_SITE_URL
+              value: https://newsletter.jaseci.org
+            - name: PUBLIC_BUTTONDOWN_USERNAME
+              value: jaseci
+            - name: BUTTONDOWN_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jaseci-digest-secrets
+                  key: BUTTONDOWN_API_KEY
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            timeoutSeconds: 2
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            timeoutSeconds: 3
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          securityContext:
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jaseci-digest
+  namespace: jaseci-digest
+spec:
+  type: ClusterIP
+  selector:
+    app: jaseci-digest
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: jaseci-digest
+  namespace: jaseci-digest
+  annotations:
+    # Adjust to whichever ingress controller / TLS issuer you're using.
+    # Examples (uncomment + edit):
+    #   kubernetes.io/ingress.class: alb
+    #   alb.ingress.kubernetes.io/scheme: internet-facing
+    #   alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    #   alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:...
+    #   cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: alb
+  rules:
+    - host: newsletter.jaseci.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: jaseci-digest
+                port:
+                  number: 80
+  # Uncomment once your TLS solution is wired up:
+  # tls:
+  #   - hosts:
+  #       - newsletter.jaseci.org
+  #     secretName: jaseci-digest-tls

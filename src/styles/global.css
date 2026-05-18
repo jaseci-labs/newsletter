@@ -1,0 +1,328 @@
+/* Jaseci Digest — magazine/editorial style (matches teammate's template) */
+
+:root {
+  --bg: #f3efe6;
+  --bg-soft: #ece7db;
+  --text: #0a0a0a;
+  --text-muted: #5a5752;
+  --rule: #0a0a0a;
+  --rule-soft: #1a1a1a33;
+  /* Jaseci-aligned orange accent (used sparingly: eyebrow, hover, logo inner, CTA) */
+  --accent: #d97a2c;
+  --accent-hover: #b85f15;
+  --accent-soft: #f5dfc4;
+  --max-width: 1100px;
+  --content-width: 720px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('https://rsms.me/inter/font-files/InterVariable.woff2?v=4.0') format('woff2');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--accent);
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent-hover);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.container--narrow {
+  max-width: var(--content-width);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.display {
+  font-size: clamp(2.25rem, 5.5vw, 4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 1.5rem 0 1.25rem;
+}
+
+.section-heading {
+  font-size: clamp(1.5rem, 3.2vw, 2.15rem);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 3.5rem 0 1.25rem;
+}
+
+.section-heading--numbered::before {
+  content: attr(data-number) ". ";
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 1.75rem;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+article p {
+  margin: 0 0 1.1rem;
+  max-width: 65ch;
+}
+
+article ul,
+article ol {
+  padding-left: 1.5rem;
+  max-width: 65ch;
+}
+
+article li {
+  margin: 0.4rem 0;
+}
+
+article img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 2rem 0;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--bg-soft);
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+}
+
+pre {
+  background: #0a0a0a;
+  color: #f3efe6;
+  border-radius: 6px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 2.5rem 0;
+}
+
+blockquote {
+  border-left: 3px solid var(--rule);
+  margin: 1.5rem 0;
+  padding: 0.25rem 1.25rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.small {
+  font-size: 0.9rem;
+}
+
+/* Two-column intro layout (text left, image right) */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin: 2rem 0 3rem;
+  align-items: start;
+}
+
+.intro-grid h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+  line-height: 1.1;
+}
+
+.intro-grid figure {
+  margin: 0;
+}
+
+.intro-grid img {
+  margin: 0;
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* CTA pill */
+.cta-pill {
+  display: inline-block;
+  padding: 0.85rem 1.75rem;
+  border: 1px solid var(--text);
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.cta-pill:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+/* Arrow-in-circle inline CTA — used as a clickable link to a feature article */
+.arrow-cta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin: 3rem 0;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.arrow-cta:hover {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.arrow-cta__icon {
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--text);
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--text);
+  background: transparent;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.arrow-cta:hover .arrow-cta__icon {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  transform: translateX(4px);
+}
+
+.arrow-cta__text {
+  text-transform: uppercase;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  letter-spacing: -0.005em;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.arrow-cta__icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--text);
+}
+
+/* Full-width image used between sections inside an issue. */
+.section-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2.5rem 0;
+  border-radius: 4px;
+}
+
+.section-image--dark {
+  background: #0a0a0a;
+}
+
+/* End-of-issue large CTA, centered. */
+.end-cta {
+  display: flex;
+  justify-content: center;
+  margin: 4rem 0 2rem;
+}
+
+.cta-pill--lg {
+  padding: 1.1rem 2.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  border-width: 1.5px;
+}
+
+/* Intro-grid image: keep a tall portrait feel like the template's nebula. */
+.intro-grid figure img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #0a0a0a;
+}
