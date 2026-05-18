@@ -37,6 +37,25 @@ function json(data: unknown, status = 200): Response {
   });
 }
 
+// Active subscriber types in Buttondown. Anything else (`unsubscribed`,
+// `removed`, `spammed`, `complained`) means the address is NOT currently
+// receiving the newsletter and must not be silently treated as a happy duplicate.
+const ACTIVE_SUBSCRIBER_TYPES = new Set(['regular', 'unactivated', 'gifted']);
+
+async function getSubscriberType(apiKey: string, email: string): Promise<string | null> {
+  try {
+    const response = await fetch(
+      `${BUTTONDOWN_SUBSCRIBERS_URL}/${encodeURIComponent(email)}`,
+      { headers: { Authorization: `Token ${apiKey}` } },
+    );
+    if (!response.ok) return null;
+    const data = (await response.json().catch(() => ({}))) as { type?: unknown };
+    return typeof data.type === 'string' ? data.type : null;
+  } catch {
+    return null;
+  }
+}
+
 async function sendWelcomeEmail(
   apiKey: string,
   email: string,
@@ -157,8 +176,20 @@ export const POST: APIRoute = async ({ request }) => {
   const detail = String((errorBody as any)?.detail ?? '');
 
   if (code === 'email_already_exists' || /already.*subscribed|already exists/i.test(detail)) {
-    // Existing subscriber — don't resend the welcome.
-    return json({ ok: true, alreadySubscribed: true });
+    // Buttondown returns this for ANY pre-existing record — including users
+    // who've since unsubscribed. Check their current type before claiming
+    // "you're already on the list."
+    const currentType = await getSubscriberType(apiKey, email);
+    if (currentType && ACTIVE_SUBSCRIBER_TYPES.has(currentType)) {
+      return json({ ok: true, alreadySubscribed: true });
+    }
+    return json(
+      {
+        error:
+          "This email previously unsubscribed and can't be resubscribed automatically. If this was a mistake, email us and we'll sort it out.",
+      },
+      400,
+    );
   }
 
   if (code === 'subscriber_suppressed') {
