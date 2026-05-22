@@ -3,6 +3,9 @@ dist/
 .astro/
 .vercel/
 
+# Jac build cache (compiled JS, vite dist, node_modules, SQLite anchor store)
+.jac/
+
 # dependencies
 node_modules/
 
