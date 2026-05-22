@@ -3,6 +3,10 @@ name = "jaseci-digest"
 version = "0.1.0"
 description = "Biweekly newsletter for the Jaseci & Jac open-source ecosystem."
 
+[serve]
+base_route_app = "app"
+cl_route_prefix = "/"
+
 [plugins.client]
 enabled = true
 
