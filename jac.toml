@@ -17,6 +17,15 @@ enabled = true
 [plugins.scale]
 enabled = true
 
+[plugins.scale.kubernetes]
+app_name = "newsletter"
+namespace = "newsletter"
+
+[plugins.scale.secrets]
+BUTTONDOWN_API_KEY = "${BUTTONDOWN_API_KEY}"
+PUBLIC_BUTTONDOWN_USERNAME = "jaseci"
+PUBLIC_SITE_URL = "https://newsletter.jaseci.org"
+
 [dependencies.npm]
 react = "^18.2.0"
 react-dom = "^18.2.0"

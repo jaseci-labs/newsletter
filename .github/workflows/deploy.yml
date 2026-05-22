@@ -1,0 +1,85 @@
+name: Deploy newsletter with jac-scale
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'main.jac'
+      - 'pages/**'
+      - 'src/**'
+      - 'styles/**'
+      - 'components/**'
+      - 'jac.toml'
+      - 'package.json'
+      - 'deploy/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4.2.0
+        with:
+          aws-region: us-east-2
+          role-to-assume: arn:aws:iam::776241927220:role/GitHubActionsJaseciDeployRole
+          role-session-name: GitHubActions-Newsletter
+          audience: sts.amazonaws.com
+
+      - name: Update kubeconfig for EKS
+        run: |
+          aws eks update-kubeconfig --region us-east-2 --name jaseci-cluster
+          kubectl config current-context
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Jaseci packages
+        run: |
+          pip install --upgrade pip
+          pip install jaclang jac-client "jac-scale[deploy]"
+
+      - name: Deploy newsletter with jac-scale
+        env:
+          BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
+        run: |
+          jac start main.jac --scale
+
+      - name: Verify deployment
+        run: |
+          echo "Checking deployment status..."
+          kubectl get deployments -n newsletter
+          kubectl get services -n newsletter
+          kubectl get pods -n newsletter
+
+      - name: Deployment Summary
+        if: always()
+        run: |
+          echo "## Newsletter Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "### Configuration" >> $GITHUB_STEP_SUMMARY
+          echo "- **App Name**: newsletter" >> $GITHUB_STEP_SUMMARY
+          echo "- **Namespace**: newsletter" >> $GITHUB_STEP_SUMMARY
+          echo "- **Host**: newsletter.jaseci.org" >> $GITHUB_STEP_SUMMARY
+          echo "- **Cluster**: jaseci-cluster" >> $GITHUB_STEP_SUMMARY
+          echo "- **Region**: us-east-2" >> $GITHUB_STEP_SUMMARY
+          echo "- **Triggered By**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Deployment Status" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          kubectl get all -n newsletter 2>&1 >> $GITHUB_STEP_SUMMARY || echo "Unable to fetch deployment status" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
