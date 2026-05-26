@@ -40,9 +40,9 @@ cl {
                 }
                 if data["ok"] {
                     if data["alreadySubscribed"] {
-                        status_message = "You're already on the list. See you Thursday.";
+                        status_message = "You're already on the list. See you Tuesday.";
                     } else {
-                        status_message = "You're in. The next issue lands on Thursday.";
+                        status_message = "You're in. The next issue lands on Tuesday.";
                     }
                     status_kind = "success";
                     email = "";
@@ -66,7 +66,7 @@ cl {
                 <h1 className="display">Build with Jac.<br />Stay in the loop.</h1>
                 <p className="lede">
                     Releases, articles, talks, and community highlights from the Jaseci open-source
-                    ecosystem, delivered to your inbox every other Thursday.
+                    ecosystem, delivered to your inbox every other Tuesday.
                 </p>
             </section>
 
@@ -91,7 +91,7 @@ cl {
                         </button>
                     </div>
                     <p className="small muted form-help">
-                        By subscribing you'll receive Jaseci Digest every other Thursday. Unsubscribe anytime.
+                        By subscribing you'll receive Jaseci Digest every other Tuesday. Unsubscribe anytime.
                     </p>
                     {status_message and (
                         <p className="form-status" data-kind={status_kind}>{status_message}</p>
@@ -106,7 +106,7 @@ cl {
                         <Link to={f"/issues/{latest['slug']}"}>{latest["title"]}</Link>
                     </h2>
                     <p className="muted">
-                        Issue N.{str(latest["number"]).rjust(2, "0")} · {latest["date"]}
+                        Issue N.{str(latest["number"]).rjust(2, "0")} · {latest["date_long"]}
                     </p>
                     <p>{latest["description"]}</p>
                     <p>
@@ -126,7 +126,7 @@ cl {
                                 <Link to={f"/issues/{issue['slug']}"}>
                                     <span className="issue-num">N.{str(issue["number"]).rjust(2, "0")}</span>
                                     <span className="issue-title">{issue["title"]}</span>
-                                    <span className="issue-date muted">{issue["date"]}</span>
+                                    <span className="issue-date muted">{issue["date_long"]}</span>
                                 </Link>
                             </li>
                             for issue in previous

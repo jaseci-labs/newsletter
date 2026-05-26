@@ -1,7 +1,7 @@
 ---
 title: Build with Jac
 description: How Jac is changing the way we build AI software with meaning-typed programming, object-spatial programming, and one language for AI-native full-stack development.
-date: 2026-05-15
+date: 2026-05-26
 eyebrow: Featured article · Issue N.01
 draft: false
 ---

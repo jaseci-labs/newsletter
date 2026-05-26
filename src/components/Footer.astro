@@ -9,26 +9,10 @@ const { issueNumber, tagline } = Astro.props;
 
 <footer class="site-footer">
   <div class="container footer-grid">
-    <div class="footer-col footer-col--left">
-      <a href="https://www.jaseci.org" target="_blank" rel="noopener">WWW.JASECI.ORG</a>
-    </div>
-
-    <div class="footer-col footer-col--center">
-      {
-        issueNumber !== undefined && (
-          <div class="issue-meta">
-            <span class="issue-label">ISSUE<br />N.{String(issueNumber).padStart(2, '0')}</span>
-            {tagline && <span class="issue-tagline">{tagline}</span>}
-          </div>
-        )
-      }
-    </div>
-
-    <div class="footer-col footer-col--right">
-      <a href="/" aria-label="Jaseci Digest home">
-        <img src="/logo.png" alt="Jaseci" width="40" height="40" class="footer-logo" />
-      </a>
-    </div>
+    <p class="footer-copyright">© 2026 Jaseci Digest. Part of the Jaseci open-source ecosystem.</p>
+    <a href="https://www.jaseci.org" target="_blank" rel="noopener">
+      <img src="/logo.png" alt="Jaseci" width="40" height="40" class="footer-logo" />
+    </a>
   </div>
 </footer>
 

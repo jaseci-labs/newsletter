@@ -2,6 +2,10 @@ sv import from ..main { Subscribe }
 
 cl {
     def:pub page() -> JsxElement {
+        can with entry {
+            document.title = "About · Jaseci Digest";
+        }
+
         has email: str = "";
         has status_message: str = "";
         has status_kind: str = "";
@@ -26,9 +30,9 @@ cl {
                 }
                 if data["ok"] {
                     if data["alreadySubscribed"] {
-                        status_message = "You're already on the list. See you Thursday.";
+                        status_message = "You're already on the list. See you Tuesday.";
                     } else {
-                        status_message = "You're in. The next issue lands on Thursday.";
+                        status_message = "You're in. The next issue lands on Tuesday.";
                     }
                     status_kind = "success";
                     email = "";
@@ -49,12 +53,12 @@ cl {
             <p>
                 <strong>Jaseci Digest</strong> is a community newsletter for everyone building with
                 {" "}<a href="https://www.jaseci.org" target="_blank" rel="noopener">Jaseci</a> and the
-                {" "}<a href="https://www.jaseci.org" target="_blank" rel="noopener">Jac</a> programming language,
-                an AI-native, graph-shaped stack out of Jaseci Labs at the University of Michigan.
+                {" "}<a href="https://docs.jaseci.org/quick-guide/" target="_blank" rel="noopener">Jac</a> programming language,
+                an AI-native, graph-shaped stack from the Jaseci open-source ecosystem.
             </p>
             <p>
-                Every other Thursday we publish a short digest of what shipped, what was written,
-                and what's worth your attention from across the ecosystem. Five minutes, no fluff.
+                Every other Tuesday we publish a short digest of what shipped, what was written,
+                and what's worth your attention from across the ecosystem. Short, scannable, no fluff.
             </p>
             <h2 className="section-heading">What's inside.</h2>
             <ul>
@@ -86,7 +90,7 @@ cl {
                     </button>
                 </div>
                 <p className="small muted form-help">
-                    By subscribing you'll receive Jaseci Digest every other Thursday. Unsubscribe anytime.
+                    By subscribing you'll receive Jaseci Digest every other Tuesday. Unsubscribe anytime.
                 </p>
                 {status_message and (
                     <p className="form-status" data-kind={status_kind}>{status_message}</p>

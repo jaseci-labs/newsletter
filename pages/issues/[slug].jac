@@ -26,6 +26,8 @@ cl {
                     data = result.reports[0];
                     if data["ok"] {
                         issue = data;
+                        padded = str(data["number"]).rjust(2, "0");
+                        document.title = f"{data['title']} · Jaseci Digest Issue N.{padded}";
                     } else {
                         error = str(data["error"]);
                     }
@@ -57,9 +59,9 @@ cl {
                 }
                 if data["ok"] {
                     if data["alreadySubscribed"] {
-                        status_message = "You're already on the list. See you Thursday.";
+                        status_message = "You're already on the list. See you Tuesday.";
                     } else {
-                        status_message = "You're in. The next issue lands on Thursday.";
+                        status_message = "You're in. The next issue lands on Tuesday.";
                     }
                     status_kind = "success";
                     email = "";
@@ -105,7 +107,7 @@ cl {
             <hr />
 
             <section className="issue-subscribe" id="subscribe">
-                <p className="eyebrow">Get the next one in your inbox</p>
+                <h2 className="section-heading">Get the next one in your inbox</h2>
                 <form className="subscribe" onSubmit={handle_submit} noValidate>
                     <label className="eyebrow" htmlFor="bd-email-issue">
                         Subscribe. Biweekly, free, no spam.
@@ -126,7 +128,7 @@ cl {
                         </button>
                     </div>
                     <p className="small muted form-help">
-                        By subscribing you'll receive Jaseci Digest every other Thursday. Unsubscribe anytime.
+                        By subscribing you'll receive Jaseci Digest every other Tuesday. Unsubscribe anytime.
                     </p>
                     {status_message and (
                         <p className="form-status" data-kind={status_kind}>{status_message}</p>

@@ -30,15 +30,10 @@ cl {
 
             <footer className="site-footer">
                 <div className="container footer-grid">
-                    <div className="footer-col footer-col--left">
-                        <a href="https://www.jaseci.org" target="_blank" rel="noopener">WWW.JASECI.ORG</a>
-                    </div>
-                    <div className="footer-col footer-col--center"></div>
-                    <div className="footer-col footer-col--right">
-                        <Link to="/">
-                            <img src="/logo.png" alt="Jaseci" width={40} height={40} className="footer-logo" />
-                        </Link>
-                    </div>
+                    <p className="footer-copyright">© 2026 Jaseci Digest. Part of the Jaseci open-source ecosystem.</p>
+                    <a href="https://www.jaseci.org" target="_blank" rel="noopener">
+                        <img src="/logo.png" alt="Jaseci" width={40} height={40} className="footer-logo" />
+                    </a>
                 </div>
             </footer>
         </>;

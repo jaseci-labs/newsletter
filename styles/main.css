@@ -3,14 +3,21 @@
 :root {
   --bg: #f3efe6;
   --bg-soft: #ece7db;
-  --text: #0a0a0a;
-  --text-muted: #5a5752;
-  --rule: #0a0a0a;
-  --rule-soft: #1a1a1a33;
-  /* Jaseci-aligned orange accent (used sparingly: eyebrow, hover, logo inner, CTA) */
-  --accent: #d97a2c;
-  --accent-hover: #b85f15;
-  --accent-soft: #f5dfc4;
+  /* Warm near-blacks pair better with cream + orange */
+  --text: #1f160e;
+  --text-heading: #160f0a;
+  --text-muted: #6a5f50;
+  --rule: #1f160e;
+  --rule-soft: #1f160e2e;
+  /* Brand-true Jaseci orange (from jaseci.org/built-with-jaseci) */
+  --accent: #ff6b35;
+  --accent-hover: #e85a25;
+  --accent-soft: #ffe1cc;
+  /* Secondary accent: warm amber — leans toward the orange family */
+  --accent-2: #fbbf24;
+  --accent-2-soft: #fef3c7;
+  /* Warm dark, for hover backgrounds + bold areas */
+  --warm-dark: #3a2d22;
   --max-width: 1100px;
   --content-width: 720px;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
@@ -71,7 +78,7 @@ h1,
 h2,
 h3,
 h4 {
-  color: var(--text);
+  color: var(--text-heading);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.05;
@@ -90,10 +97,35 @@ h4 {
 .section-heading {
   font-size: clamp(1.5rem, 3.2vw, 2.15rem);
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.1;
   margin: 3.5rem 0 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule-soft);
+  position: relative;
+  color: var(--text-heading);
+}
+
+.section-heading::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 3.5rem;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 55%, var(--accent-2) 55%, var(--accent-2) 100%);
+  border-radius: 2px;
+}
+
+.section-heading a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.section-heading a:hover {
+  color: var(--accent);
 }
 
 .section-heading--numbered::before {
@@ -115,10 +147,10 @@ h4 {
 .eyebrow::before {
   content: '';
   display: inline-block;
-  width: 1.75rem;
-  height: 2px;
-  background: var(--accent);
-  border-radius: 1px;
+  width: 2.5rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 50%, var(--accent-2) 50%, var(--accent-2) 100%);
+  border-radius: 1.5px;
 }
 
 article p {
@@ -224,10 +256,11 @@ blockquote {
 .cta-pill {
   display: inline-block;
   padding: 0.85rem 1.75rem;
-  border: 1px solid var(--text);
+  border: 1px solid var(--accent);
   border-radius: 999px;
   text-decoration: none;
-  color: var(--text);
+  background: var(--accent);
+  color: var(--bg);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 0.95rem;
@@ -236,8 +269,8 @@ blockquote {
 }
 
 .cta-pill:hover {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
   color: var(--bg);
 }
 
@@ -261,12 +294,12 @@ blockquote {
 .arrow-cta__icon {
   width: 64px;
   height: 64px;
-  border: 1px solid var(--text);
+  border: 1px solid var(--accent);
   border-radius: 999px;
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  color: var(--text);
+  color: var(--accent);
   background: transparent;
   transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
 }
@@ -279,17 +312,42 @@ blockquote {
 }
 
 .arrow-cta__text {
-  text-transform: uppercase;
-  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
   letter-spacing: -0.005em;
-  font-weight: 500;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.arrow-cta__text strong {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: clamp(1.1rem, 2.1vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.005em;
   line-height: 1.2;
+  color: var(--text-heading);
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--text-heading);
+  text-decoration-thickness: 1px;
+}
+
+.arrow-cta:hover .arrow-cta__text strong {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
 }
 
 .arrow-cta__icon svg {
   width: 28px;
   height: 28px;
-  stroke: var(--text);
+  stroke: var(--accent);
+}
+
+/* The arrow CTA controls its own underline — anchor itself stays undecorated */
+.issue-body .arrow-cta {
+  text-decoration: none;
 }
 
 /* Full-width image used between sections inside an issue. */
@@ -768,19 +826,21 @@ nav a {
   letter-spacing: -0.015em;
   line-height: 1.1;
   margin: 3.5rem 0 1.5rem;
-  padding-top: 0.75rem;
+  padding-top: 1rem;
   border-top: 1px solid var(--rule-soft);
   position: relative;
+  color: var(--text-heading);
 }
 
 .issue-body h2::before {
   content: '';
   position: absolute;
-  top: -1px;
+  top: -2px;
   left: 0;
-  width: 2.5rem;
-  height: 3px;
-  background: var(--accent);
+  width: 3.5rem;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 55%, var(--accent-2) 55%, var(--accent-2) 100%);
+  border-radius: 2px;
 }
 
 .issue-body h3 {
@@ -845,4 +905,273 @@ nav a {
 
 .issue-nav {
   margin: 2rem 0 1rem;
+}
+
+/* ============================================================
+   Archive page enhancements
+   ============================================================ */
+
+.archive {
+  margin: 2rem 0;
+  max-width: var(--content-width);
+}
+
+.archive-lede {
+  margin: 0.5rem 0 1.5rem;
+  max-width: 60ch;
+}
+
+/* Archive list — magazine-style rows with a numbered gutter */
+.issue-list--archive {
+  margin: 2.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.issue-list--archive li {
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.issue-list--archive a {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr auto 1.75rem;
+  gap: 1.75rem;
+  align-items: start;
+  padding: 2rem 1rem 2rem 1.25rem;
+  text-decoration: none;
+  color: var(--text);
+  position: relative;
+  transition: background 0.18s ease, padding-left 0.18s ease;
+}
+
+.issue-list--archive a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.2s ease;
+}
+
+.issue-list--archive a:hover {
+  background: var(--accent-soft);
+  padding-left: 1.5rem;
+}
+
+.issue-list--archive a:hover::before {
+  transform: scaleY(1);
+}
+
+.issue-list--archive .issue-num {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  line-height: 1;
+  padding-top: 0.25rem;
+  transition: color 0.18s ease;
+}
+
+.issue-list--archive a:hover .issue-num {
+  color: var(--accent);
+}
+
+.issue-meta-block {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.issue-list--archive .issue-title {
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.issue-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 55ch;
+}
+
+.issue-list--archive .issue-date {
+  font-size: 0.78rem;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding-top: 0.5rem;
+}
+
+/* Right-side arrow indicator, slides on hover */
+.issue-list--archive a::after {
+  content: '→';
+  align-self: center;
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.issue-list--archive a:hover::after {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+@media (max-width: 640px) {
+  .issue-list--archive a {
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem 1.25rem;
+    padding: 1.5rem 1rem;
+  }
+  .issue-list--archive .issue-num {
+    font-size: 1.25rem;
+  }
+  .issue-list--archive .issue-date {
+    grid-column: 2;
+    padding-top: 0;
+    font-size: 0.7rem;
+  }
+  .issue-list--archive a::after {
+    display: none;
+  }
+}
+
+/* ============================================================
+   UI polish layer — global, CSS-only, no markup changes
+   ============================================================ */
+
+/* Smooth scroll + nicer text selection */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--accent-2);
+  color: var(--text-heading);
+}
+
+/* Better keyboard focus rings */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Sticky header with backdrop blur — feels modern, doesn't take space */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(243, 239, 230, 0.85);
+  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+}
+
+/* Animated underline on nav links */
+nav a {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 1.5px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.22s ease, color 0.15s ease;
+  padding-bottom: 3px;
+}
+
+nav a:hover {
+  color: var(--accent);
+  background-size: 100% 1.5px;
+}
+
+/* Subscribe form polish: soft warm shadow + submit button lift */
+.subscribe {
+  box-shadow: 0 10px 28px -12px rgba(217, 122, 44, 0.22);
+}
+
+.subscribe input[type='email'] {
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+.subscribe button[type='submit'] {
+  transition: background 0.15s ease, transform 0.18s ease, box-shadow 0.2s ease, border-color 0.15s ease;
+}
+
+.subscribe button[type='submit']:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -6px rgba(184, 95, 21, 0.4);
+}
+
+/* CTA pill micro-lift */
+.cta-pill {
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+              transform 0.18s ease, box-shadow 0.2s ease;
+}
+
+.cta-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px -6px rgba(184, 95, 21, 0.45);
+}
+
+/* Footer link hover */
+.footer-col a {
+  transition: color 0.15s ease;
+}
+
+.footer-col a:hover {
+  color: var(--accent);
+}
+
+/* Soften body link underline with smooth color transition */
+.issue-body a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(217, 122, 44, 0.6);
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.issue-body a:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* Issue-body images: subtle warm shadow */
+.issue-body img {
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.18);
+  border-radius: 6px;
+}
+
+/* Sticky-header offset for anchor jumps (so #subscribe doesn't hide under header) */
+:where(section, article) {
+  scroll-margin-top: 6rem;
+}
+
+/* ============================================================
+   Footer copyright row — sits in the cream footer next to the logo
+   ============================================================ */
+
+.footer-copyright {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+.site-footer .footer-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .site-footer .footer-grid {
+    flex-direction: column-reverse;
+    gap: 1rem;
+    text-align: center;
+  }
+  .footer-copyright {
+    font-size: 0.78rem;
+  }
 }

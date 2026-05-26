@@ -4,6 +4,10 @@ cl import from "@jac/runtime" { Link }
 
 cl {
     def:pub page() -> JsxElement {
+        can with entry {
+            document.title = "All issues · Jaseci Digest";
+        }
+
         has loading: bool = True;
         has issues: list = [];
         has error: str = "";
@@ -23,30 +27,37 @@ cl {
             loading = False;
         }
 
-        return <article className="issues-list-page">
-            <p className="eyebrow">All issues</p>
-            <h1 className="display">The archive.</h1>
-            <p className="muted">
-                Every Jaseci Digest since the first. New issues land every other Thursday.
+        return <section className="archive">
+            <p className="eyebrow">Archive</p>
+            <h1 className="display">All issues.</h1>
+            <p className="muted archive-lede">
+                Every Jaseci Digest since the first. New issues land every other Tuesday.
             </p>
 
             {loading and <p className="muted">Loading…</p>}
             {error and <p className="form-status" data-kind="error">{error}</p>}
 
-            {(not loading) and (not error) and (
-                <ul className="issue-list">
+            {(not loading) and (not error) and (len(issues) == 0) and (
+                <p className="muted">No issues published yet. Check back soon.</p>
+            )}
+
+            {(not loading) and (not error) and (len(issues) > 0) and (
+                <ul className="issue-list issue-list--archive">
                     {[
                         <li key={issue["slug"]}>
                             <Link to={f"/issues/{issue['slug']}"}>
                                 <span className="issue-num">N.{str(issue["number"]).rjust(2, "0")}</span>
-                                <span className="issue-title">{issue["title"]}</span>
-                                <span className="issue-date muted">{issue["date"]}</span>
+                                <span className="issue-meta-block">
+                                    <span className="issue-title">{issue["title"]}</span>
+                                    <span className="issue-description muted">{issue["description"]}</span>
+                                </span>
+                                <span className="issue-date muted">{issue["date_long"]}</span>
                             </Link>
                         </li>
                         for issue in issues
                     ]}
                 </ul>
             )}
-        </article>;
+        </section>;
     }
 }

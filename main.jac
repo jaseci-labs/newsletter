@@ -19,6 +19,17 @@ import from urllib.error { HTTPError, URLError }
 
 cl {
     def:pub app(props: any) -> JsxElement {
+        can with entry {
+            document.title = "Jaseci Digest · biweekly newsletter for the Jaseci & Jac ecosystem";
+            existing = document.querySelector("link[rel='icon']");
+            if not existing {
+                icon = document.createElement("link");
+                icon.rel = "icon";
+                icon.type = "image/png";
+                icon.href = "/logo.png";
+                document.head.appendChild(icon);
+            }
+        }
         return <>{props.children}</>;
     }
 }
@@ -29,7 +40,7 @@ glob BUTTONDOWN_SUBSCRIBERS_URL = "https://api.buttondown.email/v1/subscribers";
 glob BUTTONDOWN_EMAILS_URL = "https://api.buttondown.email/v1/emails";
 
 glob WELCOME_SUBJECT = "Welcome to Jaseci Digest";
-glob WELCOME_BODY = "Hey,\n\nThanks for subscribing to **Jaseci Digest**, a biweekly roundup of what's happening across the Jaseci and Jac open-source ecosystem.\n\n**What to expect**\n\n- **One issue every other Thursday.** Releases, articles, JacHacks projects, talks, RFCs, and the occasional deep dive.\n- **No spam.** Unsubscribe anytime. Every email has a one-click link at the bottom.\n- **Worth your time.** Nothing goes out until it clears the editor's bar.\n\n**Before the first issue lands, a few things to explore**\n\n- Check out [jaseci.org](https://www.jaseci.org)\n- Join the [Jaseci Discord](https://discord.gg/jaseci). Most of the ecosystem conversation lives there.\n\nGot something we should cover? Just reply to this email. It lands in the editor's inbox.\n\nThanks,\nThe Jaseci Digest team";
+glob WELCOME_BODY = "Hey,\n\nThanks for subscribing to **Jaseci Digest**, a biweekly roundup of what's happening across the Jaseci and Jac open-source ecosystem.\n\n**What to expect**\n\n- **One issue every other Tuesday.** Releases, articles, JacHacks projects, talks, RFCs, and the occasional deep dive.\n- **No spam.** Unsubscribe anytime. Every email has a one-click link at the bottom.\n- **Worth your time.** Nothing goes out until it clears the editor's bar.\n\n**Before the first issue lands, a few things to explore**\n\n- Check out [jaseci.org](https://www.jaseci.org)\n- Join the [Jaseci Discord](https://discord.gg/jaseci). Most of the ecosystem conversation lives there.\n\nGot something we should cover? Just reply to this email. It lands in the editor's inbox.\n\nThanks,\nThe Jaseci Digest team";
 
 glob ACTIVE_SUBSCRIBER_TYPES = {"regular", "unactivated", "gifted"};
 glob ISSUES_DIR = "src/content/issues";
@@ -41,6 +52,16 @@ def:priv format_date(date_str: str) -> str {
         return parsed.strftime("%B %d, %Y").upper();
     } except Exception {
         return date_str.upper();
+    }
+}
+
+
+def:priv format_date_long(date_str: str) -> str {
+    try {
+        parsed = date_cls.fromisoformat(date_str);
+        return parsed.strftime("%B %d, %Y");
+    } except Exception {
+        return date_str;
     }
 }
 
@@ -97,6 +118,7 @@ def:priv parse_issue_file(path: Path) -> dict | None {
         "title": str(meta.get("title", "")),
         "date": raw_date,
         "date_formatted": format_date(raw_date),
+        "date_long": format_date_long(raw_date),
         "description": str(meta.get("description", "")),
         "body": body,
     };
@@ -125,6 +147,7 @@ walker:pub GetIssues {
                 "number": parsed["number"],
                 "title": parsed["title"],
                 "date": parsed["date"],
+                "date_long": parsed["date_long"],
                 "description": parsed["description"],
             });
         }
