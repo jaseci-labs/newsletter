@@ -31,7 +31,7 @@ cl {
             <p className="eyebrow">Archive</p>
             <h1 className="display">All issues.</h1>
             <p className="muted archive-lede">
-                Every Jaseci Digest since the first. New issues land every other Tuesday.
+                Every Jaseci Digest since the first. New issues land every other Wednesday.
             </p>
 
             {loading and <p className="muted">Loading…</p>}

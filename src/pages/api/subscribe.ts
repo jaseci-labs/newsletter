@@ -15,7 +15,7 @@ Thanks for subscribing to **Jaseci Digest**, a biweekly roundup of what's happen
 
 **What to expect**
 
-- **One issue every other Tuesday.** Releases, articles, JacHacks projects, talks, RFCs, and the occasional deep dive.
+- **One issue every other Wednesday.** Releases, articles, JacHacks projects, talks, RFCs, and the occasional deep dive.
 - **No spam.** Unsubscribe anytime. Every email has a one-click link at the bottom.
 - **Worth your time.** Nothing goes out until it clears the editor's bar.
 

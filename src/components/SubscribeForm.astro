@@ -12,7 +12,7 @@
     <button type="submit" class="cta-pill" data-submit>Subscribe</button>
   </div>
   <p class="small muted form-help">
-    By subscribing you'll receive Jaseci Digest every other Tuesday. Unsubscribe anytime.
+    By subscribing you'll receive Jaseci Digest every other Wednesday. Unsubscribe anytime.
   </p>
   <p class="form-status" data-status hidden></p>
 </form>
@@ -56,9 +56,9 @@
 
         if (response.ok && data?.ok) {
           if (data.alreadySubscribed) {
-            setStatus("You're already on the list. See you Tuesday.", 'success');
+            setStatus("You're already on the list. See you Wednesday.", 'success');
           } else {
-            setStatus("You're in. The next issue lands on Tuesday.", 'success');
+            setStatus("You're in. The next issue lands on Wednesday.", 'success');
           }
           form.reset();
         } else {

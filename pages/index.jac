@@ -40,9 +40,9 @@ cl {
                 }
                 if data["ok"] {
                     if data["alreadySubscribed"] {
-                        status_message = "You're already on the list. See you Tuesday.";
+                        status_message = "You're already on the list. See you Wednesday.";
                     } else {
-                        status_message = "You're in. The next issue lands on Tuesday.";
+                        status_message = "You're in. The next issue lands on Wednesday.";
                     }
                     status_kind = "success";
                     email = "";
@@ -66,7 +66,7 @@ cl {
                 <h1 className="display">Build with Jac.<br />Stay in the loop.</h1>
                 <p className="lede">
                     Releases, articles, talks, and community highlights from the Jaseci open-source
-                    ecosystem, delivered to your inbox every other Tuesday.
+                    ecosystem, delivered to your inbox every other Wednesday.
                 </p>
             </section>
 
@@ -91,7 +91,7 @@ cl {
                         </button>
                     </div>
                     <p className="small muted form-help">
-                        By subscribing you'll receive Jaseci Digest every other Tuesday. Unsubscribe anytime.
+                        By subscribing you'll receive Jaseci Digest every other Wednesday. Unsubscribe anytime.
                     </p>
                     {status_message and (
                         <p className="form-status" data-kind={status_kind}>{status_message}</p>
