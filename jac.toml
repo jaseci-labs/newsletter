@@ -45,3 +45,8 @@ vite = "^6.4.1"
 typescript = "^5.3.3"
 "@types/react" = "^18.2.0"
 "@types/react-dom" = "^18.2.0"
+
+[plugins.scale.kubernetes]
+liveness_initial_delay = 300
+liveness_failure_threshold = 10
+readiness_initial_delay = 60
