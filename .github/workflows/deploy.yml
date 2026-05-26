@@ -54,13 +54,43 @@ jobs:
           pip install --upgrade pip
           pip install jaclang jac-client "jac-scale[deploy]"
 
+      - name: Pre-deploy cluster baseline
+        run: |
+          echo "::group::StorageClasses (need a default)"
+          kubectl get sc
+          echo "::endgroup::"
+          echo "::group::EBS CSI driver status"
+          kubectl get pods -n kube-system -l app=ebs-csi-controller || true
+          echo "::endgroup::"
+          echo "::group::Current state of newsletter namespace"
+          kubectl get pvc,pods,events -n newsletter --sort-by=.metadata.creationTimestamp || true
+          echo "::endgroup::"
+
       - name: Deploy newsletter with jac-scale
         env:
           BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
         run: |
           jac start main.jac --scale
 
+      - name: Diagnose deploy failure
+        if: failure()
+        run: |
+          echo "::group::PVC status (most common blocker)"
+          kubectl get pvc -n newsletter
+          kubectl describe pvc -n newsletter
+          echo "::endgroup::"
+          echo "::group::Pods + describe for code-sync"
+          kubectl get pods -n newsletter
+          kubectl describe pod -n newsletter -l app=newsletter-code-sync || true
+          kubectl describe pod newsletter-code-sync -n newsletter || true
+          echo "::endgroup::"
+          echo "::group::Recent namespace events (warnings first)"
+          kubectl get events -n newsletter --sort-by=.lastTimestamp --field-selector type!=Normal || true
+          kubectl get events -n newsletter --sort-by=.lastTimestamp | tail -30
+          echo "::endgroup::"
+
       - name: Verify deployment
+        if: success()
         run: |
           echo "Checking deployment status..."
           kubectl get deployments -n newsletter
