@@ -44,6 +44,7 @@ glob WELCOME_BODY = "Hey,\n\nThanks for subscribing to **Jaseci Digest**, a biwe
 
 glob ACTIVE_SUBSCRIBER_TYPES = {"regular", "unactivated", "gifted"};
 glob ISSUES_DIR = "src/content/issues";
+glob ARTICLES_DIR = "src/content/articles";
 
 
 def:priv format_date(date_str: str) -> str {
@@ -192,6 +193,74 @@ walker:pub GetIssue {
             "date": parsed["date"],
             "date_formatted": parsed["date_formatted"],
             "description": parsed["description"],
+            "html": html,
+        };
+    }
+}
+
+
+walker:pub GetArticle {
+    has slug: str = "";
+
+    can get with Root entry {
+        if not self.slug {
+            report {"ok": False, "error": "missing slug"};
+            return;
+        }
+
+        path = Path(ARTICLES_DIR) / f"{self.slug}.md";
+        if not path.exists() {
+            report {"ok": False, "error": "not found"};
+            return;
+        }
+
+        try {
+            text = path.read_text(encoding="utf-8");
+        } except Exception {
+            report {"ok": False, "error": "could not read"};
+            return;
+        }
+
+        if not text.startswith("---") {
+            report {"ok": False, "error": "could not parse"};
+            return;
+        }
+
+        parts = text.split("---", 2);
+        if len(parts) < 3 {
+            report {"ok": False, "error": "could not parse"};
+            return;
+        }
+
+        try {
+            meta = yaml.safe_load(parts[1]);
+        } except Exception {
+            report {"ok": False, "error": "could not parse"};
+            return;
+        }
+
+        if not isinstance(meta, dict) {
+            report {"ok": False, "error": "could not parse"};
+            return;
+        }
+
+        if meta.get("draft", False) {
+            report {"ok": False, "error": "not found"};
+            return;
+        }
+
+        body = inject_markdown_attr(parts[2].strip());
+        html = md.markdown(
+            body,
+            extensions=["fenced_code", "codehilite", "tables", "attr_list", "md_in_html"],
+        );
+
+        report {
+            "ok": True,
+            "slug": self.slug,
+            "title": str(meta.get("title", "")),
+            "description": str(meta.get("description", "")),
+            "eyebrow": str(meta.get("eyebrow", "Article")),
             "html": html,
         };
     }

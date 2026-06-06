@@ -326,11 +326,11 @@ blockquote {
   font-weight: 700;
   letter-spacing: 0.005em;
   line-height: 1.2;
-  color: var(--text-heading);
+  color: var(--accent);
   text-transform: uppercase;
   text-decoration: underline;
   text-underline-offset: 4px;
-  text-decoration-color: var(--text-heading);
+  text-decoration-color: var(--accent);
   text-decoration-thickness: 1px;
 }
 
@@ -877,6 +877,9 @@ nav a {
 
 .issue-body p {
   margin: 0 0 1.1rem;
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 .issue-body ul,
