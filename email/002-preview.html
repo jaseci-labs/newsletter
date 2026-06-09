@@ -1,4 +1,4 @@
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3efe6;margin-bottom:24px;">
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{margin:0;background:#cfc8ba;font-family:'Inter','Helvetica Neue',Arial,sans-serif;color:#1f160e;}.wrap{max-width:600px;margin:24px auto;background:#f3efe6;padding:0 0 8px;}.wrap h2{font-size:22px;text-transform:uppercase;margin:32px 24px 12px;padding-top:18px;border-top:2px solid #ff6b35;}.wrap h3{font-size:17px;margin:20px 24px 6px;}.wrap h3 a{color:#160f0a;text-decoration:none;}.wrap p,.wrap ul{margin:10px 24px;font-size:15px;line-height:1.55;}.wrap a{color:#c0531f;}.wrap li{margin:4px 0;}.wrap code{font-family:monospace;}</style></head><body><div class="wrap"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3efe6;margin-bottom:24px;">
 <tr>
 <td align="center" style="padding: 20px 24px 0;">
 <a href="https://newsletter.jaseci.org" style="text-decoration:none;color:#1f160e;display:inline-block;">
@@ -14,12 +14,9 @@
 </tr>
 </table>
 
-Welcome to **Issue N.02** of [Jaseci Digest](https://newsletter.jaseci.org), a biweekly roundup of what's happening across the Jaseci and Jac open-source ecosystem.
-
-**This issue's lead:** [Jac Hammer](https://jachammer.ai/) turns a prompt into a real, full-stack app, with the database, authentication, and AI native to Jac and deployed in one click.
-
-## Featured
-
+<p>Welcome to <strong>Issue N.02</strong> of <a href="https://newsletter.jaseci.org">Jaseci Digest</a>, a biweekly roundup of what's happening across the Jaseci and Jac open-source ecosystem.</p>
+<p><strong>This issue's lead:</strong> <a href="https://jachammer.ai/">Jac Hammer</a> turns natural-language prompts into a working app, and the twist is that the code it writes is Jac.</p>
+<h2>Featured</h2>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 16px 0 24px;">
   <tr>
     <td style="border:1px solid rgba(31,22,14,0.18);border-left:4px solid #ff6b35;background:#ece7db;padding:22px 22px 24px;border-radius:4px;">
@@ -48,7 +45,7 @@ Welcome to **Issue N.02** of [Jaseci Digest](https://newsletter.jaseci.org), a b
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:4px 0 6px;">
         <tr><td style="background:#ece7db;border:1px solid rgba(31,22,14,0.18);border-radius:10px;padding:13px 16px;font-size:14px;line-height:1.5;color:#6a5f50;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">
           <span style="display:block;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#6a5f50;margin-bottom:5px;">&#10007;&nbsp; With Lovable</span>
-          Real authentication, a database, and a backend mean an external backend service like Supabase to set up and run, leaving you to wrestle two services into one working deployment.
+          Real authentication, a database, and a backend live in a separate Supabase project, leaving you to wrestle two services into one working deployment.
         </td></tr>
       </table>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 18px;">
@@ -83,40 +80,26 @@ Welcome to **Issue N.02** of [Jaseci Digest](https://newsletter.jaseci.org), a b
   </tr>
 </table>
 
-## Articles
-
-### [How Tobu used Jaseci to build an AI-powered memory graph](https://blogs.jaseci.org/blog/posts/tobu-memory-graph-case-study)
-
-[Tobu](https://tobu.life/) is an AI memory app that captures the people, places, and stories behind your photos. It models each one as a connected memory on a Jac graph, not a file in a folder. The highlights:
-
-- **2 weeks** to a working demo, **6 weeks** to production, **zero** prompt-engineering pipelines
-- **92.84%** retrieval accuracy, **2.2&times;** fewer missed memories than traditional RAG
-- **$1.5M** raised on the early traction
-
-## Community
-
-### [JacHacks Spring winners are live](https://jachacks.org/#spring-winners)
-
-JacHacks Spring wrapped with more than 300 participants and 81 projects shipped in four days. Winners landed across Agentic AI, Consumer Healthcare, Fintech, and Social Impact, alongside specialty awards like Best Use of Jac and Best Demo. See them all on the [winners page](https://jachacks.org/#spring-winners), or [explore all 81 submitted projects on Devpost](https://jachacks-spring.devpost.com/project-gallery).
-
-### [Join the Jaseci Discord](https://discord.com/invite/6j3QNdtcN6)
-
-The fastest way to talk to the team and other builders. RFC chatter, debugging help, release questions, and a steady stream of show-and-tells. Worth joining whether you're shipping in production or just curious.
-
-## Releases
-
-### [jaclang v0.16.0: Object-Spatial programs run client-side](https://docs.jaseci.org/community/release_notes/jaclang/)
-
-`cl` code now runs full Object-Spatial programs in-process: walkers, nodes, and edge traversal execute locally, with no server round-trip. Native compilation also gains proper AMD64 and ARM64 struct ABIs, so `jac nacompile` produces working standalone binaries.
-
-### [jac-desktop v0.1.1: a native desktop target for Jac](https://docs.jaseci.org/community/release_notes/jac-desktop/)
-
-New plugin (`pip install jac-desktop`). Adds a PyTauri desktop build target (`jac build --client desktop`) and a Tauri plugin manager, so one Jac codebase now ships as a native desktop app too.
-
-### [byllm v0.6.13: per-call system prompts](https://docs.jaseci.org/community/release_notes/byllm/)
-
-`by llm()` now takes a `system_prompt` (a string or a callable) that extends the base prompt, so an agent's persona can be cached separately from the function's semantics.
-
+<h2>Articles</h2>
+<h3><a href="https://blogs.jaseci.org/blog/posts/tobu-memory-graph-case-study">How Tobu used Jaseci to build an AI-powered memory graph</a></h3>
+<p><a href="https://tobu.life/">Tobu</a> is an AI memory app that captures the people, places, and stories behind your photos. It models each one as a connected memory on a Jac graph, not a file in a folder. The highlights:</p>
+<ul>
+<li><strong>2 weeks</strong> to a working demo, <strong>6 weeks</strong> to production, <strong>zero</strong> prompt-engineering pipelines</li>
+<li><strong>92.84%</strong> retrieval accuracy, <strong>2.2&times;</strong> fewer missed memories than traditional RAG</li>
+<li><strong>$1.5M</strong> raised on the early traction</li>
+</ul>
+<h2>Community</h2>
+<h3><a href="https://jachacks.org/#spring-winners">JacHacks Spring winners are live</a></h3>
+<p>JacHacks Spring wrapped with more than 300 participants and 81 projects shipped in four days. Winners landed across Agentic AI, Consumer Healthcare, Fintech, and Social Impact, alongside specialty awards like Best Use of Jac and Best Demo. See them all on the <a href="https://jachacks.org/#spring-winners">winners page</a>, or <a href="https://jachacks-spring.devpost.com/project-gallery">explore all 81 submitted projects on Devpost</a>.</p>
+<h3><a href="https://discord.com/invite/6j3QNdtcN6">Join the Jaseci Discord</a></h3>
+<p>The fastest way to talk to the team and other builders. RFC chatter, debugging help, release questions, and a steady stream of show-and-tells. Worth joining whether you're shipping in production or just curious.</p>
+<h2>Releases</h2>
+<h3><a href="https://docs.jaseci.org/community/release_notes/jaclang/">jaclang v0.16.0: Object-Spatial programs run client-side</a></h3>
+<p><code>cl</code> code now runs full Object-Spatial programs in-process: walkers, nodes, and edge traversal execute locally, with no server round-trip. Native compilation also gains proper AMD64 and ARM64 struct ABIs, so <code>jac nacompile</code> produces working standalone binaries.</p>
+<h3><a href="https://docs.jaseci.org/community/release_notes/jac-desktop/">jac-desktop v0.1.1: a native desktop target for Jac</a></h3>
+<p>New plugin (<code>pip install jac-desktop</code>). Adds a PyTauri desktop build target (<code>jac build --client desktop</code>) and a Tauri plugin manager, so one Jac codebase now ships as a native desktop app too.</p>
+<h3><a href="https://docs.jaseci.org/community/release_notes/byllm/">byllm v0.6.13: per-call system prompts</a></h3>
+<p><code>by llm()</code> now takes a <code>system_prompt</code> (a string or a callable) that extends the base prompt, so an agent's persona can be cached separately from the function's semantics.</p>
 <div style="text-align:center;margin:48px 0 16px;">
 <a href="https://newsletter.jaseci.org/issues" style="display:inline-block;padding:14px 32px;border:1.5px solid #ff6b35;background:#f3efe6;text-decoration:none;border-radius:999px;"><span style="text-transform:uppercase;letter-spacing:0.08em;font-size:14px;font-weight:600;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">Browse the archive</span></a>
 </div>
@@ -150,4 +133,4 @@ New plugin (`pip install jac-desktop`). Adds a PyTauri desktop build target (`ja
 </table>
 </td>
 </tr>
-</table>
+</table></div></body></html>

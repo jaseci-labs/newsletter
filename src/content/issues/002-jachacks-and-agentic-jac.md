@@ -2,13 +2,13 @@
 number: 2
 title: The roundup
 date: 2026-06-10
-description: A look at Jac Builder, the studio that turns a prompt into a real Jac app, plus the JacHacks Spring winners.
+description: A look at Jac Hammer, the studio that turns a prompt into a real Jac app, plus the JacHacks Spring winners.
 draft: false
 ---
 
 Welcome to **Issue N.02** of Jaseci Digest, a biweekly roundup of what's happening across the Jaseci and Jac open-source ecosystem.
 
-This week's lead is **[Jac Builder](https://jac-builder.jaseci.org/)**, a studio that turns natural-language prompts into a working app. The twist: the code it writes is Jac, so you get one AI-native, full-stack codebase.
+This week's lead is **[Jac Hammer](https://jachammer.ai/)**, a studio that turns a prompt into a real, full-stack app. Where Lovable hands you a frontend and a separate backend to wire up, Jac Hammer builds the database, authentication, and AI natively in Jac and deploys it all in one click.
 
 ## Featured
 
@@ -22,35 +22,62 @@ This week's lead is **[Jac Builder](https://jac-builder.jaseci.org/)**, a studio
 .issue-body .feat-points li { position:relative; padding-left:1.6rem; margin:0; line-height:1.45; }
 .issue-body .feat-points li::before { content:"\2192"; position:absolute; left:0; top:0; color:var(--accent); font-weight:700; }
 .issue-body .feat-points b { color:var(--text-heading); }
+.issue-body .feat-table-lead { margin:1.75rem 0 0.6rem; }
+.issue-body .feat-table { width:100%; table-layout:fixed; border-collapse:separate; border-spacing:0; margin:0.5rem 0 1.5rem; font-size:0.97rem; line-height:1.45; border:1px solid var(--rule-soft); border-radius:12px; overflow:hidden; box-shadow:0 2px 14px -8px rgba(31,22,14,0.22); }
+.issue-body .feat-table th, .issue-body .feat-table td { padding:0.85rem 1rem; text-align:left; vertical-align:top; }
+.issue-body .feat-table thead th { font-weight:700; font-size:0.95rem; }
+.issue-body .feat-table thead th:first-child { width:24%; background:var(--bg-soft); }
+.issue-body .feat-table thead th.jh { width:38%; background:var(--accent); color:var(--bg); }
+.issue-body .feat-table thead th.lv { width:38%; background:var(--bg-soft); color:var(--text-muted); }
+.issue-body .feat-table .row-label { font-weight:600; color:var(--text-heading); }
+.issue-body .feat-table td.jh { font-weight:600; color:var(--text-heading); background:rgba(217,122,44,0.13); }
+.issue-body .feat-table td.jh::before { content:"\2713\00a0\00a0"; color:var(--accent); font-weight:700; }
+.issue-body .feat-table td.lv { color:var(--text-muted); }
+.issue-body .feat-table tbody tr:not(:last-child) td { border-bottom:1px solid var(--rule-soft); }
+.issue-body .feat-table code { font-size:0.85em; }
+.issue-body .feat-question { font-size:clamp(1rem,1.9vw,1.2rem); font-weight:700; line-height:1.4; letter-spacing:-0.01em; color:var(--text-heading); margin:1.75rem 0 0.75rem; }
+.issue-body .feat-question .hl { color:var(--accent); }
+.issue-body .feat-vs { width:100%; border-collapse:separate; border-spacing:0 0.85rem; margin:1rem 0 1.5rem; }
+.issue-body .feat-vs-card { padding:1rem 1.25rem; border-radius:12px; line-height:1.5; font-size:1rem; }
+.issue-body .feat-vs-card .vs-label { display:block; font-weight:700; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.35rem; }
+.issue-body .feat-vs-card.lovable { background:var(--bg-soft); border:1px solid var(--rule-soft); color:var(--text-muted); }
+.issue-body .feat-vs-card.lovable .vs-label { color:var(--text-muted); }
+.issue-body .feat-vs-card.jachammer { background:rgba(217,122,44,0.09); border:1px solid var(--accent); border-left:5px solid var(--accent); color:var(--text); }
+.issue-body .feat-vs-card.jachammer .vs-label { color:var(--accent); }
+.issue-body .feat-vs-card.jachammer b { color:var(--text-heading); }
 </style>
 
-<a class="feat-hero" href="/articles/jac-builder">Jac Builder: an AI app studio that builds in Jac</a>
+<a class="feat-hero" href="/articles/jac-builder">Jac Hammer: an AI app studio that builds in Jac</a>
 
 <figure class="video-embed" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin:1.5rem 0 2rem;border-radius:10px;">
-  <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/48_MlEfci_M" title="Jac Builder demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/48_MlEfci_M" title="Jac Hammer demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </figure>
 
-<a class="arrow-cta" href="/articles/jac-builder">
-  <span class="arrow-cta__icon" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M5 12 H19 M13 6 L19 12 L13 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </span>
-  <span class="arrow-cta__text">
-    Describe an app, watch it build, just like <em>Lovable, v0, or Bolt</em>. The twist: the code it writes is Jac, so you get <b>one clean, AI-native codebase</b> with <b>auth and a database built in</b> (no third-party service to wire up), and you can <b>deploy it live in one click</b>. We built the same app in both, and <b>Jac Builder got there about 3x faster</b>.
-  </span>
-</a>
+<p class="feat-question">What if one prompt gave you a <span class="hl">real, full-stack app</span> with authentication and a database, that you <span class="hl">deploy frontend and backend in one click</span> and scale to millions?</p>
 
-<ul class="feat-points">
-  <li><b>One language, not three.</b> Frontend, backend, and AI all live in Jac. Nothing to keep in sync by hand.</li>
-  <li><b>Auth and database built in.</b> Native authentication and data storage come with the stack, no third-party service to wire up.</li>
-  <li><b>AI built in.</b> Need an LLM call? Write <code>by llm()</code>. No prompt files, no schemas.</li>
-  <li><b>Start from a template.</b> Begin from a real starter (full-stack with auth, a React client, live preview, or blank) and build on top.</li>
-  <li><b>Deploy in one click.</b> From a sentence to a live app on the internet. No Dockerfiles, no CI, no infra.</li>
-</ul>
+<table class="feat-vs">
+<tr><td class="feat-vs-card lovable"><span class="vs-label">&#10007;&nbsp; With Lovable</span>Real authentication, a database, and a backend mean an external backend service like Supabase to set up and run, leaving you to wrestle two services into one working deployment.</td></tr>
+<tr><td class="feat-vs-card jachammer"><span class="vs-label">&#10003;&nbsp; With Jac Hammer</span><b>It builds in Jac, a language where one-click deployment, the database, authentication, backend, and AI are all native.</b> Nothing to bolt on. Describe the app, and ship it. A real app, not a demo.</td></tr>
+</table>
+
+<p class="feat-table-lead"><b>Jac Hammer vs Lovable.</b> The differences that actually matter.</p>
+
+<table class="feat-table">
+  <thead>
+    <tr><th></th><th class="jh">Jac Hammer</th><th class="lv">Lovable</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="row-label">Languages to juggle</td><td class="jh">Just Jac</td><td class="lv">React, TypeScript, SQL, and more</td></tr>
+    <tr><td class="row-label">Deployment</td><td class="jh">Frontend and backend, one click, one deployment</td><td class="lv">Only the frontend; Supabase backend deployed separately</td></tr>
+    <tr><td class="row-label">Database</td><td class="jh">Native to Jac</td><td class="lv">A separate Postgres database on Supabase</td></tr>
+    <tr><td class="row-label">Authentication</td><td class="jh">Native to Jac</td><td class="lv">Added through Supabase</td></tr>
+    <tr><td class="row-label">Build for</td><td class="jh">Web, mobile, and desktop apps</td><td class="lv">Web apps only</td></tr>
+    <tr><td class="row-label">AI in your app</td><td class="jh">Native to Jac, no prompts (byLLM)</td><td class="lv">Wire up AI SDKs, APIs, and prompts</td></tr>
+  </tbody>
+</table>
 
 <div class="feat-try-wrap">
-  <a class="feat-try" href="https://jac-builder.jaseci.org/" target="_blank" rel="noopener">Try Jac Builder &rarr;</a>
+  <a class="feat-try" href="https://jachammer.ai/" target="_blank" rel="noopener">Try Jac Hammer &rarr;</a>
 </div>
 
 ## Articles
@@ -69,7 +96,7 @@ This week's lead is **[Jac Builder](https://jac-builder.jaseci.org/)**, a studio
 
 JacHacks Spring wrapped with more than 300 participants and 81 projects shipped in four days. Winners landed across Agentic AI, Consumer Healthcare, Fintech, and Social Impact, alongside specialty awards like Best Use of Jac and Best Demo. See them all on the [winners page](https://jachacks.org/#spring-winners), or [explore all 81 submitted projects on Devpost](https://jachacks-spring.devpost.com/project-gallery).
 
-### [Join the Jaseci Discord](https://discord.gg/jaseci)
+### [Join the Jaseci Discord](https://discord.com/invite/6j3QNdtcN6)
 
 The fastest way to talk to the team and other builders. RFC chatter, debugging help, release questions, and a steady stream of show-and-tells. Worth joining whether you ship in production or are just curious.
 
