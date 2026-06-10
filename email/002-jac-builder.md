@@ -37,7 +37,7 @@ Welcome to **Issue N.02** of [Jaseci Digest](https://newsletter.jaseci.org), a b
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:12px 0 18px;">
         <tr><td align="center">
           <a href="https://www.youtube.com/watch?v=6_2L_FWY6vY" target="_blank" rel="noopener" style="display:inline-block;padding:10px 24px;background:#ff0000;border-radius:999px;text-decoration:none;">
-            <span style="color:#ffffff;font-size:14px;font-weight:600;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">&#9658;&nbsp;&nbsp;Watch the 1-minute demo</span>
+            <span style="color:#ffffff;font-size:14px;font-weight:600;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">&#9658;&nbsp;&nbsp;Watch video</span>
           </a>
         </td></tr>
       </table>
