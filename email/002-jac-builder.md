@@ -30,13 +30,13 @@ Welcome to **Issue N.02** of [Jaseci Digest](https://newsletter.jaseci.org), a b
         </strong>
       </a>
 
-      <a href="https://www.youtube.com/watch?v=48_MlEfci_M" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
-        <img src="https://i.ytimg.com/vi/48_MlEfci_M/maxresdefault.jpg" width="100%" alt="Watch the Jac Hammer vs Lovable demo on YouTube" style="display:block;border:1px solid rgba(31,22,14,0.18);border-radius:8px;width:100%;max-width:100%;height:auto;">
+      <a href="https://www.youtube.com/watch?v=6_2L_FWY6vY" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
+        <img src="https://i.ytimg.com/vi/6_2L_FWY6vY/maxresdefault.jpg" width="100%" alt="Watch the Jac Hammer vs Lovable demo on YouTube" style="display:block;border:1px solid rgba(31,22,14,0.18);border-radius:8px;width:100%;max-width:100%;height:auto;">
       </a>
 
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:12px 0 18px;">
         <tr><td align="center">
-          <a href="https://www.youtube.com/watch?v=48_MlEfci_M" target="_blank" rel="noopener" style="display:inline-block;padding:10px 24px;background:#ff0000;border-radius:999px;text-decoration:none;">
+          <a href="https://www.youtube.com/watch?v=6_2L_FWY6vY" target="_blank" rel="noopener" style="display:inline-block;padding:10px 24px;background:#ff0000;border-radius:999px;text-decoration:none;">
             <span style="color:#ffffff;font-size:14px;font-weight:600;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">&#9658;&nbsp;&nbsp;Watch the 1-minute demo</span>
           </a>
         </td></tr>
@@ -105,15 +105,15 @@ The fastest way to talk to the team and other builders. RFC chatter, debugging h
 
 ## Releases
 
-### [jaclang v0.16.0: Object-Spatial programs run client-side](https://docs.jaseci.org/community/release_notes/jaclang/)
+### [jaclang v0.16.1: Object-Spatial programs run client-side](https://docs.jaseci.org/community/release_notes/jaclang/)
 
-`cl` code now runs full Object-Spatial programs in-process: walkers, nodes, and edge traversal execute locally, with no server round-trip. Native compilation also gains proper AMD64 and ARM64 struct ABIs, so `jac nacompile` produces working standalone binaries.
+`cl` code now runs full Object-Spatial programs in-process: walkers, nodes, and edge traversal execute locally, with no server round-trip. Native compilation also adds WebAssembly and Windows targets, so `jac nacompile` builds WASM apps and standalone Windows executables.
 
-### [jac-desktop v0.1.1: a native desktop target for Jac](https://docs.jaseci.org/community/release_notes/jac-desktop/)
+### [jac-desktop v0.2.0: a Jac-native desktop target](https://docs.jaseci.org/community/release_notes/jac-desktop/)
 
-New plugin (`pip install jac-desktop`). Adds a PyTauri desktop build target (`jac build --client desktop`) and a Tauri plugin manager, so one Jac codebase now ships as a native desktop app too.
+The desktop target is now fully Jac-native: `jac build --client desktop` compiles a single self-contained binary that embeds the OS webview. No more Rust toolchain, PyTauri, or PyInstaller in the chain.
 
-### [byllm v0.6.13: per-call system prompts](https://docs.jaseci.org/community/release_notes/byllm/)
+### [byllm v0.6.14: per-call system prompts](https://docs.jaseci.org/community/release_notes/byllm/)
 
 `by llm()` now takes a `system_prompt` (a string or a callable) that extends the base prompt, so an agent's persona can be cached separately from the function's semantics.
 

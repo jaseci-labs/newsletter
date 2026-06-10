@@ -50,7 +50,7 @@ This week's lead is **[Jac Hammer](https://jachammer.ai/)**, a studio that turns
 <a class="feat-hero" href="/articles/jac-builder">Jac Hammer: an AI app studio that builds in Jac</a>
 
 <figure class="video-embed" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin:1.5rem 0 2rem;border-radius:10px;">
-  <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/48_MlEfci_M" title="Jac Hammer demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/6_2L_FWY6vY" title="Jac Hammer demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </figure>
 
 <p class="feat-question">What if one prompt gave you a <span class="hl">real, full-stack app</span> with authentication and a database, that you <span class="hl">deploy frontend and backend in one click</span> and scale to millions?</p>
@@ -102,15 +102,15 @@ The fastest way to talk to the team and other builders. RFC chatter, debugging h
 
 ## Releases
 
-### [jaclang v0.16.0: Object-Spatial programs run client-side](https://docs.jaseci.org/community/release_notes/jaclang/)
+### [jaclang v0.16.1: Object-Spatial programs run client-side](https://docs.jaseci.org/community/release_notes/jaclang/)
 
-`cl` code now runs full Object-Spatial programs in-process: walkers, nodes, and edge traversal execute locally, with no server round-trip. Native compilation also gains proper AMD64 and ARM64 struct ABIs, so `jac nacompile` produces working standalone binaries.
+`cl` code now runs full Object-Spatial programs in-process: walkers, nodes, and edge traversal execute locally, with no server round-trip. Native compilation also adds WebAssembly and Windows targets, so `jac nacompile` builds WASM apps and standalone Windows executables.
 
-### [jac-desktop v0.1.1: a native desktop target for Jac](https://docs.jaseci.org/community/release_notes/jac-desktop/)
+### [jac-desktop v0.2.0: a Jac-native desktop target](https://docs.jaseci.org/community/release_notes/jac-desktop/)
 
-New plugin (`pip install jac-desktop`). Adds a PyTauri desktop build target (`jac build --client desktop`) and a Tauri plugin manager, so one Jac codebase now ships as a native desktop app too.
+The desktop target is now fully Jac-native: `jac build --client desktop` compiles a single self-contained binary that embeds the OS webview. No more Rust toolchain, PyTauri, or PyInstaller in the chain.
 
-### [byllm v0.6.13: per-call system prompts](https://docs.jaseci.org/community/release_notes/byllm/)
+### [byllm v0.6.14: per-call system prompts](https://docs.jaseci.org/community/release_notes/byllm/)
 
 `by llm()` now takes a `system_prompt` (a string or a callable) that extends the base prompt, so an agent's persona can be cached separately from the function's semantics.
 

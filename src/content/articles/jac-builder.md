@@ -13,7 +13,7 @@ draft: false
 </div>
 
 <figure class="video-embed" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin:1.5rem 0 2rem;border-radius:10px;">
-  <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/48_MlEfci_M" title="Jac Hammer demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" src="https://www.youtube.com/embed/6_2L_FWY6vY" title="Jac Hammer demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </figure>
 
 **What if one prompt gave you a real, full-stack app with authentication and a database, that you deploy frontend and backend in one click and scale to millions?**
