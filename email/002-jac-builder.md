@@ -3,7 +3,7 @@
 <td align="center" style="padding: 20px 24px 0;">
 <a href="https://newsletter.jaseci.org" style="text-decoration:none;color:#1f160e;display:inline-block;">
 <img src="https://newsletter.jaseci.org/logo.png" width="28" height="28" alt="" style="vertical-align:middle;border:0;display:inline-block;">
-<span style="display:inline-block;margin-left:8px;text-transform:uppercase;letter-spacing:0.18em;font-size:13px;font-weight:600;vertical-align:middle;color:#1f160e;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">Jaseci Digest</span>
+<span style="display:inline-block;margin-left:8px;text-transform:uppercase;letter-spacing:0.18em;font-size:13px;font-weight:600;vertical-align:middle;color:#1f160e;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">Jaseci Digest &middot; June 10, 2026</span>
 </a>
 </td>
 </tr>
@@ -26,7 +26,7 @@ Welcome to **Issue N.02** of [Jaseci Digest](https://newsletter.jaseci.org), a b
 
       <a href="https://jachammer.ai/" style="text-decoration:none;color:#160f0a;display:block;">
         <strong style="display:block;font-size:19px;font-weight:700;text-transform:uppercase;color:#160f0a;margin-bottom:16px;letter-spacing:-0.005em;line-height:1.22;">
-          Jac Hammer: an AI app studio that builds in Jac &rarr;
+          Jac Hammer: an AI app studio that builds in Jac
         </strong>
       </a>
 
@@ -34,12 +34,15 @@ Welcome to **Issue N.02** of [Jaseci Digest](https://newsletter.jaseci.org), a b
         <img src="https://i.ytimg.com/vi/6_2L_FWY6vY/maxresdefault.jpg" width="100%" alt="Watch the Jac Hammer vs Lovable demo on YouTube" style="display:block;border:1px solid rgba(31,22,14,0.18);border-radius:8px;width:100%;max-width:100%;height:auto;">
       </a>
 
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:12px 0 18px;">
-        <tr><td align="center">
-          <a href="https://www.youtube.com/watch?v=6_2L_FWY6vY" target="_blank" rel="noopener" style="display:inline-block;padding:10px 24px;background:#ff0000;border-radius:999px;text-decoration:none;">
-            <span style="color:#ffffff;font-size:14px;font-weight:600;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">&#9658;&nbsp;&nbsp;Watch video</span>
-          </a>
-        </td></tr>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:12px auto 18px;">
+        <tr>
+          <td style="padding:0 5px;">
+            <a href="https://www.youtube.com/watch?v=6_2L_FWY6vY" target="_blank" rel="noopener" style="display:inline-block;padding:10px 24px;background:#ff0000;border-radius:999px;text-decoration:none;color:#ffffff !important;font-size:14px;font-weight:600;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">&#9658;&nbsp;&nbsp;Watch video</a>
+          </td>
+          <td style="padding:0 5px;">
+            <a href="https://jachammer.ai/" target="_blank" rel="noopener" style="display:inline-block;padding:10px 24px;background:#ff6b35;border-radius:999px;text-decoration:none;color:#f3efe6 !important;font-size:14px;font-weight:600;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">Try Jac Hammer</a>
+          </td>
+        </tr>
       </table>
 
       <p style="margin:0 0 12px;font-size:18px;font-weight:700;line-height:1.3;color:#160f0a;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">
@@ -59,23 +62,47 @@ Welcome to **Issue N.02** of [Jaseci Digest](https://newsletter.jaseci.org), a b
       </table>
 
 
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 20px;">
-        <tr><td style="padding:5px 0;font-size:14px;line-height:1.5;color:#1f160e;font-family:'Inter','Helvetica Neue',Arial,sans-serif;"><span style="color:#ff6b35;font-weight:700;">&rarr;</span>&nbsp;&nbsp;<strong>One language.</strong> Frontend, backend, and AI all live in Jac.</td></tr>
-        <tr><td style="padding:5px 0;font-size:14px;line-height:1.5;color:#1f160e;font-family:'Inter','Helvetica Neue',Arial,sans-serif;"><span style="color:#ff6b35;font-weight:700;">&rarr;</span>&nbsp;&nbsp;<strong>Auth and database built in.</strong> User accounts and data storage are ready to use, nothing to set up.</td></tr>
-        <tr><td style="padding:5px 0;font-size:14px;line-height:1.5;color:#1f160e;font-family:'Inter','Helvetica Neue',Arial,sans-serif;"><span style="color:#ff6b35;font-weight:700;">&rarr;</span>&nbsp;&nbsp;<strong>AI-native, no prompts.</strong> Write <code style="font-family:'SFMono-Regular',Consolas,monospace;background:rgba(31,22,14,0.07);padding:1px 5px;border-radius:3px;font-size:13px;">by llm()</code>. No prompt files, no schemas.</td></tr>
-        <tr><td style="padding:5px 0;font-size:14px;line-height:1.5;color:#1f160e;font-family:'Inter','Helvetica Neue',Arial,sans-serif;"><span style="color:#ff6b35;font-weight:700;">&rarr;</span>&nbsp;&nbsp;<strong>Start from a template.</strong> Full-stack with auth, a React client, live preview, or blank.</td></tr>
-        <tr><td style="padding:5px 0;font-size:14px;line-height:1.5;color:#1f160e;font-family:'Inter','Helvetica Neue',Arial,sans-serif;"><span style="color:#ff6b35;font-weight:700;">&rarr;</span>&nbsp;&nbsp;<strong>Deploy in one click.</strong> From a sentence to a live app, no Dockerfiles, no CI.</td></tr>
+      <p style="margin:8px 0 8px;font-size:14px;color:#1f160e;font-family:'Inter','Helvetica Neue',Arial,sans-serif;"><strong style="color:#160f0a;">Jac Hammer vs Lovable.</strong> The differences that actually matter.</p>
+
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 20px;border-collapse:collapse;border:1px solid rgba(31,22,14,0.18);font-family:'Inter','Helvetica Neue',Arial,sans-serif;">
+        <tr>
+          <td style="padding:9px 10px;background:#ece7db;border-bottom:2px solid rgba(31,22,14,0.18);width:24%;"></td>
+          <td style="padding:9px 11px;background:#ff6b35;color:#f3efe6;font-weight:700;font-size:13px;border-bottom:2px solid rgba(31,22,14,0.18);width:38%;">Jac Hammer</td>
+          <td style="padding:9px 11px;background:#ece7db;color:#6a5f50;font-weight:700;font-size:13px;border-bottom:2px solid rgba(31,22,14,0.18);width:38%;">Lovable</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 10px;font-weight:600;color:#160f0a;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">Languages to juggle</td>
+          <td style="padding:9px 11px;font-weight:600;color:#160f0a;font-size:13px;background:#f7e7d9;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;"><span style="color:#ff6b35;font-weight:700;">&#10003;</span> Just Jac</td>
+          <td style="padding:9px 11px;color:#6a5f50;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">React, TypeScript, SQL, and more</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 10px;font-weight:600;color:#160f0a;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">Deployment</td>
+          <td style="padding:9px 11px;font-weight:600;color:#160f0a;font-size:13px;background:#f7e7d9;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;"><span style="color:#ff6b35;font-weight:700;">&#10003;</span> Frontend and backend, one click, one deployment</td>
+          <td style="padding:9px 11px;color:#6a5f50;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">Only the frontend; Supabase backend deployed separately</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 10px;font-weight:600;color:#160f0a;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">Database</td>
+          <td style="padding:9px 11px;font-weight:600;color:#160f0a;font-size:13px;background:#f7e7d9;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;"><span style="color:#ff6b35;font-weight:700;">&#10003;</span> Native to Jac</td>
+          <td style="padding:9px 11px;color:#6a5f50;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">A separate Postgres database on Supabase</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 10px;font-weight:600;color:#160f0a;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">Authentication</td>
+          <td style="padding:9px 11px;font-weight:600;color:#160f0a;font-size:13px;background:#f7e7d9;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;"><span style="color:#ff6b35;font-weight:700;">&#10003;</span> Native to Jac</td>
+          <td style="padding:9px 11px;color:#6a5f50;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">Added through Supabase</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 10px;font-weight:600;color:#160f0a;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">Build for</td>
+          <td style="padding:9px 11px;font-weight:600;color:#160f0a;font-size:13px;background:#f7e7d9;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;"><span style="color:#ff6b35;font-weight:700;">&#10003;</span> Web, mobile, and desktop apps</td>
+          <td style="padding:9px 11px;color:#6a5f50;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">Web apps only</td>
+        </tr>
+        <tr>
+          <td style="padding:9px 10px;font-weight:600;color:#160f0a;font-size:13px;vertical-align:top;">AI in your app</td>
+          <td style="padding:9px 11px;font-weight:600;color:#160f0a;font-size:13px;background:#f7e7d9;vertical-align:top;"><span style="color:#ff6b35;font-weight:700;">&#10003;</span> Native to Jac, no prompts (byLLM)</td>
+          <td style="padding:9px 11px;color:#6a5f50;font-size:13px;vertical-align:top;">Wire up AI SDKs, APIs, and prompts</td>
+        </tr>
       </table>
 
-      <table role="presentation" cellpadding="0" cellspacing="0" border="0">
-        <tr><td style="border-radius:999px;background:#ff6b35;">
-          <a href="https://jachammer.ai/" target="_blank" rel="noopener" style="display:inline-block;padding:13px 30px;text-decoration:none;">
-            <span style="color:#f3efe6;text-transform:uppercase;letter-spacing:0.06em;font-size:14px;font-weight:700;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">Try Jac Hammer &rarr;</span>
-          </a>
-        </td></tr>
-      </table>
-
-      <p style="margin:14px 0 0;font-size:13px;line-height:1.5;color:#6a5f50;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">
+      <p style="margin:6px 0 0;font-size:13px;line-height:1.5;color:#6a5f50;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">
         Want the full write-up? <a href="https://newsletter.jaseci.org/articles/jac-builder" style="color:#ff6b35;text-decoration:underline;">Read it on the site</a>.
       </p>
 
