@@ -1,0 +1,1276 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The roundup — Jaseci Digest</title><style>/* Jaseci Digest — magazine/editorial style (matches teammate's template) */
+
+:root {
+  --bg: #f3efe6;
+  --bg-soft: #ece7db;
+  /* Warm near-blacks pair better with cream + orange */
+  --text: #1f160e;
+  --text-heading: #160f0a;
+  --text-muted: #6a5f50;
+  --rule: #1f160e;
+  --rule-soft: #1f160e2e;
+  /* Brand-true Jaseci orange (from jaseci.org/built-with-jaseci) */
+  --accent: #ff6b35;
+  --accent-hover: #e85a25;
+  --accent-soft: #ffe1cc;
+  /* Secondary accent: warm amber — leans toward the orange family */
+  --accent-2: #fbbf24;
+  --accent-2-soft: #fef3c7;
+  /* Warm dark, for hover backgrounds + bold areas */
+  --warm-dark: #3a2d22;
+  --max-width: 1100px;
+  --content-width: 720px;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, Monaco, Consolas, monospace;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('https://rsms.me/inter/font-files/InterVariable.woff2?v=4.0') format('woff2');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'ss01', 'cv11';
+}
+
+a {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--accent);
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent-hover);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.container--narrow {
+  max-width: var(--content-width);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text-heading);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.display {
+  font-size: clamp(2.25rem, 5.5vw, 4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 1.5rem 0 1.25rem;
+}
+
+.section-heading {
+  font-size: clamp(1.5rem, 3.2vw, 2.15rem);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 3.5rem 0 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule-soft);
+  position: relative;
+  color: var(--text-heading);
+}
+
+.section-heading::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 3.5rem;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 55%, var(--accent-2) 55%, var(--accent-2) 100%);
+  border-radius: 2px;
+}
+
+.section-heading a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.section-heading a:hover {
+  color: var(--accent);
+}
+
+.section-heading--numbered::before {
+  content: attr(data-number) ". ";
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 2.5rem;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 50%, var(--accent-2) 50%, var(--accent-2) 100%);
+  border-radius: 1.5px;
+}
+
+article p {
+  margin: 0 0 1.1rem;
+  max-width: 65ch;
+}
+
+article ul,
+article ol {
+  padding-left: 1.5rem;
+  max-width: 65ch;
+}
+
+article li {
+  margin: 0.4rem 0;
+}
+
+article img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 2rem 0;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--bg-soft);
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+}
+
+pre {
+  background: #0a0a0a;
+  color: #f3efe6;
+  border-radius: 6px;
+  padding: 1.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 2.5rem 0;
+}
+
+blockquote {
+  border-left: 3px solid var(--rule);
+  margin: 1.5rem 0;
+  padding: 0.25rem 1.25rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.small {
+  font-size: 0.9rem;
+}
+
+/* Two-column intro layout (text left, image right) */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin: 2rem 0 3rem;
+  align-items: start;
+}
+
+.intro-grid h2 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+  line-height: 1.1;
+}
+
+.intro-grid figure {
+  margin: 0;
+}
+
+.intro-grid img {
+  margin: 0;
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .intro-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* CTA pill */
+.cta-pill {
+  display: inline-block;
+  padding: 0.85rem 1.75rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  text-decoration: none;
+  background: var(--accent);
+  color: var(--bg);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.cta-pill:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--bg);
+}
+
+/* Arrow-in-circle inline CTA — used as a clickable link to a feature article */
+.arrow-cta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  margin: 3rem 0;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.arrow-cta:hover {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.arrow-cta__icon {
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  color: var(--accent);
+  background: transparent;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.arrow-cta:hover .arrow-cta__icon {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  transform: translateX(4px);
+}
+
+.arrow-cta__text {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  letter-spacing: -0.005em;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--text);
+}
+
+.arrow-cta__text strong {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: clamp(1.1rem, 2.1vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.005em;
+  line-height: 1.2;
+  color: var(--accent);
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+}
+
+.arrow-cta:hover .arrow-cta__text strong {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+.arrow-cta__icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--accent);
+}
+
+/* The arrow CTA controls its own underline — anchor itself stays undecorated */
+.issue-body .arrow-cta {
+  text-decoration: none;
+}
+
+/* Full-width image used between sections inside an issue. */
+.section-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 2.5rem 0;
+  border-radius: 4px;
+}
+
+.section-image--dark {
+  background: #0a0a0a;
+}
+
+/* End-of-issue large CTA, centered. */
+.end-cta {
+  display: flex;
+  justify-content: center;
+  margin: 4rem 0 2rem;
+}
+
+.cta-pill--lg {
+  padding: 1.1rem 2.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  border-width: 1.5px;
+}
+
+/* Intro-grid image: keep a tall portrait feel like the template's nebula. */
+.intro-grid figure img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 4px;
+  background: #0a0a0a;
+}
+
+/* ============================================================
+   Component styles (ported from Astro per-component <style> blocks)
+   ============================================================ */
+
+/* Header */
+.site-header {
+  padding-top: 1.5rem;
+}
+
+.brand-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--text);
+  opacity: 0.85;
+}
+
+.brand-logo {
+  display: block;
+  width: 28px;
+  height: 28px;
+}
+
+.brand-text {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+nav li:nth-child(1) { text-align: left; }
+nav li:nth-child(2) { text-align: center; }
+nav li:nth-child(3) { text-align: center; }
+nav li:nth-child(4) { text-align: right; }
+
+nav a {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.header-rule {
+  margin: 1rem 0 0;
+  border: none;
+  border-top: 1px solid var(--rule);
+}
+
+@media (max-width: 540px) {
+  nav ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  nav li:nth-child(3) { text-align: left; }
+  nav li:nth-child(4) { text-align: right; }
+  nav a {
+    font-size: 0.78rem;
+  }
+}
+
+/* Footer */
+.site-footer {
+  margin-top: 5rem;
+  padding: 1.75rem 0 2.5rem;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+
+.footer-col a {
+  text-decoration: none;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+}
+
+.footer-col--left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.footer-col--right {
+  justify-self: end;
+}
+
+.footer-logo {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
+.issue-meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.issue-label {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.issue-tagline {
+  font-size: 0.85rem;
+  line-height: 1.35;
+  color: var(--text);
+  max-width: 28ch;
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr auto;
+    gap: 1.25rem;
+  }
+  .footer-col--center {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+  .footer-col--right {
+    justify-self: end;
+  }
+  .issue-meta {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+/* Subscribe form */
+.subscribe {
+  position: relative;
+  background: var(--accent-soft);
+  border-radius: 10px;
+  padding: 2.25rem 2rem;
+  margin: 3rem 0;
+  display: grid;
+  gap: 0.9rem;
+  overflow: hidden;
+}
+
+.subscribe::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: var(--accent);
+}
+
+.subscribe .row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.subscribe input[type='email'] {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--bg);
+  border: 1px solid var(--text);
+  color: var(--text);
+  padding: 0.85rem 1.1rem;
+  font: inherit;
+  border-radius: 999px;
+  min-width: 0;
+}
+
+.subscribe input[type='email']::placeholder {
+  color: var(--text-muted);
+}
+
+.subscribe input[type='email']:focus {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+.subscribe button[type='submit'] {
+  cursor: pointer;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+  font-family: inherit;
+}
+
+.subscribe button[type='submit']:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--bg);
+  opacity: 1;
+}
+
+.subscribe button[type='submit']:disabled {
+  cursor: progress;
+  opacity: 0.75;
+}
+
+.form-help {
+  margin: 0;
+}
+
+.form-status {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.form-status[data-kind='success'] {
+  color: #1f6b53;
+}
+
+.form-status[data-kind='error'] {
+  color: #a8341a;
+}
+
+@media (max-width: 480px) {
+  .subscribe .row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Home page sections */
+.hero {
+  padding: 3.5rem 0 2.5rem;
+  max-width: var(--content-width);
+  position: relative;
+}
+
+.hero::after {
+  content: '';
+  display: block;
+  width: 3.5rem;
+  height: 3px;
+  background: var(--accent);
+  margin-top: 2rem;
+}
+
+.lede {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  max-width: 50ch;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+.latest,
+.archive-teaser {
+  margin: 3rem 0;
+  max-width: var(--content-width);
+}
+
+.issue-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.25rem 0;
+  border-top: 1px solid var(--rule-soft);
+}
+
+.issue-list li {
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.issue-list a {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.25rem;
+  align-items: baseline;
+  padding: 1rem 0.25rem 1rem 1rem;
+  text-decoration: none;
+  color: var(--text);
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.issue-list a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.18s ease;
+}
+
+.issue-list a:hover {
+  background: var(--accent-soft);
+}
+
+.issue-list a:hover::before {
+  transform: scaleY(1);
+}
+
+.issue-list a:hover .issue-num {
+  color: var(--accent);
+}
+
+.issue-num {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  transition: color 0.15s ease;
+}
+
+.issue-title {
+  font-weight: 500;
+}
+
+.issue-date {
+  font-size: 0.85rem;
+}
+
+@media (max-width: 540px) {
+  .issue-list a {
+    grid-template-columns: auto 1fr;
+  }
+  .issue-date {
+    grid-column: 2;
+    font-size: 0.8rem;
+  }
+}
+
+/* About page */
+.about {
+  margin: 2rem auto;
+  max-width: var(--content-width);
+}
+
+/* ============================================================
+   Issue page styles (ported from src/pages/issues/[...slug].astro)
+   ============================================================ */
+
+.issue {
+  margin: 2rem auto;
+  max-width: var(--content-width);
+}
+
+.issue-header {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) 4fr;
+  gap: 2.5rem;
+  align-items: start;
+  margin: 2rem 0 3rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.issue-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.5rem;
+  border-top: 3px solid var(--accent);
+}
+
+.issue-date {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.issue-title-block .display {
+  margin-top: 0.25rem;
+}
+
+.issue-description {
+  font-size: 1.15rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+  max-width: 52ch;
+  margin: 0.75rem 0 0;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 640px) {
+  .issue-header {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding-bottom: 1.75rem;
+  }
+  .issue-meta {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1rem;
+    padding-top: 0.4rem;
+  }
+}
+
+.issue-body h2 {
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  margin: 3.5rem 0 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule-soft);
+  position: relative;
+  color: var(--text-heading);
+}
+
+.issue-body h2::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 3.5rem;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 55%, var(--accent-2) 55%, var(--accent-2) 100%);
+  border-radius: 2px;
+}
+
+.issue-body h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.4rem;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+}
+
+.issue-body h3 a {
+  color: var(--text);
+  text-decoration: none;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 1.5px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.18s ease, color 0.15s ease;
+  padding-bottom: 2px;
+}
+
+.issue-body h3 a:hover {
+  color: var(--accent);
+  background-size: 100% 1.5px;
+}
+
+.issue-body .numbered-subhead {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 600;
+  margin: 2.25rem 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.issue-body p {
+  margin: 0 0 1.1rem;
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.issue-body ul,
+.issue-body ol {
+  margin: 0 0 1.1rem;
+  padding-left: 1.5rem;
+}
+
+.issue-body li {
+  margin: 0.4rem 0;
+}
+
+.issue-body blockquote {
+  border-left: 3px solid var(--rule);
+  margin: 1.75rem 0;
+  padding: 0.25rem 1.25rem;
+  font-style: normal;
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.issue-body a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.issue-nav {
+  margin: 2rem 0 1rem;
+}
+
+/* ============================================================
+   Archive page enhancements
+   ============================================================ */
+
+.archive {
+  margin: 2rem 0;
+  max-width: var(--content-width);
+}
+
+.archive-lede {
+  margin: 0.5rem 0 1.5rem;
+  max-width: 60ch;
+}
+
+/* Archive list — magazine-style rows with a numbered gutter */
+.issue-list--archive {
+  margin: 2.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.issue-list--archive li {
+  border-bottom: 1px solid var(--rule-soft);
+}
+
+.issue-list--archive a {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr auto 1.75rem;
+  gap: 1.75rem;
+  align-items: start;
+  padding: 2rem 1rem 2rem 1.25rem;
+  text-decoration: none;
+  color: var(--text);
+  position: relative;
+  transition: background 0.18s ease, padding-left 0.18s ease;
+}
+
+.issue-list--archive a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.2s ease;
+}
+
+.issue-list--archive a:hover {
+  background: var(--accent-soft);
+  padding-left: 1.5rem;
+}
+
+.issue-list--archive a:hover::before {
+  transform: scaleY(1);
+}
+
+.issue-list--archive .issue-num {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  line-height: 1;
+  padding-top: 0.25rem;
+  transition: color 0.18s ease;
+}
+
+.issue-list--archive a:hover .issue-num {
+  color: var(--accent);
+}
+
+.issue-meta-block {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.issue-list--archive .issue-title {
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.issue-description {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 55ch;
+}
+
+.issue-list--archive .issue-date {
+  font-size: 0.78rem;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding-top: 0.5rem;
+}
+
+/* Right-side arrow indicator, slides on hover */
+.issue-list--archive a::after {
+  content: '→';
+  align-self: center;
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.issue-list--archive a:hover::after {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+@media (max-width: 640px) {
+  .issue-list--archive a {
+    grid-template-columns: auto 1fr;
+    gap: 0.75rem 1.25rem;
+    padding: 1.5rem 1rem;
+  }
+  .issue-list--archive .issue-num {
+    font-size: 1.25rem;
+  }
+  .issue-list--archive .issue-date {
+    grid-column: 2;
+    padding-top: 0;
+    font-size: 0.7rem;
+  }
+  .issue-list--archive a::after {
+    display: none;
+  }
+}
+
+/* ============================================================
+   UI polish layer — global, CSS-only, no markup changes
+   ============================================================ */
+
+/* Smooth scroll + nicer text selection */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--accent-2);
+  color: var(--text-heading);
+}
+
+/* Better keyboard focus rings */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Sticky header with backdrop blur — feels modern, doesn't take space */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(243, 239, 230, 0.85);
+  backdrop-filter: saturate(180%) blur(10px);
+  -webkit-backdrop-filter: saturate(180%) blur(10px);
+}
+
+/* Animated underline on nav links */
+nav a {
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 1.5px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.22s ease, color 0.15s ease;
+  padding-bottom: 3px;
+}
+
+nav a:hover {
+  color: var(--accent);
+  background-size: 100% 1.5px;
+}
+
+/* Subscribe form polish: soft warm shadow + submit button lift */
+.subscribe {
+  box-shadow: 0 10px 28px -12px rgba(217, 122, 44, 0.22);
+}
+
+.subscribe input[type='email'] {
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+.subscribe button[type='submit'] {
+  transition: background 0.15s ease, transform 0.18s ease, box-shadow 0.2s ease, border-color 0.15s ease;
+}
+
+.subscribe button[type='submit']:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -6px rgba(184, 95, 21, 0.4);
+}
+
+/* CTA pill micro-lift */
+.cta-pill {
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+              transform 0.18s ease, box-shadow 0.2s ease;
+}
+
+.cta-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px -6px rgba(184, 95, 21, 0.45);
+}
+
+/* Footer link hover */
+.footer-col a {
+  transition: color 0.15s ease;
+}
+
+.footer-col a:hover {
+  color: var(--accent);
+}
+
+/* Soften body link underline with smooth color transition */
+.issue-body a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(217, 122, 44, 0.6);
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.issue-body a:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* Issue-body images: subtle warm shadow */
+.issue-body img {
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.18);
+  border-radius: 6px;
+}
+
+/* Sticky-header offset for anchor jumps (so #subscribe doesn't hide under header) */
+:where(section, article) {
+  scroll-margin-top: 6rem;
+}
+
+/* ============================================================
+   Footer copyright row — sits in the cream footer next to the logo
+   ============================================================ */
+
+.footer-copyright {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+.site-footer .footer-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .site-footer .footer-grid {
+    flex-direction: column-reverse;
+    gap: 1rem;
+    text-align: center;
+  }
+  .footer-copyright {
+    font-size: 0.78rem;
+  }
+}
+</style></head><body><main class="container" style="max-width:760px;margin:0 auto;padding:3rem 1.25rem;"><article class="issue-body"><p>Welcome to <strong>Issue N.02</strong> of Jaseci Digest, a biweekly roundup of what's happening across the Jaseci and Jac open-source ecosystem.</p>
+<p>This week's lead is <strong><a href="https://jachammer.ai/">Jac Hammer</a></strong>, a studio that turns a prompt into a real, full-stack app. Where Lovable gives you a React frontend and a separate Postgres backend wired together, Jac Hammer builds one Jac program where the UI, data, authentication, and AI are all the same language, and deploys it in one click.</p>
+<h2>Featured</h2>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+.issue-body .feat-hero { display:block; margin:0.5rem 0 1.25rem; font-size:clamp(1.7rem,4.2vw,2.7rem); font-weight:700; line-height:1.08; letter-spacing:-0.02em; color:var(--text-heading); text-decoration:none; }
+.issue-body .feat-hero:hover { color:var(--accent); }
+.issue-body .feat-try-wrap { margin:1.75rem 0 0.5rem; }
+.issue-body .feat-try-wrap p { margin:0; text-align:center; }
+.issue-body .feat-try { display:inline-block; padding:1rem 2.2rem; background:var(--accent); color:var(--bg); font-weight:700; font-size:1.05rem; letter-spacing:0.01em; border-radius:999px; text-decoration:none; transition:transform 0.15s ease, box-shadow 0.2s ease, background 0.15s ease; }
+.issue-body .feat-try:hover { transform:translateY(-2px); box-shadow:0 12px 26px -8px rgba(184,95,21,0.5); background:var(--accent-hover); }
+.issue-body .feat-points { list-style:none; margin:1.5rem 0; padding:1.25rem 1.5rem; display:grid; gap:0.7rem; background:rgba(217,122,44,0.06); border-left:3px solid var(--accent); border-radius:8px; }
+.issue-body .feat-points li { position:relative; padding-left:1.6rem; margin:0; line-height:1.45; }
+.issue-body .feat-points li::before { content:"\2192"; position:absolute; left:0; top:0; color:var(--accent); font-weight:700; }
+.issue-body .feat-points b { color:var(--text-heading); }
+.issue-body .feat-table-lead { margin:1.75rem 0 0.6rem; }
+.issue-body .feat-table { width:100%; table-layout:fixed; border-collapse:separate; border-spacing:0; margin:0.5rem 0 1.5rem; font-family:'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size:0.95rem; line-height:1.4; border:1px solid var(--rule-soft); border-radius:12px; overflow:hidden; box-shadow:0 2px 14px -8px rgba(31,22,14,0.22); }
+.issue-body .feat-table th, .issue-body .feat-table td { padding:0.85rem 1rem; text-align:left; vertical-align:top; }
+.issue-body .feat-table thead th { font-weight:700; font-size:0.95rem; }
+.issue-body .feat-table thead th:first-child { width:24%; background:var(--bg-soft); }
+.issue-body .feat-table thead th.jh { width:38%; background:var(--accent); color:var(--bg); }
+.issue-body .feat-table thead th.lv { width:38%; background:var(--bg-soft); color:var(--text-muted); }
+.issue-body .feat-table .row-label { font-weight:600; color:var(--text-heading); }
+.issue-body .feat-table td.jh { font-weight:600; color:var(--text-heading); background:rgba(217,122,44,0.13); }
+.issue-body .feat-table td.jh::before { content:"\2713\00a0\00a0"; color:var(--accent); font-weight:700; }
+.issue-body .feat-table td.lv { color:var(--text-muted); }
+.issue-body .feat-table tbody tr:not(:last-child) td { border-bottom:1px solid var(--rule-soft); }
+.issue-body .feat-table code { font-size:0.85em; }
+.issue-body .feat-question { font-size:clamp(1rem,1.9vw,1.2rem); font-weight:700; line-height:1.4; letter-spacing:-0.01em; color:var(--text-heading); margin:1.75rem 0 0.75rem; }
+.issue-body .feat-question .hl { color:var(--accent); }
+.issue-body .feat-vs { width:100%; border-collapse:separate; border-spacing:0 0.85rem; margin:1rem 0 1.5rem; }
+.issue-body .feat-vs-card { padding:1rem 1.25rem; border-radius:12px; line-height:1.5; font-size:1rem; }
+.issue-body .feat-vs-card .vs-label { display:block; font-weight:700; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.35rem; }
+.issue-body .feat-vs-card.lovable { background:var(--bg-soft); border:1px solid var(--rule-soft); color:var(--text-muted); }
+.issue-body .feat-vs-card.lovable .vs-label { color:var(--text-muted); }
+.issue-body .feat-vs-card.jachammer { background:rgba(217,122,44,0.09); border:1px solid var(--accent); border-left:5px solid var(--accent); color:var(--text); }
+.issue-body .feat-vs-card.jachammer .vs-label { color:var(--accent); }
+.issue-body .feat-vs-card.jachammer b { color:var(--text-heading); }
+</style>
+
+<p><a class="feat-hero" href="https://newsletter.jaseci.org/articles/jac-builder" markdown="1">Jac Hammer: an AI app studio that builds in Jac</a></p>
+<figure class="video-embed" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin:1.5rem 0 1.5rem;border-radius:10px;">
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" src="https://www.youtube.com/embed/VIUG6JpRgH0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" title="Jac Hammer demo"></iframe>
+</figure>
+<div class="feat-try-wrap" style="margin:0 0 2rem;text-align:center;">
+<p><a class="feat-try" href="https://jachammer.ai/" target="_blank" rel="noopener" markdown="1">Try Jac Hammer &rarr;</a></p>
+</div>
+<p class="feat-question">What if one prompt gave you a <span class="hl">real, full-stack app</span> with authentication and a database, that you <span class="hl">deploy frontend and backend in one click</span> and scale to millions?</p>
+
+<table class="feat-vs">
+<tr><td class="feat-vs-card lovable"><span class="vs-label">&#10007;&nbsp; With Lovable</span>You get a React frontend and a separate Postgres backend wired together: one app spread across two layers and three languages (React, TypeScript, and SQL) to understand, change, and own.</td></tr>
+<tr><td class="feat-vs-card jachammer"><span class="vs-label">&#10003;&nbsp; With Jac Hammer</span><b>You get one Jac program where the UI, data, authentication, and AI are all the same language and runtime.</b> One thing to read, change, and own. Describe the app, and ship it. A real app, not a demo.</td></tr>
+</table>
+
+<p class="feat-table-lead"><b>Jac Hammer vs Lovable.</b> The differences that actually matter.</p>
+
+<table class="feat-table">
+  <thead>
+    <tr><th></th><th class="jh">Jac Hammer</th><th class="lv">Lovable</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="row-label">Database</td><td class="jh">One <code>node</code>. Frontend and backend read the same definition, nothing to keep in sync.</td><td class="lv">A SQL table plus a matching TypeScript type: two places to drift when the model changes.</td></tr>
+    <tr><td class="row-label">Authentication</td><td class="jh">Built in. Every user gets their own graph.</td><td class="lv">Supabase Auth, plus Row-Level Security policies you own and debug.</td></tr>
+    <tr><td class="row-label">Per-user data privacy</td><td class="jh">On by default. Nothing to author, nothing to forget.</td><td class="lv">You write the RLS rules. Miss one and data leaks.</td></tr>
+    <tr><td class="row-label">AI in your app</td><td class="jh"><code>by llm()</code>. Call a model like a typed function.</td><td class="lv">Wire up an SDK, write the prompts, parse and retry the output.</td></tr>
+    <tr><td class="row-label">Languages to debug</td><td class="jh">Jac.</td><td class="lv">TypeScript (UI), TypeScript (edge functions), and SQL, across two systems.</td></tr>
+    <tr><td class="row-label">Deployment</td><td class="jh">Frontend and backend, one click.</td><td class="lv">Frontend deploys; the Supabase backend runs as a separate service.</td></tr>
+    <tr><td class="row-label">Builds for</td><td class="jh">Web and desktop</td><td class="lv">Web.</td></tr>
+  </tbody>
+</table>
+
+<h2>Articles</h2>
+<h3><a href="https://blogs.jaseci.org/blog/posts/tobu-memory-graph-case-study">How Tobu used Jaseci to build an AI-powered memory graph</a></h3>
+<p><a href="https://tobu.life/">Tobu</a> is an AI memory app that captures the people, places, and stories behind your photos. It models each one as a connected memory on a Jac graph, not a file in a folder. The highlights:</p>
+<ul>
+<li><strong>2 weeks</strong> to a working demo, <strong>6 weeks</strong> to production, <strong>zero</strong> prompt-engineering pipelines</li>
+<li><strong>92.84%</strong> retrieval accuracy, <strong>2.2x</strong> fewer missed memories than traditional RAG</li>
+<li><strong>$1.5M</strong> raised on the early traction</li>
+</ul>
+<h2>Community</h2>
+<h3><a href="https://jachacks.org/#spring-winners">JacHacks Spring winners are live</a></h3>
+<p>JacHacks Spring wrapped with more than 300 participants and 81 projects shipped in four days. Winners landed across Agentic AI, Consumer Healthcare, Fintech, and Social Impact, alongside specialty awards like Best Use of Jac and Best Demo. See them all on the <a href="https://jachacks.org/#spring-winners">winners page</a>, or <a href="https://jachacks-spring.devpost.com/project-gallery">explore all 81 submitted projects on Devpost</a>.</p>
+<h3><a href="https://discord.com/invite/6j3QNdtcN6">Join the Jaseci Discord</a></h3>
+<p>The fastest way to talk to the team and other builders. RFC chatter, debugging help, release questions, and a steady stream of show-and-tells. Worth joining whether you ship in production or are just curious.</p>
+<h2>Releases</h2>
+<h3><a href="https://docs.jaseci.org/community/release_notes/jaclang/">jaclang v0.16.5: eject a Jac project into a deployable app</a></h3>
+<p><code>jac eject</code> now compiles a project into a runnable FastAPI backend, with walkers exposed as POST endpoints and authentication wired up automatically, plus a compiled JavaScript frontend. <code>jac install</code> is faster too, using <code>uv</code> as its backend when available.</p>
+<h3><a href="https://docs.jaseci.org/community/release_notes/jac-desktop/">jac-desktop v0.2.2: a Jac-native desktop target</a></h3>
+<p>The desktop target is now fully Jac-native: <code>jac build --client desktop</code> compiles a single self-contained binary that embeds the OS webview. No more Rust toolchain, PyTauri, or PyInstaller in the chain.</p>
+<h3><a href="https://docs.jaseci.org/community/release_notes/jac-scale/">jac-scale v0.2.28: event-driven autoscaling, down to zero</a></h3>
+<p>A new KEDA autoscaler engine (<code>autoscaler_engine = 'keda'</code>) scales on real demand and can idle workloads all the way to zero replicas (<code>idle_replicas = 0</code>). The admin console also adds deploy health, endpoints, and storage pages, so you can watch rollouts and pods without touching kubeconfig.</p>
+<h3><a href="https://docs.jaseci.org/community/release_notes/byllm/">byllm v0.6.17: sturdier structured outputs</a></h3>
+<p><code>by llm()</code> now retries malformed or empty structured outputs automatically, regenerating up to three times (configurable via <code>max_output_retries</code>) with corrective prompts, and streaming is now safe to consume across threads.</p>
+<div class="end-cta">
+<p><a href="https://newsletter.jaseci.org/issues" class="cta-pill cta-pill--lg" markdown="1">Browse the archive</a></p>
+</div></article></main></body></html>

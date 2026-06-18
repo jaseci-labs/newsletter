@@ -1,4 +1,4 @@
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3efe6;margin-bottom:24px;">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="x-apple-disable-message-reformatting"><title>Jaseci Digest — Issue N.02</title></head><body style="margin:0;padding:0;background:#e6e0d4;-webkit-text-size-adjust:100%;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#e6e0d4;"><tr><td align="center" style="padding:24px 12px;"><table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;background:#f3efe6;"><tr><td><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3efe6;margin-bottom:24px;">
 <tr>
 <td align="center" style="padding: 20px 24px 0;">
 <a href="https://newsletter.jaseci.org" style="text-decoration:none;color:#1f160e;display:inline-block;">
@@ -14,12 +14,9 @@
 </tr>
 </table>
 
-Welcome to **Issue N.02** of [Jaseci Digest](https://newsletter.jaseci.org), a biweekly roundup of what's happening across the Jaseci and Jac open-source ecosystem.
-
-**This issue's lead:** [Jac Hammer](https://jachammer.ai/) turns a prompt into a real, full-stack app: one Jac program where the UI, data, authentication, and AI are all the same language, deployed in one click.
-
-## Featured
-
+<p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;color:#1f160e;margin:10px 24px;">Welcome to <strong>Issue N.02</strong> of <a href="https://newsletter.jaseci.org" style="color:#c0531f;text-decoration:underline;">Jaseci Digest</a>, a biweekly roundup of what's happening across the Jaseci and Jac open-source ecosystem.</p>
+<p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;color:#1f160e;margin:10px 24px;"><strong>This issue's lead:</strong> <a href="https://jachammer.ai/" style="color:#c0531f;text-decoration:underline;">Jac Hammer</a> turns a prompt into a real, full-stack app: one Jac program where the UI, data, authentication, and AI are all the same language, deployed in one click.</p>
+<h2 style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:-0.01em;color:#160f0a;margin:34px 24px 10px;padding-top:18px;border-top:2px solid #ff6b35;">Featured</h2>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 16px 0 24px;">
   <tr>
     <td style="border:1px solid rgba(31,22,14,0.18);border-left:4px solid #ff6b35;background:#ece7db;padding:22px 22px 24px;border-radius:4px;">
@@ -115,44 +112,28 @@ Welcome to **Issue N.02** of [Jaseci Digest](https://newsletter.jaseci.org), a b
   </tr>
 </table>
 
-## Articles
-
-### [How Tobu used Jaseci to build an AI-powered memory graph](https://blogs.jaseci.org/blog/posts/tobu-memory-graph-case-study)
-
-[Tobu](https://tobu.life/) is an AI memory app that captures the people, places, and stories behind your photos. It models each one as a connected memory on a Jac graph, not a file in a folder. The highlights:
-
-- **2 weeks** to a working demo, **6 weeks** to production, **zero** prompt-engineering pipelines
-- **92.84%** retrieval accuracy, **2.2&times;** fewer missed memories than traditional RAG
-- **$1.5M** raised on the early traction
-
-## Community
-
-### [JacHacks Spring winners are live](https://jachacks.org/#spring-winners)
-
-JacHacks Spring wrapped with more than 300 participants and 81 projects shipped in four days. Winners landed across Agentic AI, Consumer Healthcare, Fintech, and Social Impact, alongside specialty awards like Best Use of Jac and Best Demo. See them all on the [winners page](https://jachacks.org/#spring-winners), or [explore all 81 submitted projects on Devpost](https://jachacks-spring.devpost.com/project-gallery).
-
-### [Join the Jaseci Discord](https://discord.com/invite/6j3QNdtcN6)
-
-The fastest way to talk to the team and other builders. RFC chatter, debugging help, release questions, and a steady stream of show-and-tells. Worth joining whether you're shipping in production or just curious.
-
-## Releases
-
-### [jaclang v0.16.5: eject a Jac project into a deployable app](https://docs.jaseci.org/community/release_notes/jaclang/)
-
-`jac eject` now compiles a project into a runnable FastAPI backend, with walkers exposed as POST endpoints and authentication wired up automatically, plus a compiled JavaScript frontend. `jac install` is faster too, using `uv` as its backend when available.
-
-### [jac-desktop v0.2.2: a Jac-native desktop target](https://docs.jaseci.org/community/release_notes/jac-desktop/)
-
-The desktop target is now fully Jac-native: `jac build --client desktop` compiles a single self-contained binary that embeds the OS webview. No more Rust toolchain, PyTauri, or PyInstaller in the chain.
-
-### [jac-scale v0.2.28: event-driven autoscaling, down to zero](https://docs.jaseci.org/community/release_notes/jac-scale/)
-
-A new KEDA autoscaler engine (`autoscaler_engine = 'keda'`) scales on real demand and can idle workloads all the way to zero replicas (`idle_replicas = 0`). The admin console also adds deploy health, endpoints, and storage pages, so you can watch rollouts and pods without touching kubeconfig.
-
-### [byllm v0.6.17: sturdier structured outputs](https://docs.jaseci.org/community/release_notes/byllm/)
-
-`by llm()` now retries malformed or empty structured outputs automatically, regenerating up to three times (configurable via `max_output_retries`) with corrective prompts, and streaming is now safe to consume across threads.
-
+<h2 style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:-0.01em;color:#160f0a;margin:34px 24px 10px;padding-top:18px;border-top:2px solid #ff6b35;">Articles</h2>
+<h3 style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:17px;font-weight:700;line-height:1.3;color:#160f0a;margin:20px 24px 6px;"><a href="https://blogs.jaseci.org/blog/posts/tobu-memory-graph-case-study" style="color:#160f0a;text-decoration:none;">How Tobu used Jaseci to build an AI-powered memory graph</a></h3>
+<p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;color:#1f160e;margin:10px 24px;"><a href="https://tobu.life/" style="color:#c0531f;text-decoration:underline;">Tobu</a> is an AI memory app that captures the people, places, and stories behind your photos. It models each one as a connected memory on a Jac graph, not a file in a folder. The highlights:</p>
+<ul style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;color:#1f160e;margin:10px 24px;padding-left:20px;">
+<li style="margin:5px 0;"><strong>2 weeks</strong> to a working demo, <strong>6 weeks</strong> to production, <strong>zero</strong> prompt-engineering pipelines</li>
+<li style="margin:5px 0;"><strong>92.84%</strong> retrieval accuracy, <strong>2.2&times;</strong> fewer missed memories than traditional RAG</li>
+<li style="margin:5px 0;"><strong>$1.5M</strong> raised on the early traction</li>
+</ul>
+<h2 style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:-0.01em;color:#160f0a;margin:34px 24px 10px;padding-top:18px;border-top:2px solid #ff6b35;">Community</h2>
+<h3 style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:17px;font-weight:700;line-height:1.3;color:#160f0a;margin:20px 24px 6px;"><a href="https://jachacks.org/#spring-winners" style="color:#160f0a;text-decoration:none;">JacHacks Spring winners are live</a></h3>
+<p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;color:#1f160e;margin:10px 24px;">JacHacks Spring wrapped with more than 300 participants and 81 projects shipped in four days. Winners landed across Agentic AI, Consumer Healthcare, Fintech, and Social Impact, alongside specialty awards like Best Use of Jac and Best Demo. See them all on the <a href="https://jachacks.org/#spring-winners" style="color:#c0531f;text-decoration:underline;">winners page</a>, or <a href="https://jachacks-spring.devpost.com/project-gallery" style="color:#c0531f;text-decoration:underline;">explore all 81 submitted projects on Devpost</a>.</p>
+<h3 style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:17px;font-weight:700;line-height:1.3;color:#160f0a;margin:20px 24px 6px;"><a href="https://discord.com/invite/6j3QNdtcN6" style="color:#160f0a;text-decoration:none;">Join the Jaseci Discord</a></h3>
+<p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;color:#1f160e;margin:10px 24px;">The fastest way to talk to the team and other builders. RFC chatter, debugging help, release questions, and a steady stream of show-and-tells. Worth joining whether you're shipping in production or just curious.</p>
+<h2 style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:-0.01em;color:#160f0a;margin:34px 24px 10px;padding-top:18px;border-top:2px solid #ff6b35;">Releases</h2>
+<h3 style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:17px;font-weight:700;line-height:1.3;color:#160f0a;margin:20px 24px 6px;"><a href="https://docs.jaseci.org/community/release_notes/jaclang/" style="color:#160f0a;text-decoration:none;">jaclang v0.16.5: eject a Jac project into a deployable app</a></h3>
+<p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;color:#1f160e;margin:10px 24px;"><code style="font-family:'SFMono-Regular',Consolas,monospace;background:rgba(31,22,14,0.07);padding:1px 5px;border-radius:3px;font-size:13px;">jac eject</code> now compiles a project into a runnable FastAPI backend, with walkers exposed as POST endpoints and authentication wired up automatically, plus a compiled JavaScript frontend. <code style="font-family:'SFMono-Regular',Consolas,monospace;background:rgba(31,22,14,0.07);padding:1px 5px;border-radius:3px;font-size:13px;">jac install</code> is faster too, using <code style="font-family:'SFMono-Regular',Consolas,monospace;background:rgba(31,22,14,0.07);padding:1px 5px;border-radius:3px;font-size:13px;">uv</code> as its backend when available.</p>
+<h3 style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:17px;font-weight:700;line-height:1.3;color:#160f0a;margin:20px 24px 6px;"><a href="https://docs.jaseci.org/community/release_notes/jac-desktop/" style="color:#160f0a;text-decoration:none;">jac-desktop v0.2.2: a Jac-native desktop target</a></h3>
+<p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;color:#1f160e;margin:10px 24px;">The desktop target is now fully Jac-native: <code style="font-family:'SFMono-Regular',Consolas,monospace;background:rgba(31,22,14,0.07);padding:1px 5px;border-radius:3px;font-size:13px;">jac build --client desktop</code> compiles a single self-contained binary that embeds the OS webview. No more Rust toolchain, PyTauri, or PyInstaller in the chain.</p>
+<h3 style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:17px;font-weight:700;line-height:1.3;color:#160f0a;margin:20px 24px 6px;"><a href="https://docs.jaseci.org/community/release_notes/jac-scale/" style="color:#160f0a;text-decoration:none;">jac-scale v0.2.28: event-driven autoscaling, down to zero</a></h3>
+<p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;color:#1f160e;margin:10px 24px;">A new KEDA autoscaler engine (<code style="font-family:'SFMono-Regular',Consolas,monospace;background:rgba(31,22,14,0.07);padding:1px 5px;border-radius:3px;font-size:13px;">autoscaler_engine = 'keda'</code>) scales on real demand and can idle workloads all the way to zero replicas (<code style="font-family:'SFMono-Regular',Consolas,monospace;background:rgba(31,22,14,0.07);padding:1px 5px;border-radius:3px;font-size:13px;">idle_replicas = 0</code>). The admin console also adds deploy health, endpoints, and storage pages, so you can watch rollouts and pods without touching kubeconfig.</p>
+<h3 style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:17px;font-weight:700;line-height:1.3;color:#160f0a;margin:20px 24px 6px;"><a href="https://docs.jaseci.org/community/release_notes/byllm/" style="color:#160f0a;text-decoration:none;">byllm v0.6.17: sturdier structured outputs</a></h3>
+<p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.6;color:#1f160e;margin:10px 24px;"><code style="font-family:'SFMono-Regular',Consolas,monospace;background:rgba(31,22,14,0.07);padding:1px 5px;border-radius:3px;font-size:13px;">by llm()</code> now retries malformed or empty structured outputs automatically, regenerating up to three times (configurable via <code style="font-family:'SFMono-Regular',Consolas,monospace;background:rgba(31,22,14,0.07);padding:1px 5px;border-radius:3px;font-size:13px;">max_output_retries</code>) with corrective prompts, and streaming is now safe to consume across threads.</p>
 <div style="text-align:center;margin:48px 0 16px;">
 <a href="https://newsletter.jaseci.org/issues" style="display:inline-block;padding:14px 32px;border:1.5px solid #ff6b35;background:#f3efe6;text-decoration:none;border-radius:999px;"><span style="text-transform:uppercase;letter-spacing:0.08em;font-size:14px;font-weight:600;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">Browse the archive</span></a>
 </div>
@@ -186,4 +167,4 @@ A new KEDA autoscaler engine (`autoscaler_engine = 'keda'`) scales on real deman
 </table>
 </td>
 </tr>
-</table>
+</table></td></tr></table></td></tr></table></body></html>
