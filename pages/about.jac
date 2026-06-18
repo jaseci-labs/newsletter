@@ -30,9 +30,9 @@ cl {
                 }
                 if data["ok"] {
                     if data["alreadySubscribed"] {
-                        status_message = "You're already on the list. See you Wednesday.";
+                        status_message = "You're already on the list. See you in the next issue.";
                     } else {
-                        status_message = "You're in. The next issue lands on Wednesday.";
+                        status_message = "You're in. Watch your inbox for the next issue.";
                     }
                     status_kind = "success";
                     email = "";
@@ -57,7 +57,7 @@ cl {
                 an AI-native, graph-shaped stack from the Jaseci open-source ecosystem.
             </p>
             <p>
-                Every other Wednesday we publish a short digest of what shipped, what was written,
+                Every two weeks we publish a short digest of what shipped, what was written,
                 and what's worth your attention from across the ecosystem. Short, scannable, no fluff.
             </p>
             <h2 className="section-heading">What's inside.</h2>
@@ -90,7 +90,7 @@ cl {
                     </button>
                 </div>
                 <p className="small muted form-help">
-                    By subscribing you'll receive Jaseci Digest every other Wednesday. Unsubscribe anytime.
+                    By subscribing you'll receive Jaseci Digest every two weeks. Unsubscribe anytime.
                 </p>
                 {status_message and (
                     <p className="form-status" data-kind={status_kind}>{status_message}</p>

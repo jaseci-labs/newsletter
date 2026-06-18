@@ -11,7 +11,7 @@ draft: false
 
 Welcome to **Issue N.01** of Jaseci Digest, a biweekly roundup of what's happening across the Jaseci and Jac open-source ecosystem.
 
-Every other Wednesday we'll send you a short, scannable list of releases, articles, projects, and community notes. No fluff. The goal is to keep you in the loop without piling onto your reading list.
+Every two weeks we'll send you a short, scannable list of releases, articles, projects, and community notes. No fluff. The goal is to keep you in the loop without piling onto your reading list.
 
 This week's lead is a concrete cost analysis: the same todo app built once in Jac and once in FastAPI plus React plus TypeScript, side by side. The result is hard to argue with.
 
