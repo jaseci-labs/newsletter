@@ -72,7 +72,7 @@ Welcome to **Issue N.02** of [Jaseci Digest](https://newsletter.jaseci.org), a b
         </tr>
         <tr>
           <td style="padding:9px 10px;font-weight:600;color:#160f0a;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">Database</td>
-          <td style="padding:9px 11px;font-weight:600;color:#160f0a;font-size:13px;background:#f7e7d9;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;"><span style="color:#ff6b35;font-weight:700;">&#10003;</span> One <code style="font-family:'SFMono-Regular',Consolas,monospace;background:rgba(31,22,14,0.06);padding:1px 4px;border-radius:3px;font-size:12px;">node</code>. Frontend and backend read the same definition, nothing to keep in sync.</td>
+          <td style="padding:9px 11px;font-weight:600;color:#160f0a;font-size:13px;background:#f7e7d9;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;"><span style="color:#ff6b35;font-weight:700;">&#10003;</span> One <code style="font-family:'SFMono-Regular',Consolas,monospace;background:#ffffff;border:1px solid rgba(31,22,14,0.25);color:#c0531f;padding:1px 5px;border-radius:4px;font-size:12px;">node</code>. Frontend and backend read the same definition, nothing to keep in sync.</td>
           <td style="padding:9px 11px;color:#6a5f50;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">A SQL table plus a matching TypeScript type: two places to drift when the model changes.</td>
         </tr>
         <tr>
@@ -87,7 +87,7 @@ Welcome to **Issue N.02** of [Jaseci Digest](https://newsletter.jaseci.org), a b
         </tr>
         <tr>
           <td style="padding:9px 10px;font-weight:600;color:#160f0a;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">AI in your app</td>
-          <td style="padding:9px 11px;font-weight:600;color:#160f0a;font-size:13px;background:#f7e7d9;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;"><span style="color:#ff6b35;font-weight:700;">&#10003;</span> <code style="font-family:'SFMono-Regular',Consolas,monospace;background:rgba(31,22,14,0.06);padding:1px 4px;border-radius:3px;font-size:12px;">by llm()</code>. Call a model like a typed function.</td>
+          <td style="padding:9px 11px;font-weight:600;color:#160f0a;font-size:13px;background:#f7e7d9;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;"><span style="color:#ff6b35;font-weight:700;">&#10003;</span> <code style="font-family:'SFMono-Regular',Consolas,monospace;background:#ffffff;border:1px solid rgba(31,22,14,0.25);color:#c0531f;padding:1px 5px;border-radius:4px;font-size:12px;">by llm()</code>. Call a model like a typed function.</td>
           <td style="padding:9px 11px;color:#6a5f50;font-size:13px;border-bottom:1px solid rgba(31,22,14,0.12);vertical-align:top;">Wire up an SDK, write the prompts, parse and retry the output.</td>
         </tr>
         <tr>

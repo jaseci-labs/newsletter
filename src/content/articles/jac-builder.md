@@ -40,7 +40,7 @@ draft: false
 .issue-body .feat-table td.jh::before { content:"\2713\00a0\00a0"; color:var(--accent); font-weight:700; }
 .issue-body .feat-table td.lv { color:var(--text-muted); }
 .issue-body .feat-table tbody tr:not(:last-child) td { border-bottom:1px solid var(--rule-soft); }
-.issue-body .feat-table code { font-size:0.85em; }
+.issue-body .feat-table code { font-size:0.82em; background:#ffffff; border:1px solid var(--rule-soft); color:var(--accent); padding:0.1em 0.45em; border-radius:5px; }
 </style>
 
 <table class="feat-vs">
