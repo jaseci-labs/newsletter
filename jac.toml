@@ -41,6 +41,11 @@ jac_mcp = "none"
 BUTTONDOWN_API_KEY = "${BUTTONDOWN_API_KEY}"
 PUBLIC_BUTTONDOWN_USERNAME = "jaseci"
 PUBLIC_SITE_URL = "https://newsletter.jaseci.org"
+# Authenticate the toolchain installer's api.github.com calls inside the pod so
+# they aren't rate-limited (the cause of "Failed to query GitHub API"). Resolved
+# from the deploy step's env at deploy time.
+GITHUB_TOKEN = "${GITHUB_TOKEN}"
+GH_TOKEN = "${GITHUB_TOKEN}"
 
 [dependencies]
 markdown = ">=3.5"
