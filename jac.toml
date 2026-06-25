@@ -24,6 +24,18 @@ liveness_initial_delay = 300
 liveness_failure_threshold = 10
 readiness_initial_delay = 60
 
+# Pin exact versions so the pod installs known-good releases instead of
+# resolving "latest" at startup. The runtime "latest" lookup hits the GitHub
+# Releases API, which gets rate-limited from the cluster and fails the deploy
+# with "Could not determine latest version from GitHub Releases". These match
+# the versions used in local development.
+[plugins.scale.kubernetes.plugin_versions]
+jaclang = "0.16.0"
+jac_scale = "0.2.23"
+jac_client = "0.3.21"
+jac_byllm = "none"
+jac_mcp = "none"
+
 
 [plugins.scale.secrets]
 BUTTONDOWN_API_KEY = "${BUTTONDOWN_API_KEY}"
