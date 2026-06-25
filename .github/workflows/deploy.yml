@@ -44,6 +44,9 @@ jobs:
           aws eks update-kubeconfig --region us-east-2 --name jaseci-cluster
           kubectl config current-context
 
+      - name: Log in to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
@@ -70,7 +73,11 @@ jobs:
         env:
           BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
         run: |
-          jac start main.jac --scale
+          # --build bakes the toolchain into an image on the runner (where the
+          # GitHub Releases / PyPI fetches actually succeed) and pushes it to
+          # ECR. The pod just pulls the image, so it never has to reach the
+          # GitHub API at startup -- which the cluster can't do reliably.
+          jac start main.jac --scale --build --registry ecr
 
       - name: Diagnose deploy failure
         if: failure()
