@@ -52,7 +52,14 @@ jobs:
       - name: Install Jaseci packages
         run: |
           pip install --upgrade pip
-          pip install jaclang jac-client "jac-scale[deploy]"
+          # PIN the RUNNER's toolchain. `jac start --scale` uses the runner's
+          # jac-scale to GENERATE the pod manifest; the latest (0.2.31) generates
+          # a pod that boot-installs `jac` via the GitHub-Releases binary installer,
+          # whose api.github.com lookup fails ("Failed to query GitHub API for
+          # release vX"). 0.2.23 generates a pod that doesn't use that path.
+          # Pinning [plugins.scale.kubernetes.plugin_versions] alone is NOT enough --
+          # it only changes which version the (still-broken) installer requests.
+          pip install jaclang==0.16.0 jac-client==0.3.21 "jac-scale[deploy]==0.2.23"
 
       - name: Pre-deploy cluster baseline
         run: |
