@@ -119,10 +119,14 @@ The Jaseci team just kicked off a video series that teaches Jac from the ground 
 ### [JacHacks SF is coming](https://jachacks.org/)
 
 <a href="https://jachacks.org/" target="_blank" rel="noopener" class="news-img">
-  <img src="/issues/003/jachacks.png" alt="JacHacks SF. August 8, 2026, 9:00 AM PT, San Francisco." />
+  <img src="/issues/003/jachacks.png" alt="JacHacks SF. July 26, 2026, 8:00 AM PT, Founders, Inc., San Francisco." />
 </a>
 
-JacHacks heads to San Francisco for a one-day, in-person hackathon built around the future of AI programming, landing August 8 at 9 AM PT. It follows a strong run for the series, with JacHacks Spring drawing 300+ builders and 81 projects online this May. [Register on Luma](https://luma.com/9x1573sw) to grab your spot.
+JacHacks heads to San Francisco for a one-day, in-person hackathon built around the future of AI programming, landing **July 26 at 8 AM PT** at **Founders, Inc.** It follows a strong run for the series, with JacHacks Spring drawing **300+ builders** and **81 projects** online this May.
+
+<div class="feat-try-wrap" style="margin:1.25rem 0 0.5rem;">
+  <a class="feat-try" href="https://jachacks.org/" target="_blank" rel="noopener">Register for JacHacks SF &rarr;</a>
+</div>
 
 ### [Join the Jaseci Discord](https://discord.com/invite/6j3QNdtcN6)
 
