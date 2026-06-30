@@ -121,7 +121,7 @@ The Jaseci team just kicked off a video series that teaches Jac from the ground 
 ### [JacHacks SF is coming](https://jachacks.org/)
 
 <a href="https://jachacks.org/" target="_blank" rel="noopener" class="news-img">
-  <img src="/issues/003/jachacks.png" alt="JacHacks SF. July 26, 2026, 8:00 AM PT, Founders, Inc., San Francisco." />
+  <img src="/issues/003/jachacks.png?v=2" alt="JacHacks SF. July 26, 2026, 8:00 AM PT, Founders, Inc., San Francisco." />
 </a>
 
 JacHacks heads to San Francisco for a one-day, in-person hackathon built around the future of AI programming, landing **July 26 at 8 AM PT** at **Founders, Inc.** It follows a strong run for the series, with JacHacks Spring drawing **300+ builders** and **81 projects** online this May.
