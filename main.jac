@@ -12,6 +12,7 @@ import time;
 import uuid;
 import yaml;
 import markdown as md;
+import jac_syntax_highlighter;  # registers the Jac Pygments lexer for codehilite
 import from datetime { date as date_cls }
 import from pathlib { Path }
 import from urllib.request { Request, urlopen }
