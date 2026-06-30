@@ -23,10 +23,10 @@ This week's lead is about building AI agents with far less code. Today, much of 
 .issue-body .feat-eyebrow { display:block; font-weight:700; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); margin:0.5rem 0 0.5rem; }
 .issue-body .feat-hero { display:block; margin:0 0 1.25rem; font-size:clamp(1.7rem,4.2vw,2.7rem); font-weight:700; line-height:1.08; letter-spacing:-0.02em; color:var(--text-heading); text-decoration:none; }
 .issue-body .feat-hero:hover { color:var(--accent); }
-.issue-body .feat-code-cap { display:flex; align-items:center; justify-content:space-between; gap:0.6rem; max-width:none; margin:1.5rem 0 0; padding:0.6rem 1.05rem; background:#efdcc4; border:1px solid var(--rule-soft); border-left:4px solid var(--accent); border-bottom:none; border-radius:12px 12px 0 0; font-weight:700; font-size:0.92rem; color:var(--text-heading); }
+.issue-body .feat-code-cap { display:flex; align-items:center; justify-content:space-between; gap:0.6rem; max-width:none; margin:1.5rem 0 0; padding:0.6rem 1.05rem; background:#efdcc4; border:1px solid var(--rule-soft); border-bottom:none; border-radius:12px 12px 0 0; font-weight:700; font-size:0.92rem; color:var(--text-heading); }
 .issue-body .feat-code-cap .badge { font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--bg); background:var(--accent); padding:0.24em 0.75em; border-radius:999px; white-space:nowrap; }
 .issue-body .codehilite, .issue-body .codehilite pre { background:#f6f0e6; }
-.issue-body .codehilite { margin:0 0 1.25rem; border:1px solid var(--rule-soft); border-top:none; border-left:4px solid var(--accent); border-radius:0 0 12px 12px; box-shadow:0 16px 34px -20px rgba(31,22,14,0.4); overflow:hidden; }
+.issue-body .codehilite { margin:0 0 1.25rem; border:1px solid var(--rule-soft); border-top:none; border-radius:0 0 12px 12px; box-shadow:0 16px 34px -20px rgba(31,22,14,0.4); overflow:hidden; }
 .issue-body .codehilite pre { margin:0; padding:1rem 1.2rem; overflow-x:auto; color:#2c2218; background:transparent; border:none; border-radius:0; box-shadow:none; }
 .issue-body .codehilite .c, .issue-body .codehilite .c1, .issue-body .codehilite .cm, .issue-body .codehilite .ch, .issue-body .codehilite .cs { color:#b07a3a; font-style:italic; }
 .issue-body .codehilite .k, .issue-body .codehilite .kn, .issue-body .codehilite .kd, .issue-body .codehilite .kp, .issue-body .codehilite .kr, .issue-body .codehilite .kc { color:#8a3fb0; }
@@ -74,19 +74,15 @@ This week's lead is about building AI agents with far less code. Today, much of 
 
 <a class="feat-hero" href="https://blogs.jaseci.org/blog/posts/building-agentic-ai-with-jac">Agentic AI is easy when it's built into the language</a>
 
-<p class="feat-question">What if the AI agent that usually takes <span class="hl">150+ lines of code</span> to build was just <span class="hl">7 lines with Jac</span>?</p>
+<p class="feat-question">What if building an AI agent took <span class="hl">14x fewer lines of code</span>? In Jac, the whole thing is just <span class="hl">5 lines</span>.</p>
 
-<p class="feat-code-cap">A complete AI agent <span class="badge">7 lines of Jac</span></p>
+<p class="feat-code-cap">A complete AI agent <span class="badge">5 lines of Jac</span></p>
 
 ```jac
-import from byllm.llm { Model }
-glob llm = Model(model_name="openai/gpt-4o");
-
-# A tool is just an ordinary function.
-def search(query: str) -> list[str];
+import from .tools { web_search, read_file, write_file }
 
 # An agent: a function the model runs, calling tools.
-def research(topic: str) -> str by llm(tools=[search]);
+def research(topic: str) -> str by llm(tools=[web_search, read_file, write_file]);
 
 with entry {
     print(research("the best coffee in Tokyo"));
@@ -94,8 +90,8 @@ with entry {
 ```
 
 <table class="feat-vs">
-<tr><td class="feat-vs-card old"><span class="vs-label">&#10007;&nbsp; The usual way</span>You write the agent and all the code around it: connecting to the model, defining each tool, looping while it works, and validating and retrying its output. Most of your file is not the agent.</td></tr>
-<tr><td class="feat-vs-card jac"><span class="vs-label">&#10003;&nbsp; With Jac</span><b>That supporting code is part of the language.</b> You describe the agent, and the runtime handles the rest. The whole thing is the 7 lines above.</td></tr>
+<tr><td class="feat-vs-card old"><span class="vs-label">&#10007;&nbsp; The usual way</span>You write the agent and all the code around it: each tool's JSON schema, a dispatch table, the loop that runs while the model works, and the validating and retrying of its output. The same agent in Python runs to around 70 lines, and most of it is not the agent.</td></tr>
+<tr><td class="feat-vs-card jac"><span class="vs-label">&#10003;&nbsp; With Jac</span><b>That supporting code is part of the language.</b> You describe the agent, and the runtime handles the rest. The whole thing is the 5 lines above.</td></tr>
 </table>
 
 The full article explores how Jac makes building real, capable agents this simple.
