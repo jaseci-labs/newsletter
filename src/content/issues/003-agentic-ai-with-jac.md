@@ -74,15 +74,17 @@ This week's lead is about building AI agents with far less code. Today, much of 
 
 <a class="feat-hero" href="https://blogs.jaseci.org/blog/posts/building-agentic-ai-with-jac">Agentic AI is easy when it's built into the language</a>
 
-<p class="feat-question">What if building an AI agent took <span class="hl">14x fewer lines of code</span> than Python? In Jac, the whole thing is just <span class="hl">5 lines</span>.</p>
+<p class="feat-question">What if building an AI agent took <span class="hl">10x fewer lines of code</span> than Python? In Jac, the whole thing is just <span class="hl">7 lines</span>.</p>
 
-<p class="feat-code-cap">A complete AI agent <span class="badge">5 lines of Jac</span></p>
+<p class="feat-code-cap">A complete AI agent <span class="badge">7 lines of Jac</span></p>
 
 ```jac
 import from .tools { web_search, read_file, write_file }
 
 # An agent: a function the model runs, calling tools.
-def research(topic: str) -> str by llm(tools=[web_search, read_file, write_file]);
+def research(topic: str) -> str by llm(
+    tools=[web_search, read_file, write_file]
+);
 
 with entry {
     print(research("the best coffee in Tokyo"));
@@ -91,7 +93,7 @@ with entry {
 
 <table class="feat-vs">
 <tr><td class="feat-vs-card old"><span class="vs-label">&#10007;&nbsp; The usual way</span>You write the agent and all the code around it: each tool's JSON schema, a dispatch table, the loop that runs while the model works, and the validating and retrying of its output. The same agent in Python runs to around 70 lines, and most of it is not the agent.</td></tr>
-<tr><td class="feat-vs-card jac"><span class="vs-label">&#10003;&nbsp; With Jac</span><b>That supporting code is part of the language.</b> You describe the agent, and the runtime handles the rest. The whole thing is the 5 lines above.</td></tr>
+<tr><td class="feat-vs-card jac"><span class="vs-label">&#10003;&nbsp; With Jac</span><b>That supporting code is part of the language.</b> You describe the agent, and the runtime handles the rest. The whole thing is the 7 lines above.</td></tr>
 </table>
 
 The full article explores how Jac makes building real, capable agents this simple.
