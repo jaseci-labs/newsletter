@@ -74,7 +74,7 @@ This week's lead is about building AI agents with far less code. Today, much of 
 
 <a class="feat-hero" href="https://blogs.jaseci.org/blog/posts/building-agentic-ai-with-jac">Agentic AI is easy when it's built into the language</a>
 
-<p class="feat-question">What if building an AI agent took <span class="hl">14x fewer lines of code</span>? In Jac, the whole thing is just <span class="hl">5 lines</span>.</p>
+<p class="feat-question">What if building an AI agent took <span class="hl">14x fewer lines of code</span> than Python? In Jac, the whole thing is just <span class="hl">5 lines</span>.</p>
 
 <p class="feat-code-cap">A complete AI agent <span class="badge">5 lines of Jac</span></p>
 
