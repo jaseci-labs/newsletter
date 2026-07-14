@@ -83,7 +83,7 @@ cl {
                         autoComplete="email"
                         required
                         value={email}
-                        onChange={lambda e: any -> None { email = e.target.value; }}
+                        onChange={lambda(e: any) { email = e.target.value as str; }}
                     />
                     <button type="submit" className="cta-pill" disabled={submitting}>
                         {submitting and "Subscribing…" or "Subscribe"}

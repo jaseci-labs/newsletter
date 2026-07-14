@@ -14,7 +14,7 @@ cl {
             try {
                 result = root spawn GetIssues();
                 if result.reports and len(result.reports) > 0 {
-                    issues = result.reports[0]["issues"];
+                    issues = result.reports[0]["issues"] as list;
                 }
             } except Exception {
                 # Silent fail — page still works without latest-issue card
@@ -84,7 +84,7 @@ cl {
                             autoComplete="email"
                             required
                             value={email}
-                            onChange={lambda e: any -> None { email = e.target.value; }}
+                            onChange={lambda(e: any) { email = e.target.value as str; }}
                         />
                         <button type="submit" className="cta-pill" disabled={submitting}>
                             {submitting and "Subscribing…" or "Subscribe"}

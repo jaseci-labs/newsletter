@@ -17,7 +17,7 @@ cl {
                 result = root spawn GetIssues();
                 if result.reports and len(result.reports) > 0 {
                     data = result.reports[0];
-                    issues = data["issues"];
+                    issues = data["issues"] as list;
                 } else {
                     error = "No response from server.";
                 }
