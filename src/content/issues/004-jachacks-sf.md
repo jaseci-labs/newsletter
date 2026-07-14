@@ -2,7 +2,7 @@
 number: 4
 title: Built for builders
 date: 2026-07-15
-description: Two features this issue. JacHacks comes to San Francisco for the first time on July 26, and a tutorial on the new one-binary Jac toolchain.
+description: JacHacks comes to San Francisco for the first time on July 26, and a tutorial on the new one-binary Jac toolchain.
 draft: false
 ---
 
@@ -15,8 +15,6 @@ public/issues/004/.
 -->
 
 Welcome to **Issue N.04** of Jaseci Digest, a biweekly roundup of what's happening across the Jaseci and Jac open-source ecosystem.
-
-Two features this issue. First, JacHacks is coming to San Francisco on **July 26**, its first time in the city. Second, a tutorial on the new one-binary Jac toolchain that sets up your whole dev environment with a single download. Both below.
 
 ## Featured
 
