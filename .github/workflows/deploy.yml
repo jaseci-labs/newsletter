@@ -73,6 +73,35 @@ jobs:
           kubectl get pvc,pods,events -n newsletter --sort-by=.metadata.creationTimestamp || true
           echo "::endgroup::"
 
+      - name: Free the code PVC before syncing (scale down code-server)
+        # ROOT CAUSE (jac-scale 0.2.23): the shared code PVC newsletter-code-pvc is
+        # ReadWriteOnce on EBS (attaches to one node at a time). The long-lived
+        # `newsletter-code-server` pod holds it, and jac-scale runs the `code-sync`
+        # pod — which needs the SAME RWO volume — BEFORE it recreates code-server.
+        # So during sync, code-sync competes with the still-running code-server pod;
+        # if it lands on a different node it wedges in Multi-Attach and the deploy
+        # times out ("FailedAttachVolume … Volume is already used by pod(s)
+        # newsletter-code-server-…"). Co-location is scheduler luck — deploys pass
+        # for weeks, then fail with no code change. (Same issue fixed in jaseci-blogs.)
+        #
+        # DETERMINISTIC FIX: scale code-server to 0 first, detaching the volume, so
+        # code-sync can attach on ANY node. jac-scale delete+recreates code-server at
+        # the end of the deploy, so this only moves that teardown earlier. The APP pod
+        # serves from an emptyDir (it wgets code from code-server over HTTP; it does
+        # NOT mount this PVC), so the live site stays UP throughout.
+        run: |
+          NS=newsletter
+          if kubectl get deploy/newsletter-code-server -n "$NS" >/dev/null 2>&1; then
+            SEL=$(kubectl get deploy/newsletter-code-server -n "$NS" \
+              -o go-template='{{range $k,$v := .spec.selector.matchLabels}}{{$k}}={{$v}},{{end}}' | sed 's/,$//')
+            kubectl scale deploy/newsletter-code-server -n "$NS" --replicas=0
+            echo "Waiting for code-server pod to terminate (EBS volume detach)…"
+            kubectl wait --for=delete pod -l "$SEL" -n "$NS" --timeout=120s || true
+          fi
+          # Clear any code-sync pod wedged by a prior run so jac-scale makes a fresh one.
+          kubectl delete pod newsletter-code-sync -n "$NS" \
+            --ignore-not-found --force --grace-period=0 2>/dev/null || true
+
       - name: Deploy newsletter with jac-scale
         env:
           BUTTONDOWN_API_KEY: ${{ secrets.BUTTONDOWN_API_KEY }}
@@ -85,7 +114,41 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          jac start main.jac --scale
+          # The "Free the code PVC" step above detached the RWO code volume, so the
+          # code-sync pod can now attach on any node and this should succeed on the
+          # first try. The short retry is belt-and-suspenders for transient EBS
+          # detach latency AND a flaky `kubectl cp` in jac-scale's sync (it copies
+          # the tarball into the pod then extracts it; the copy occasionally does not
+          # land → "tar: can't open /tmp/jaseci-code.tar.gz"). It force-deletes any
+          # wedged code-sync pod between tries.
+          NS=newsletter
+          for attempt in 1 2 3; do
+            echo "::group::Deploy attempt ${attempt}/3"
+            kubectl delete pod newsletter-code-sync -n "$NS" \
+              --ignore-not-found --force --grace-period=0 2>/dev/null || true
+            kubectl wait --for=delete pod/newsletter-code-sync -n "$NS" \
+              --timeout=60s 2>/dev/null || true
+            if jac start main.jac --scale; then
+              echo "::endgroup::"
+              echo "Deployed successfully on attempt ${attempt}."
+              exit 0
+            fi
+            echo "::endgroup::"
+            echo "Attempt ${attempt} failed; retrying…"
+          done
+          echo "All attempts failed. The live app pod was never touched, so the site is"
+          echo "still serving the last-synced code."
+          exit 1
+
+      - name: Ensure code-server is running
+        if: always()
+        # Safety net: jac-scale recreates code-server (at replicas=1) only after a
+        # successful sync. If the deploy failed before that, code-server may be left
+        # at 0 replicas from the "Free the code PVC" step — the site stays up (app pod
+        # serves from emptyDir), but restore code-server so new app-pod boots and the
+        # next sync aren't blocked. No-op once jac-scale has recreated it at 1.
+        run: |
+          kubectl scale deploy/newsletter-code-server -n newsletter --replicas=1 2>/dev/null || true
 
       - name: Diagnose deploy failure
         if: failure()
