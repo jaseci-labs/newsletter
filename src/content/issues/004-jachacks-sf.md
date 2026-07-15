@@ -184,6 +184,17 @@ The fastest way to reach the Jaseci team and other builders. Debugging help, rel
   <a class="discord-btn" href="https://discord.com/invite/6j3QNdtcN6" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.198.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join the Discord</a>
 </div>
 
+## Releases
+
+### [jaclang v0.32.0: opt-in ownership checking, hardened WebSockets](https://docs.jaseci.org/community/release_notes/jaclang/)
+
+What matters if you're upgrading:
+
+- **Opt-in ownership and borrow checking.** Annotate code with `own` and `mut` and the compiler enforces memory safety. Unannotated code is untouched.
+- **Breaking: new lambda syntax.** Parameters are now parenthesized and bodies always braced, with implicit return for single expressions.
+- **Breaking: `own` and `mut` are now reserved.** Rename any variables using those names.
+- **Hardened WebSockets.** JWT authentication, rate limits, and heartbeat monitoring.
+- **Official Docker images.** On Docker Hub for every release.
 <!--
 STUBS for the rest of the issue. Uncomment a section once it has real content.
 
@@ -198,14 +209,6 @@ featured story.)
 One or two sentences. What is the project, what does it use Jac for, and why
 is it worth a click.
 
-## Releases
-
-(Any jaclang / plugin releases since 0.30.3? Check
-https://docs.jaseci.org/community/release_notes/jaclang/)
-
-### [Project name vX.Y: what shipped](https://example.com)
-
-One or two sentences. Headline the big new capability.
 -->
 
 <div class="orn-divider" aria-hidden="true"><i></i><i></i><i></i></div>

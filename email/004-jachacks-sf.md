@@ -34,7 +34,7 @@ Welcome to **Issue N.04** of [Jaseci Digest](https://newsletter.jaseci.org), a b
   <a href="https://jachacks.org/" target="_blank" rel="noopener" style="text-decoration:none;display:block;">
     <img src="https://newsletter.jaseci.org/issues/004/jachacks.png?v=4" width="100%" alt="JacHacks SF, registration open. July 26, 2026, 8:00 AM PT, Founders, Inc., San Francisco." style="display:block;border:1px solid rgba(31,22,14,0.18);border-radius:12px;width:100%;max-width:100%;height:auto;margin:0 0 20px;">
   </a>
-  <p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.5;color:#1f160e;text-align:justify;-webkit-hyphens:auto;hyphens:auto;margin:0 0 18px;"><span style="float:left;font-size:3.1em;line-height:0.82;font-weight:700;color:#ff6b35;padding:0.08em 0.14em 0 0;">J</span>acHacks SF is a one-day, in-person hackathon built around the future of AI programming, happening <strong>July 26</strong> at <strong>Founders, Inc. in San Francisco</strong>. Starting at 8 AM PT, you spend the day <strong>building AI agents and applications with Jac</strong>, and demo what you made that same evening.</p>
+  <p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.5;color:#1f160e;text-align:justify;-webkit-hyphens:auto;hyphens:auto;margin:0 0 18px;">JacHacks SF is a one-day, in-person hackathon built around the future of AI programming, happening <strong>July 26</strong> at <strong>Founders, Inc. in San Francisco</strong>. Starting at 8 AM PT, you spend the day <strong>building AI agents and applications with Jac</strong>, and demo what you made that same evening.</p>
 </td></tr>
 </table>
 
@@ -97,20 +97,20 @@ Welcome to **Issue N.04** of [Jaseci Digest](https://newsletter.jaseci.org), a b
         <td width="11" style="font-size:1px;"><div style="width:11px;height:11px;border-radius:50%;background:#ffbd2e;font-size:1px;line-height:11px;">&nbsp;</div></td>
         <td width="8" style="font-size:1px;">&nbsp;</td>
         <td width="11" style="font-size:1px;"><div style="width:11px;height:11px;border-radius:50%;background:#27c93f;font-size:1px;line-height:11px;">&nbsp;</div></td>
-        <td style="padding-left:12px;font-family:'SFMono-Regular',Consolas,'Courier New',monospace;font-size:11px;letter-spacing:0.04em;color:rgba(243,239,230,0.55);">terminal</td>
+        <td style="padding-left:12px;font-family:'SFMono-Regular',Consolas,'Courier New',monospace;font-size:11px;letter-spacing:0.04em;color:rgba(243,239,230,0.78);">terminal</td>
       </tr></table>
     </td></tr>
     <tr><td style="background:#3a2d22;border-radius:0 0 12px 12px;padding:15px 16px;font-family:'SFMono-Regular',Consolas,'Courier New',monospace;font-size:12.5px;line-height:1.7;color:#f3efe6;">
-<div style="color:rgba(243,239,230,0.72);"># one download, the whole toolchain</div>
-<div style="padding-left:15px;text-indent:-15px;"><span style="color:#ff6b35;font-weight:700;">$</span> curl -fsSL https://raw.githubusercontent.com/jaseci-labs/jaseci/main/scripts/install.sh | bash</div>
-<div style="color:rgba(243,239,230,0.72);margin-top:3px;"># then everything is just jac</div>
-<div style="padding-left:15px;text-indent:-15px;"><span style="color:#ff6b35;font-weight:700;">$</span> jac add numpy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgba(243,239,230,0.72);"># PyPI and npm deps, one tool</span></div>
-<div style="padding-left:15px;text-indent:-15px;"><span style="color:#ff6b35;font-weight:700;">$</span> jac start&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgba(243,239,230,0.72);"># walkers become REST APIs</span></div>
-<div style="padding-left:15px;text-indent:-15px;"><span style="color:#ff6b35;font-weight:700;">$</span> jac nacompile&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgba(243,239,230,0.72);"># compile to a native binary</span></div>
-<div style="padding-left:15px;text-indent:-15px;"><span style="color:#ff6b35;font-weight:700;">$</span> jac x hf&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:rgba(243,239,230,0.72);"># run any CLI from PyPI or npm</span></div>
+<div style="color:#9db179;"># one download, the whole toolchain</div>
+<div style="padding-left:15px;text-indent:-15px;color:#f3efe6;"><span style="color:#ff6b35;font-weight:700;">$</span> curl -fsSL https://raw.githubusercontent.com/jaseci-labs/jaseci/main/scripts/install.sh | bash</div>
+<div style="color:#9db179;margin-top:3px;"># then everything is just jac</div>
+<div style="padding-left:15px;text-indent:-15px;color:#f3efe6;"><span style="color:#ff6b35;font-weight:700;">$</span> jac add numpy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#9db179;"># PyPI and npm deps, one tool</span></div>
+<div style="padding-left:15px;text-indent:-15px;color:#f3efe6;"><span style="color:#ff6b35;font-weight:700;">$</span> jac start&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#9db179;"># walkers become REST APIs</span></div>
+<div style="padding-left:15px;text-indent:-15px;color:#f3efe6;"><span style="color:#ff6b35;font-weight:700;">$</span> jac nacompile&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#9db179;"># compile to a native binary</span></div>
+<div style="padding-left:15px;text-indent:-15px;color:#f3efe6;"><span style="color:#ff6b35;font-weight:700;">$</span> jac x hf&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#9db179;"># run any CLI from PyPI or npm</span></div>
     </td></tr>
   </table>
-  <p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.55;color:#1f160e;text-align:justify;-webkit-hyphens:auto;hyphens:auto;margin:0 0 18px;"><span style="float:left;font-size:3.1em;line-height:0.82;font-weight:700;color:#ff6b35;padding:0.08em 0.14em 0 0;">B</span>efore you can write a line of code, a new project normally needs Python, Node.js, a package manager, and a web framework installed and kept in sync. Jac replaces all of that with a single download.</p>
+  <p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.55;color:#1f160e;text-align:justify;-webkit-hyphens:auto;hyphens:auto;margin:0 0 18px;">Before you can write a line of code, a new project normally needs Python, Node.js, a package manager, and a web framework installed and kept in sync. Jac replaces all of that with a single download.</p>
 </td></tr>
 </table>
 
@@ -220,6 +220,30 @@ Welcome to **Issue N.04** of [Jaseci Digest](https://newsletter.jaseci.org), a b
   <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-radius:999px;background:#5865F2;">
     <a href="https://discord.com/invite/6j3QNdtcN6" target="_blank" rel="noopener" style="display:inline-block;padding:12px 28px;text-decoration:none;color:#ffffff !important;font-size:15px;font-weight:700;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">Join the Discord</a>
   </td></tr></table>
+</td></tr>
+</table>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:44px 0 6px;">
+<tr><td style="padding:0 24px;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+    <td width="42" style="background:#ff6b35;height:3px;line-height:3px;font-size:1px;">&nbsp;</td>
+    <td style="border-top:1px solid rgba(31,22,14,0.18);height:3px;line-height:1px;font-size:1px;">&nbsp;</td>
+  </tr></table>
+  <h2 style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:26px;font-weight:700;text-transform:uppercase;letter-spacing:-0.015em;line-height:1.1;color:#160f0a;margin:14px 0 0;">Releases</h2>
+</td></tr>
+</table>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:20px 0 0;">
+<tr><td style="padding:0 24px;">
+  <h3 style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:18px;font-weight:600;line-height:1.3;letter-spacing:-0.005em;margin:0 0 8px;"><a href="https://docs.jaseci.org/community/release_notes/jaclang/" style="color:#160f0a !important;text-decoration:underline;text-decoration-color:#ff6b35;">jaclang v0.32.0: opt-in ownership checking, hardened WebSockets</a></h3>
+  <p style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.55;color:#1f160e;margin:0 0 10px;">What matters if you're upgrading:</p>
+  <ul style="font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-size:15px;line-height:1.55;color:#1f160e;margin:0;padding-left:22px;">
+    <li style="margin:0 0 8px;"><strong>Opt-in ownership and borrow checking.</strong> Annotate code with <code style="font-family:'SFMono-Regular',Consolas,monospace;font-size:0.9em;background:#ece7db;padding:1px 5px;border-radius:4px;">own</code> and <code style="font-family:'SFMono-Regular',Consolas,monospace;font-size:0.9em;background:#ece7db;padding:1px 5px;border-radius:4px;">mut</code> and the compiler enforces memory safety. Unannotated code is untouched.</li>
+    <li style="margin:0 0 8px;"><strong>Breaking: new lambda syntax.</strong> Parameters are now parenthesized and bodies always braced, with implicit return for single expressions.</li>
+    <li style="margin:0 0 8px;"><strong>Breaking: <code style="font-family:'SFMono-Regular',Consolas,monospace;font-size:0.9em;background:#ece7db;padding:1px 5px;border-radius:4px;">own</code> and <code style="font-family:'SFMono-Regular',Consolas,monospace;font-size:0.9em;background:#ece7db;padding:1px 5px;border-radius:4px;">mut</code> are now reserved.</strong> Rename any variables using those names.</li>
+    <li style="margin:0 0 8px;"><strong>Hardened WebSockets.</strong> JWT authentication, rate limits, and heartbeat monitoring.</li>
+    <li style="margin:0;"><strong>Official Docker images.</strong> On Docker Hub for every release.</li>
+  </ul>
 </td></tr>
 </table>
 
