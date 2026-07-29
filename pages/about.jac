@@ -1,7 +1,7 @@
 sv import from ..main { Subscribe }
 
 cl {
-    def:pub page() -> JsxElement {
+    def:pub page() -> JsxPage {
         can with entry {
             document.title = "About · Jaseci Digest";
         }
