@@ -59,6 +59,15 @@ GH_TOKEN = "${GITHUB_TOKEN}"
 [dependencies]
 markdown = ">=3.5"
 pyyaml = ">=6.0"
+# WORKAROUND for an upstream gap, not an app dependency -- nothing in this repo
+# imports dotenv. jaclang's Kubernetes realizer does, at module scope
+# (jaclang/scale/runtime/realizer/kubernetes_realizer.jac:3 --
+# `import from dotenv { load_dotenv }`), but neither the shipped runtime nor
+# `jac install --scale` installs python-dotenv, so `jac start --scale` dies with
+# ModuleNotFoundError before it reaches the cluster. Declaring it here puts it in
+# .jac/venv, which is on the import path for the deploy. Drop this once jaclang
+# declares its own scale dependency.
+python-dotenv = ">=1.0"
 
 [dependencies.npm]
 react = "^18.2.0"
