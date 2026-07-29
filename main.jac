@@ -24,11 +24,12 @@ cl {
             document.title = "Jaseci Digest · biweekly newsletter for the Jaseci & Jac ecosystem";
             existing = document.querySelector("link[rel='icon']");
             if not existing {
-                icon = document.createElement("link");
+                icon: any = document.createElement("link");
                 icon.rel = "icon";
                 icon.type = "image/png";
                 icon.href = "/logo.png";
-                document.head.appendChild(icon);
+                head: any = document.head;
+                head.appendChild(icon);
             }
         }
         return <>{props.children}</>;
@@ -135,7 +136,7 @@ walker:pub GetIssues {
             return;
         }
 
-        items = [];
+        items: list[dict[str, any]] = [];
         for path in sorted(dir_path.glob("*.md")) {
             if path.name.startswith("_") {
                 continue;
@@ -154,7 +155,7 @@ walker:pub GetIssues {
             });
         }
 
-        items.sort(key=lambda x: dict -> int { return x["number"]; }, reverse=True);
+        items.sort(key=lambda(x: dict[str, any]) -> int { return x["number"] as int; }, reverse=True);
         report {"issues": items};
     }
 }
@@ -276,11 +277,11 @@ def:priv http_post(url: str, api_key: str, body: dict) -> tuple[int, dict] {
     req.add_header("X-Buttondown-Live-Dangerously", "true");
     try {
         resp = urlopen(req, timeout=10);
-        raw = resp.read().decode("utf-8");
+        raw: str = resp.read().decode("utf-8") as str;
         parsed = json.loads(raw) if raw else {};
         return (resp.status, parsed);
     } except HTTPError as e {
-        raw = e.read().decode("utf-8") if e.fp else "";
+        raw: str = (e.read().decode("utf-8") if e.fp else "") as str;
         parsed = {};
         try {
             parsed = json.loads(raw) if raw else {};
@@ -299,11 +300,11 @@ def:priv http_get(url: str, api_key: str) -> tuple[int, dict] {
     req.add_header("Authorization", f"Token {api_key}");
     try {
         resp = urlopen(req, timeout=10);
-        raw = resp.read().decode("utf-8");
+        raw: str = resp.read().decode("utf-8") as str;
         parsed = json.loads(raw) if raw else {};
         return (resp.status, parsed);
     } except HTTPError as e {
-        raw = e.read().decode("utf-8") if e.fp else "";
+        raw: str = (e.read().decode("utf-8") if e.fp else "") as str;
         parsed = {};
         try {
             parsed = json.loads(raw) if raw else {};

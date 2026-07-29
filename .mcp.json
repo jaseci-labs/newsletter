@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "jac": {
-      "command": "/Users/saviniudumalagala/miniconda3/envs/agentic-ai/bin/jac",
+      "command": "/Users/saviniudumalagala/.local/bin/jac",
       "args": ["mcp"]
     }
   }

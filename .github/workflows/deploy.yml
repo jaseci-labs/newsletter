@@ -44,22 +44,56 @@ jobs:
           aws eks update-kubeconfig --region us-east-2 --name jaseci-cluster
           kubectl config current-context
 
+      # Not required by the toolchain itself -- the jac binary bundles its own
+      # runtime and nothing here is pip-installed anymore. Retained because
+      # `jac install` resolves [dependencies] into .jac/venv and may reach for a
+      # system interpreter to do it; pinning keeps that predictable.
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Install Jaseci packages
+      - name: Install Jac toolchain
+        env:
+          # install.sh resolves the release through api.github.com, and tracking
+          # latest means it does that lookup on EVERY deploy. Unauthenticated calls
+          # are rate-limited and fail with "Failed to query GitHub API for latest
+          # release" / "Could not determine latest version from GitHub Releases";
+          # the script picks GITHUB_TOKEN up and authenticates, raising the ceiling
+          # to ~1000/hr. Do not drop this env block.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pip install --upgrade pip
-          # PIN the RUNNER's toolchain. `jac start --scale` uses the runner's
-          # jac-scale to GENERATE the pod manifest; the latest (0.2.31) generates
-          # a pod that boot-installs `jac` via the GitHub-Releases binary installer,
-          # whose api.github.com lookup fails ("Failed to query GitHub API for
-          # release vX"). 0.2.23 generates a pod that doesn't use that path.
-          # Pinning [plugins.scale.kubernetes.plugin_versions] alone is NOT enough --
-          # it only changes which version the (still-broken) installer requests.
-          pip install jaclang==0.16.0 jac-client==0.3.21 "jac-scale[deploy]==0.2.23"
+          # One-binary jac: a single self-contained executable, no PyPI packages.
+          # `scale` and the client bundler now ship INSIDE jaclang -- the jac-scale
+          # and jac-client packages no longer exist. Installing the old pinned set
+          # here would pull the 0.16-era parser, which cannot read this source
+          # (parenthesized lambda params, `as` casts).
+          #
+          # UNPINNED BY CHOICE: no --version, so this tracks the latest release.
+          # jac.toml leaves the pod's jaclang version unpinned to match. Two things
+          # follow from that, and they are the first places to look when a deploy
+          # breaks with no diff in this repo:
+          #   - a breaking jac release breaks the deploy without a commit here
+          #     (0.16 -> 0.32 changed lambda syntax and did exactly this);
+          #   - runner and pod resolve latest independently, so a release landing
+          #     mid-deploy can leave them on different versions.
+          # `jac --version` in the next step records what was actually resolved.
+          curl -fsSL https://raw.githubusercontent.com/jaseci-labs/jaseci/main/scripts/install.sh \
+            | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Resolve project dependencies
+        run: |
+          jac --version
+          # Resolves [dependencies] + [dependencies.npm] into .jac/, plus the
+          # kubernetes/docker clients --scale needs. The deploy step would do this
+          # on first run anyway; doing it here fails fast and keeps dependency
+          # errors out of the deploy step's output.
+          #
+          # No --dry-run rehearsal below: `jac start --scale --dry-run` is only
+          # implemented for the kubernetes-microservice target and no-ops with a
+          # warning on the plain `kubernetes` target this app uses.
+          jac install --scale
 
       - name: Pre-deploy cluster baseline
         run: |
