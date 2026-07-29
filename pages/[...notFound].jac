@@ -3,7 +3,7 @@
 cl import from "@jac/runtime" { Link }
 
 cl {
-    def:pub page() -> JsxElement {
+    def:pub page() -> JsxPage {
         return <section className="not-found">
             <p className="eyebrow">404</p>
             <h1 className="display">Not found.</h1>

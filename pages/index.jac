@@ -3,7 +3,7 @@ sv import from ..main { Subscribe, GetIssues }
 cl import from "@jac/runtime" { Link }
 
 cl {
-    def:pub page() -> JsxElement {
+    def:pub page() -> JsxPage {
         has email: str = "";
         has status_message: str = "";
         has status_kind: str = "";

@@ -2,7 +2,7 @@ cl import "../styles/main.css";
 cl import from "@jac/runtime" { Outlet, Link }
 
 cl {
-    def:pub layout() -> JsxElement {
+    def:pub layout() -> JsxLayout {
         return <>
             <header className="site-header">
                 <div className="container">
