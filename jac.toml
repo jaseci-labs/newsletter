@@ -7,52 +7,50 @@ description = "Biweekly newsletter for the Jaseci & Jac open-source ecosystem."
 base_route_app = "app"
 cl_route_prefix = "/"
 
-[plugins.client]
-enabled = true
-
-[plugins.client.paths]
-"@components/*" = "./components/*"
-"@styles/*" = "./styles/*"
-
-[plugins.scale]
-enabled = true
-
-[plugins.scale.kubernetes]
+# CONFIG NAMESPACE: these are [scale.*] / [client.*], NOT [plugins.scale.*] /
+# [plugins.client.*]. The one-binary toolchain folded jac-scale into core
+# (jaseci#7034) and reads the unprefixed sections; the [plugins.*] spelling is
+# silently IGNORED -- no error, it just falls back to defaults. That is what
+# happened on run 30420047383, which deployed app 'jaseci-digest' (the [project]
+# name) into namespace 'default' instead of 'newsletter', with none of the
+# secrets below attached. If a deploy ever logs the wrong app or namespace in
+# its "Deploying application ... Context: {...}" line, check this prefix first.
+#
+# Dropped in the migration, deliberately:
+#   - `[plugins.client] enabled` / `[plugins.scale] enabled` -- there is nothing
+#     to enable now that both are in core; declaring any [scale.*] section is
+#     what opts in, and client bundling is detected from the source.
+#   - `[plugins.client.paths]` (@components/*, @styles/*) -- no file in this
+#     repo imports either alias, so it was dead config; not worth carrying to a
+#     new key name that cannot be verified.
+#   - `[...kubernetes.plugin_versions]` -- obsolete. Pods no longer install a
+#     toolchain from GitHub Releases; the runner downloads the stable binary and
+#     ships it to pods over the bundle PVC (jaseci#7084), which the deploy log
+#     shows as "Preparing the 'stable' jac runtime for pods."
+[scale.kubernetes]
 app_name = "newsletter"
 namespace = "newsletter"
+# The bundle PVC that carries the jac binary + app code to the pods is
+# ReadWriteMany. This cluster's default class (gp3, ebs.csi.aws.com) is RWO and
+# rejects RWX with "InvalidArgument desc = Volume capabilities not supported",
+# which is how run 30420047383 failed: the jaseci-digest-bundle-loader pod sat
+# Pending until timeout on all three attempts. efs-sc (efs.csi.aws.com) is the
+# cluster's RWX class -- confirmed present in the deploy's `kubectl get sc`
+# baseline. jacBuilder pins the same class on production-cluster for the same
+# reason.
+bundle_storage_class = "efs-sc"
 liveness_initial_delay = 300
 liveness_failure_threshold = 10
 readiness_initial_delay = 60
 
-# `jaclang` is deliberately absent: the pod resolves the latest release at
-# startup, matching the unpinned install.sh call in .github/workflows/deploy.yml.
-# Adding a pin here without also pinning --version there splits the runner from
-# the pod -- the runner generates the manifest, but the POD compiles this source,
-# so the deploy reports success and the pod then fails to parse main.jac.
-#
-# That "latest" lookup hits the GitHub Releases API on every pod start. From the
-# cluster it gets rate-limited and fails with "Could not determine latest version
-# from GitHub Releases" unless authenticated -- which is what the GITHUB_TOKEN /
-# GH_TOKEN entries in [plugins.scale.secrets] below are for. Removing them
-# reintroduces that failure.
-#
-# jac_scale / jac_client are "none" because those PyPI packages no longer exist:
-# scale and the client bundler ship inside jaclang as of the one-binary
-# toolchain. Naming them here would drag the 0.16-era stack back in.
-[plugins.scale.kubernetes.plugin_versions]
-jac_scale = "none"
-jac_client = "none"
-jac_byllm = "none"
-jac_mcp = "none"
-
-
-[plugins.scale.secrets]
+[scale.secrets]
 BUTTONDOWN_API_KEY = "${BUTTONDOWN_API_KEY}"
 PUBLIC_BUTTONDOWN_USERNAME = "jaseci"
 PUBLIC_SITE_URL = "https://newsletter.jaseci.org"
-# Authenticate the toolchain installer's api.github.com calls inside the pod so
-# they aren't rate-limited (the cause of "Failed to query GitHub API"). Resolved
-# from the deploy step's env at deploy time.
+# Retained for the pod-side GitHub API path. Likely vestigial now that the
+# runner ships the binary over the bundle PVC rather than the pod fetching it,
+# but they are harmless and removing them is a separate question from this
+# migration. Resolved from the deploy step's env at deploy time.
 GITHUB_TOKEN = "${GITHUB_TOKEN}"
 GH_TOKEN = "${GITHUB_TOKEN}"
 
