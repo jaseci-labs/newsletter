@@ -85,10 +85,15 @@ jobs:
       - name: Resolve project dependencies
         run: |
           jac --version
-          # Resolves [dependencies] + [dependencies.npm] into .jac/, plus the
-          # kubernetes/docker clients --scale needs. The deploy step would do this
-          # on first run anyway; doing it here fails fast and keeps dependency
-          # errors out of the deploy step's output.
+          # Resolves [dependencies] + [dependencies.npm] into .jac/. The deploy step
+          # would do this on first run anyway; doing it here fails fast and keeps
+          # dependency errors out of the deploy step's output.
+          #
+          # --scale does NOT pull deploy-time capabilities the way its help text
+          # suggests: on run 30419548547 this step installed markdown and pyyaml and
+          # nothing else. Anything jaclang's own scale runtime needs but does not
+          # declare has to be listed in [dependencies] -- see the python-dotenv
+          # entry in jac.toml.
           #
           # No --dry-run rehearsal below: `jac start --scale --dry-run` is only
           # implemented for the kubernetes-microservice target and no-ops with a
