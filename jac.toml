@@ -24,15 +24,24 @@ liveness_initial_delay = 300
 liveness_failure_threshold = 10
 readiness_initial_delay = 60
 
-# Pin exact versions so the pod installs known-good releases instead of
-# resolving "latest" at startup. The runtime "latest" lookup hits the GitHub
-# Releases API, which gets rate-limited from the cluster and fails the deploy
-# with "Could not determine latest version from GitHub Releases". These match
-# the versions used in local development.
+# `jaclang` is deliberately absent: the pod resolves the latest release at
+# startup, matching the unpinned install.sh call in .github/workflows/deploy.yml.
+# Adding a pin here without also pinning --version there splits the runner from
+# the pod -- the runner generates the manifest, but the POD compiles this source,
+# so the deploy reports success and the pod then fails to parse main.jac.
+#
+# That "latest" lookup hits the GitHub Releases API on every pod start. From the
+# cluster it gets rate-limited and fails with "Could not determine latest version
+# from GitHub Releases" unless authenticated -- which is what the GITHUB_TOKEN /
+# GH_TOKEN entries in [plugins.scale.secrets] below are for. Removing them
+# reintroduces that failure.
+#
+# jac_scale / jac_client are "none" because those PyPI packages no longer exist:
+# scale and the client bundler ship inside jaclang as of the one-binary
+# toolchain. Naming them here would drag the 0.16-era stack back in.
 [plugins.scale.kubernetes.plugin_versions]
-jaclang = "0.16.0"
-jac_scale = "0.2.23"
-jac_client = "0.3.21"
+jac_scale = "none"
+jac_client = "none"
 jac_byllm = "none"
 jac_mcp = "none"
 
