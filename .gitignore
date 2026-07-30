@@ -29,3 +29,9 @@ pnpm-debug.log*
 
 # bun
 bun.lockb
+
+# Local-dev-only symlink to public/. The `jac start` dev server resolves static
+# assets from .jac/client/dist, dist/ and assets/ but never public/, so images
+# 404 locally while production serves them fine (the scale server's static
+# handler does check public/). Recreate with: ln -s public assets
+assets
