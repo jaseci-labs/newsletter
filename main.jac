@@ -18,22 +18,21 @@ import from pathlib { Path }
 import from urllib.request { Request, urlopen }
 import from urllib.error { HTTPError, URLError }
 
-cl {
-    def:pub app(props: any) -> JsxElement {
-        can with entry {
-            document.title = "Jaseci Digest · biweekly newsletter for the Jaseci & Jac ecosystem";
-            existing = document.querySelector("link[rel='icon']");
-            if not existing {
-                icon: any = document.createElement("link");
-                icon.rel = "icon";
-                icon.type = "image/png";
-                icon.href = "/logo.png";
-                head: any = document.head;
-                head.appendChild(icon);
-            }
+
+def:pub app(props: any) -> JsxElement {
+    can with entry {
+        document.title = "Jaseci Digest · biweekly newsletter for the Jaseci & Jac ecosystem";
+        existing = document.querySelector("link[rel='icon']");
+        if not existing {
+            icon: any = document.createElement("link");
+            icon.rel = "icon";
+            icon.type = "image/png";
+            icon.href = "/logo.png";
+            head: any = document.head;
+            head.appendChild(icon);
         }
-        return <>{props.children}</>;
     }
+    return <>{props.children}</>;
 }
 
 
@@ -124,6 +123,7 @@ def:priv parse_issue_file(path: Path) -> dict | None {
         "date_long": format_date_long(raw_date),
         "description": str(meta.get("description", "")),
         "body": body,
+
     };
 }
 
@@ -145,17 +145,23 @@ walker:pub GetIssues {
             if parsed is None {
                 continue;
             }
-            items.append({
-                "slug": parsed["slug"],
-                "number": parsed["number"],
-                "title": parsed["title"],
-                "date": parsed["date"],
-                "date_long": parsed["date_long"],
-                "description": parsed["description"],
-            });
+            items.append(
+                {
+                    "slug": parsed["slug"],
+                    "number": parsed["number"],
+                    "title": parsed["title"],
+                    "date": parsed["date"],
+                    "date_long": parsed["date_long"],
+                    "description": parsed["description"],
+
+                }
+            );
         }
 
-        items.sort(key=lambda(x: dict[str, any]) -> int { return x["number"] as int; }, reverse=True);
+        items.sort(
+            key=lambda (x: dict[str, any]) -> int { return x["number"] as int; },
+            reverse=True
+        );
         report {"issues": items};
     }
 }
@@ -184,7 +190,13 @@ walker:pub GetIssue {
 
         html = md.markdown(
             parsed["body"],
-            extensions=["fenced_code", "codehilite", "tables", "attr_list", "md_in_html"],
+            extensions=[
+                "fenced_code",
+                "codehilite",
+                "tables",
+                "attr_list",
+                "md_in_html"
+            ],
         );
 
         report {
@@ -196,6 +208,7 @@ walker:pub GetIssue {
             "date_formatted": parsed["date_formatted"],
             "description": parsed["description"],
             "html": html,
+
         };
     }
 }
@@ -254,7 +267,13 @@ walker:pub GetArticle {
         body = inject_markdown_attr(parts[2].strip());
         html = md.markdown(
             body,
-            extensions=["fenced_code", "codehilite", "tables", "attr_list", "md_in_html"],
+            extensions=[
+                "fenced_code",
+                "codehilite",
+                "tables",
+                "attr_list",
+                "md_in_html"
+            ],
         );
 
         report {
@@ -264,6 +283,7 @@ walker:pub GetArticle {
             "description": str(meta.get("description", "")),
             "eyebrow": str(meta.get("eyebrow", "Article")),
             "html": html,
+
         };
     }
 }
@@ -331,11 +351,14 @@ def:priv send_welcome_email(api_key: str, email: str, welcome_token: str) -> Non
                     "field": "subscriber.metadata.welcome_token",
                     "operator": "equals",
                     "value": welcome_token,
+
                 }
             ],
             "groups": [],
             "predicate": "and",
+
         },
+
     };
     (status, _resp) = http_post(BUTTONDOWN_EMAILS_URL, api_key, payload);
     if status >= 400 {
@@ -362,14 +385,20 @@ walker:pub Subscribe {
         }
 
         welcome_token = str(uuid.uuid4());
-        (status, resp) = http_post(BUTTONDOWN_SUBSCRIBERS_URL, api_key, {
-            "email_address": addr,
-            "type": "regular",
-            "metadata": {
-                "source": "jaseci-digest-site",
-                "welcome_token": welcome_token,
-            },
-        });
+        (status, resp) = http_post(
+            BUTTONDOWN_SUBSCRIBERS_URL,
+            api_key,
+            {
+                "email_address": addr,
+                "type": "regular",
+                "metadata": {
+                    "source": "jaseci-digest-site",
+                    "welcome_token": welcome_token,
+
+                },
+
+            }
+        );
 
         if 200 <= status < 300 {
             send_welcome_email(api_key, addr, welcome_token);
@@ -392,6 +421,7 @@ walker:pub Subscribe {
             report {
                 "ok": False,
                 "error": "This email previously unsubscribed and can't be resubscribed automatically. If this was a mistake, email us and we'll sort it out.",
+
             };
             return;
         }
@@ -400,11 +430,14 @@ walker:pub Subscribe {
             report {
                 "ok": False,
                 "error": "This email previously unsubscribed and can't be resubscribed automatically. If this was a mistake, email us and we'll sort it out.",
+
             };
             return;
         }
 
-        print(f"[subscribe] buttondown error status={status} code={code} detail={detail}");
+        print(
+            f"[subscribe] buttondown error status={status} code={code} detail={detail}"
+        );
         report {"ok": False, "error": "Something went wrong. Please try again."};
     }
 }

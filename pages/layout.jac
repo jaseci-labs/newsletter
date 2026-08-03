@@ -1,41 +1,67 @@
-cl import "../styles/main.css";
-cl import from "@jac/runtime" { Outlet, Link }
+import "../styles/main.css";
+import from "@jac/runtime" { Outlet, Link }
 
-cl {
-    def:pub layout() -> JsxLayout {
-        return <>
+
+def:pub layout() -> JsxLayout {
+    return
+        <>
             <header className="site-header">
                 <div className="container">
                     <div className="brand-row">
                         <Link to="/" className="brand">
-                            <img src="/logo.png" alt="" width={28} height={28} className="brand-logo" />
+                            <img
+                                src="/logo.png"
+                                alt=""
+                                width={28}
+                                height={28}
+                                className="brand-logo"
+                            />
                             <span className="brand-text">Jaseci Digest</span>
                         </Link>
                     </div>
                     <nav aria-label="Primary">
                         <ul>
-                            <li><Link to="/issues">Issues</Link></li>
-                            <li><a href="/#subscribe">Subscribe</a></li>
-                            <li><Link to="/about">About</Link></li>
-                            <li><a href="https://www.jaseci.org" target="_blank" rel="noopener">Jaseci.org</a></li>
+                            <li>
+                                <Link to="/issues">Issues</Link>
+                            </li>
+                            <li>
+                                <a href="/#subscribe">Subscribe</a>
+                            </li>
+                            <li>
+                                <Link to="/about">About</Link>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://www.jaseci.org"
+                                    target="_blank"
+                                    rel="noopener"
+                                >
+                                    Jaseci.org
+                                </a>
+                            </li>
                         </ul>
                     </nav>
-                    <hr className="header-rule" />
+                    <hr className="header-rule"/>
                 </div>
             </header>
-
             <main className="container">
-                <Outlet />
+                <Outlet/>
             </main>
-
             <footer className="site-footer">
                 <div className="container footer-grid">
-                    <p className="footer-copyright">© 2026 Jaseci Digest. Part of the Jaseci open-source ecosystem.</p>
+                    <p className="footer-copyright">
+                        © 2026 Jaseci Digest. Part of the Jaseci open-source ecosystem.
+                    </p>
                     <a href="https://www.jaseci.org" target="_blank" rel="noopener">
-                        <img src="/logo.png" alt="Jaseci" width={40} height={40} className="footer-logo" />
+                        <img
+                            src="/logo.png"
+                            alt="Jaseci"
+                            width={40}
+                            height={40}
+                            className="footer-logo"
+                        />
                     </a>
                 </div>
             </footer>
         </>;
-    }
 }
