@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
-"""Render the Buttondown email source (003-agentic-ai-with-jac.md) into the two
-browser-preview HTML files. Run after editing the .md so previews stay in sync.
+"""Render a Buttondown email source into the two browser-preview HTML files.
+Run after editing the .md so previews stay in sync.
 
-    python3 email/render_previews.py
+    python3 email/render_previews.py                  # default: 003
+    python3 email/render_previews.py 005              # email/005.md -> 005.html + 005-preview.html
+    python3 email/render_previews.py 004-jachacks-sf  # any stem works
 """
 import re, sys, pathlib
 
 HERE = pathlib.Path(__file__).parent
-SRC = HERE / "003-agentic-ai-with-jac.md"
+
+STEM = sys.argv[1] if len(sys.argv) > 1 else "003-agentic-ai-with-jac"
+SRC = HERE / ("%s.md" % STEM)
+# Issue number for the <title>: leading digits of the stem, else 03.
+ISSUE_NO = (re.match(r"0*(\d+)", STEM).group(1).zfill(2) if re.match(r"\d", STEM) else "03")
+# 003 keeps its "-preview" sibling name; numeric-only stems use "NNN-preview".
+PREVIEW_STEM = "%s-preview" % STEM.split("-")[0]
 
 FONT_IMPORT = "@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');"
 INTER = ("@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;"
@@ -53,7 +61,16 @@ def render_body(md, fmt):
         s = line.rstrip("\n")
         if s.strip() == "":
             i += 1; continue
-        if s[0] == "<":  # raw HTML block at column 0
+        if s.lstrip().startswith("<!--"):
+            # HTML comment: pass through verbatim, consume until the closer.
+            # Without this the tag matcher below finds no tag name and swallows
+            # the rest of the file looking for a close tag that never comes.
+            block = [s]
+            i += 1
+            while "-->" not in block[-1] and i < n:
+                block.append(lines[i].rstrip("\n")); i += 1
+            out.append("\n".join(block))
+        elif s[0] == "<":  # raw HTML block at column 0
             m = re.match(r"<(\w+)", s)
             tag = m.group(1) if m else ""
             block = [s]
@@ -84,7 +101,7 @@ def build_email(body):
     head = ('<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width, initial-scale=1">'
             '<meta name="x-apple-disable-message-reformatting"><style>\n%s%s\n</style>'
-            '<title>Jaseci Digest · Issue N.03</title></head>' % (FONT_IMPORT, INTER))
+            '<title>Jaseci Digest · Issue N.%s</title></head>' % (FONT_IMPORT, INTER, ISSUE_NO))
     open_ = ('<body style="margin:0;padding:0;background:#e6e0d4;-webkit-text-size-adjust:100%;'
              "font-family:'Inter','Helvetica Neue',Arial,sans-serif;color:#1f160e;\">"
              '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" '
@@ -107,9 +124,11 @@ def build_preview(body):
 
 def main():
     md = SRC.read_text(encoding="utf-8")
-    (HERE / "003-agentic-ai-with-jac.html").write_text(build_email(render_body(md, "email")), encoding="utf-8")
-    (HERE / "003-preview.html").write_text(build_preview(render_body(md, "preview")), encoding="utf-8")
-    print("regenerated 003-agentic-ai-with-jac.html and 003-preview.html from the .md")
+    email_out = HERE / ("%s.html" % STEM)
+    preview_out = HERE / ("%s.html" % PREVIEW_STEM)
+    email_out.write_text(build_email(render_body(md, "email")), encoding="utf-8")
+    preview_out.write_text(build_preview(render_body(md, "preview")), encoding="utf-8")
+    print("regenerated %s and %s from %s" % (email_out.name, preview_out.name, SRC.name))
 
 if __name__ == "__main__":
     main()

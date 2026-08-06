@@ -105,7 +105,6 @@ def:pub page() -> JsxPage {
                     <p className="eyebrow">Jaseci Digest</p>
                     <h1 className="display">N.{padded}</h1>
                     <p className="sr-only">{issue["title"]}</p>
-                    <p className="issue-description">{issue["description"]}</p>
                 </div>
             </header>
             <div

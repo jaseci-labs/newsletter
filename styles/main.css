@@ -752,17 +752,19 @@ nav a {
    ============================================================ */
 
 .issue {
-  margin: 2rem auto;
+  margin: 1.25rem auto;
   max-width: var(--content-width);
 }
 
+/* Spacing here is deliberately tight: the header is pure masthead, and every
+   pixel it gives back pulls the featured story further above the fold. */
 .issue-header {
   display: grid;
   grid-template-columns: minmax(120px, 1fr) 4fr;
   gap: 2.5rem;
   align-items: start;
-  margin: 2rem 0 3rem;
-  padding-bottom: 2.5rem;
+  margin: 1.25rem 0 1.75rem;
+  padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--rule);
 }
 
@@ -783,6 +785,8 @@ nav a {
 
 .issue-title-block .display {
   margin-top: 0.25rem;
+  /* Nothing follows the issue number, so it does not need trailing room. */
+  margin-bottom: 0.25rem;
 }
 
 .issue-description {
@@ -830,6 +834,12 @@ nav a {
   border-top: 1px solid var(--rule-soft);
   position: relative;
   color: var(--text-heading);
+}
+
+/* The first section already has the header rule above it, so the full 3.5rem
+   gap just pushes the featured story below the fold. */
+.issue-body > h2:first-of-type {
+  margin-top: 1.9rem;
 }
 
 .issue-body h2::before {
