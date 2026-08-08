@@ -24,7 +24,7 @@ bun run preview
 
 The dev server runs at <http://localhost:4321>.
 
-> No Node? `bun install && bun run dev` works end-to-end. The build output is static HTML and deploys to any host (Vercel, Netlify, Cloudflare Pages, etc.).
+> No Node? `bun install && bun run dev` works end-to-end. The deployed site is the Jac version; see `.github/workflows/deploy.yml` for the jac-scale pipeline.
 
 ---
 
