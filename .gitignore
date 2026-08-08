@@ -35,3 +35,10 @@ bun.lockb
 # 404 locally while production serves them fine (the scale server's static
 # handler does check public/). Recreate with: ln -s public assets
 assets
+
+# Generated HTML: email exports/previews and one-off issue previews are built
+# from the .md sources (email/render_previews.py); never commit them.
+*.html
+
+# Python bytecode
+__pycache__/

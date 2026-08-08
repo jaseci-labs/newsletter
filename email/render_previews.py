@@ -122,12 +122,18 @@ def build_preview(body):
             ".wrap p,.wrap ul{margin:10px 24px;font-size:15px;line-height:1.55;}.wrap a{color:#c0531f;}</style></head>" % (FONT_IMPORT, INTER))
     return head + '<body><div class="wrap">' + body + "</div></body></html>"
 
+def localize_images(html):
+    # Previews load images from the local repo so not-yet-deployed assets
+    # (public/ mirrors the deployed site root) still show up. Only <img src>
+    # is rewritten; links keep pointing at the live site.
+    return re.sub(r'src="https://newsletter\.jaseci\.org/', 'src="../public/', html)
+
 def main():
     md = SRC.read_text(encoding="utf-8")
     email_out = HERE / ("%s.html" % STEM)
     preview_out = HERE / ("%s.html" % PREVIEW_STEM)
-    email_out.write_text(build_email(render_body(md, "email")), encoding="utf-8")
-    preview_out.write_text(build_preview(render_body(md, "preview")), encoding="utf-8")
+    email_out.write_text(localize_images(build_email(render_body(md, "email"))), encoding="utf-8")
+    preview_out.write_text(localize_images(build_preview(render_body(md, "preview"))), encoding="utf-8")
     print("regenerated %s and %s from %s" % (email_out.name, preview_out.name, SRC.name))
 
 if __name__ == "__main__":
