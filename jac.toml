@@ -57,6 +57,11 @@ GH_TOKEN = "${GITHUB_TOKEN}"
 [dependencies]
 markdown = ">=3.5"
 pyyaml = ">=6.0"
+# Required by jac_syntax_highlighter.jac (RegexLexer + the token types) and by
+# markdown's `codehilite` extension. It currently resolves anyway because the jac
+# runtime bundles pygments in its own site directory, but that is an implementation
+# detail of the toolchain, not a promise. Declared so the app owns its dependency.
+pygments = ">=2.17"
 # WORKAROUND for an upstream gap, not an app dependency -- nothing in this repo
 # imports dotenv. jaclang's Kubernetes realizer does, at module scope
 # (jaclang/scale/runtime/realizer/kubernetes_realizer.jac:3 --

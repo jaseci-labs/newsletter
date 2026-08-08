@@ -36,8 +36,8 @@ bun.lockb
 assets
 
 # Generated HTML: email exports/previews and one-off issue previews are built
-# from the .md sources (email/render_previews.py); never commit them.
+# from the .md sources (tools/render_previews.jac); never commit them.
 *.html
 
-# Python bytecode
+# Python bytecode (the sources are Jac now, but jac compiles through CPython)
 __pycache__/

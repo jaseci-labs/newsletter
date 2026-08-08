@@ -1,6 +1,6 @@
 # Jaseci Digest
 
-A biweekly newsletter for the [Jaseci](https://www.jaseci.org) and Jac open-source ecosystem. This repo is both the **public archive site** (Astro) and the **source of truth for issue content** (markdown files). Emails are delivered via [Buttondown](https://buttondown.com).
+A biweekly newsletter for the [Jaseci](https://www.jaseci.org) and Jac open-source ecosystem. This repo is both the **public archive site** (Jac) and the **source of truth for issue content** (markdown files). Emails are delivered via [Buttondown](https://buttondown.com).
 
 The visual design follows the team's editorial template — cream background, all-caps display headings, numbered sections, hexagon "J" mark.
 
@@ -9,52 +9,51 @@ The visual design follows the team's editorial template — cream background, al
 ## Quick start
 
 ```bash
-# install (bun is the local runtime; npm/pnpm/yarn also work)
-bun install
+# resolve [dependencies] and [dependencies.npm] into .jac/
+jac install
 
 # run the dev server
-bun run dev
+jac start
 
-# build the static site
-bun run build
-
-# preview the production build
-bun run preview
+# type-check the sources
+jac check main.jac
 ```
 
-The dev server runs at <http://localhost:4321>.
-
-> No Node? `bun install && bun run dev` works end-to-end. The deployed site is the Jac version; see `.github/workflows/deploy.yml` for the jac-scale pipeline.
+> The site is a Jac app end to end: `main.jac` is the server entry and `pages/` holds the
+> client routes. See `.github/workflows/deploy.yml` for the jac-scale deploy pipeline.
 
 ---
 
 ## Project layout
 
 ```
-src/
-├── components/
-│   ├── Header.astro          ← top nav with horizontal rule
-│   ├── Footer.astro          ← 3-column footer (urls / issue meta / hex logo)
-│   ├── HexLogo.astro         ← the J-in-hexagon mark
-│   └── SubscribeForm.astro   ← Buttondown embed
-├── content/
-│   ├── config.ts             ← issue collection schema
-│   └── issues/
-│       ├── _template.md      ← copy this to start a new issue
-│       └── 001-build-with-jac.md
-├── layouts/
-│   └── Layout.astro          ← base layout, passes issue metadata to footer
-├── pages/
-│   ├── index.astro           ← landing + latest issue + subscribe
-│   ├── about.astro
-│   ├── 404.astro
-│   ├── rss.xml.ts            ← /rss.xml feed
-│   └── issues/
-│       ├── index.astro       ← all-issues archive
-│       └── [...slug].astro   ← individual issue page
-└── styles/
-    └── global.css            ← design tokens + typography
+main.jac                      ← server entry: Subscribe walker + issue/article endpoints
+jac_syntax_highlighter.jac    ← Pygments lexer for Jac, registered for codehilite
+pages/                        ← client routes
+├── layout.jac                ← base layout, imports styles/main.css
+├── index.jac                 ← landing + latest issue + subscribe
+├── about.jac
+├── [...notFound].jac
+├── articles/[slug].jac
+└── issues/
+    ├── index.jac             ← all-issues archive
+    └── [slug].jac            ← individual issue page
+src/content/                  ← source of truth for content (read by main.jac)
+├── issues/
+│   ├── _template.md          ← copy this to start a new issue
+│   └── 001-build-with-jac.md
+└── articles/
+styles/
+└── main.css                  ← design tokens + typography
+email/                        ← Buttondown sources (NNN-*.md) + generated previews
+tools/
+└── render_previews.jac       ← regenerates the email/*.html previews
 ```
+
+> `tools/render_previews.jac` lives outside `email/` deliberately. A `.jac` file inside a
+> directory named `email/` makes Jac register it as a package called `email`, shadowing the
+> Python stdlib package and breaking every `jac` command with
+> `ModuleNotFoundError: No module named 'email.utils'`.
 
 ---
 
@@ -124,10 +123,9 @@ This site uses **single opt-in** — subscribers are activated immediately, no c
 - The API key lives **server-side only** (`BUTTONDOWN_API_KEY` env var) — it is never
   shipped to the browser.
 
-This means the app is no longer purely static — it needs a Node runtime (which is why we
-deploy as a container on EKS, not as static files). The Astro Node adapter is configured
-in `astro.config.mjs` (`output: 'hybrid'`, `mode: 'standalone'`). Most pages are still
-pre-rendered to HTML at build time; only `/api/subscribe` runs on the server.
+This means the app is not purely static — it needs a server runtime (which is why we
+deploy onto EKS via jac-scale rather than shipping static files). The endpoint is the
+`Subscribe` walker in `main.jac`, exposed as a REST route by jac-scale.
 
 ### Spam exposure
 
@@ -157,24 +155,17 @@ BUTTONDOWN_API_KEY=                # required: single opt-in needs the API
 
 ## Deployment (EKS / Kubernetes)
 
-The site runs as a Node server inside a container, not as static files (because the
-subscribe endpoint needs a runtime).
+The site runs as a Jac server on EKS, not as static files (because the subscribe endpoint
+needs a runtime). Pushing to `main` triggers
+[`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml), which installs the jac
+toolchain and runs `jac start --scale`. There is no container build and no Node runtime;
+the jac binary is shipped to the pods over the bundle PVC.
 
-**Quick local sanity check before pushing the image:**
-
-```bash
-bun run build
-node ./dist/server/entry.mjs   # http://localhost:4321
-```
-
-**Container build:**
+**Quick local sanity check before pushing:**
 
 ```bash
-docker build -t jaseci-digest:dev .
-docker run --rm -p 4321:4321 \
-  -e PUBLIC_BUTTONDOWN_USERNAME=jaseci \
-  -e BUTTONDOWN_API_KEY=$BUTTONDOWN_API_KEY \
-  jaseci-digest:dev
+jac check main.jac
+jac start
 ```
 
 **Kubernetes manifest:** [`deploy/k8s.yaml`](./deploy/k8s.yaml) — Namespace, Deployment
@@ -185,9 +176,9 @@ docker run --rm -p 4321:4321 \
 3. Set `host:` on the Ingress to your real domain and adjust the annotations to match your ingress controller (ALB, NGINX, etc.) and TLS issuer.
 4. `kubectl apply -f deploy/k8s.yaml`.
 
-**If you'd rather skip the backend** and lose single opt-in: revert `astro.config.mjs`
-to `output: 'static'`, swap the subscribe form back to Buttondown's embed endpoint, and
-deploy `dist/` to any static host. Single opt-in is the only reason this needs a server.
+**If you'd rather skip the backend** and lose single opt-in: swap the subscribe form back
+to Buttondown's embed endpoint and deploy the built client to any static host. Single
+opt-in is the only reason this needs a server.
 
 ---
 

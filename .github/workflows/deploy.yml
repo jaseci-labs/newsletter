@@ -5,10 +5,12 @@ on:
     branches: [main]
     paths:
       - 'main.jac'
+      # Top-level module imported by main.jac; no glob above covers it, so a
+      # highlighter-only change would otherwise not trigger a deploy.
+      - 'jac_syntax_highlighter.jac'
       - 'pages/**'
       - 'src/**'
       - 'styles/**'
-      - 'components/**'
       - 'jac.toml'
       - 'package.json'
       - 'deploy/**'

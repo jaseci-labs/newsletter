@@ -1,103 +1,119 @@
-# flake8: noqa
-"""Pygments Syntax highlighter for Jac code."""
+"""Pygments syntax highlighter for Jac code.
+
+Adapted from Pygments' own Python lexer (pygments.lexers.python),
+Copyright 2006-2023 by the Pygments team, BSD licensed.
+
+`JacLexer` uses the `class` archetype rather than `obj`: Pygments' RegexLexerMeta
+metaclass reads `tokens`/`name`/`aliases` off the class at creation time to compile
+the rule table, and only `class` + `static has` produce genuine class attributes.
+
+The rule helpers and UNI_NAME are module-level rather than class-level (they are
+class-body locals in the Python original) because a `static has` initializer cannot
+see other names in the same class body.
 """
-    pygments.lexers.python
-    ~~~~~~~~~~~~~~~~~~~~~~
 
-    Lexers for Python and related languages.
-
-    :copyright: Copyright 2006-2023 by the Pygments team, see AUTHORS.
-    :license: BSD, see LICENSE for details.
-"""
-
-import keyword
-from pygments.lexer import (
+import keyword;
+import pygments.lexer as pyglex;
+import from pygments.lexer {
     RegexLexer,
     include,
     bygroups,
     using,
-    default,
     words,
     combined,
-    this,
-)
-from pygments.util import shebang_matches
-from pygments.token import (
-    Text,
-    Comment,
-    Operator,
-    Keyword,
-    Name,
-    String,
-    Number,
-    Punctuation,
-    Whitespace,
-)
-from pygments import unistring as uni
+    this
+}
+import from pygments.util { shebang_matches }
+import from pygments.token {
+    Text as _Text,
+    Comment as _Comment,
+    Operator as _Operator,
+    Keyword as _Keyword,
+    Name as _Name,
+    String as _String,
+    Number as _Number,
+    Punctuation as _Punctuation,
+    Whitespace as _Whitespace
+}
+import from pygments { unistring as uni }
+
+# `default` cannot be brace-imported: that spelling is the client-only JS
+# default-import form and raises E5002. Bind it off the module instead.
+glob pyg_default: any = pyglex.default;
+
+glob UNI_NAME = "[%s][%s]*" % (uni.xid_start, uni.xid_continue);
+
+# Pygments mints token subtypes dynamically (_TokenType.__getattr__), so
+# String.Interpol / Name.Namespace / Comment.Hashbang are invisible to the type
+# checker. Re-binding as `any` narrows the untyped boundary in one place instead
+# of scattering casts through 780 lines of rules. Same objects at runtime.
+glob Text: any = _Text;
+glob Comment: any = _Comment;
+glob Operator: any = _Operator;
+glob Keyword: any = _Keyword;
+glob Name: any = _Name;
+glob String: any = _String;
+glob Number: any = _Number;
+glob Punctuation: any = _Punctuation;
+glob Whitespace: any = _Whitespace;
 
 
-class JacLexer(RegexLexer):
-    """
-    For Jac source code,
-    Adapted from Python source code (version 3.x).
-        .. versionadded:: 0.10
-        .. versionchanged:: 2.5
-        This is now the default ``PythonLexer``.  It is still available as the
-        alias ``Python3Lexer``.
-    """
+def:priv innerstring_rules(ttype: any) -> list {
+    return [
+        # the old style '%s' % (...) string formatting (still valid in Py3)
+        (
+            r"%(\(\w+\))?[-#0 +]*([0-9]+|[*])?(\.([0-9]+|[*]))?"
+            "[hlL]?[E-GXc-giorsaux%]",
+            String.Interpol,
+        ),
+        # the new style '{}'.format(...) string formatting
+        (
+            r"\{"
+            r"((\w+)((\.\w+)|(\[[^\]]+\]))*)?"  # field name
+            r"(\![sra])?"  # conversion
+            r"(\:(.?[<>=\^])?[-+ ]?#?0?(\d+)?,?(\.\d+)?[E-GXb-gnosx%]?)?"
+            r"\}",
+            String.Interpol,
+        ),
+        # backslashes, quotes and formatting signs must be parsed one at a time
+        (r'[^\\\'"%{\n]+', ttype),
+        (r'[\'"\\]', ttype),
+        # unhandled string formatting sign
+        (r"%|(\{{1,2})", ttype),
+        # newlines are an error (use "nl" state)
+    ];
+}
 
-    name = "Jac"
-    url = "http://www.jac-lang.org"
-    aliases = ["jac"]
-    filenames = ["*.jac"]
-    mimetypes = [
+
+def:priv fstring_rules(ttype: any) -> list {
+    return [
+        # Assuming that a '}' is the closing brace after format specifier.
+        # Sadly, this means that we won't detect syntax error. But it's
+        # more important to parse correct syntax correctly, than to
+        # highlight invalid syntax.
+        (r"\}", String.Interpol),
+        (r"\{", String.Interpol, "expr-inside-fstring"),
+        # backslashes, quotes and formatting signs must be parsed one at a time
+        (r'[^\\\'"{}\n]+', ttype),
+        (r'[\'"\\]', ttype),
+        # newlines are an error (use "nl" state)
+    ];
+}
+
+
+class JacLexer(RegexLexer) {
+    static has name: str = "Jac";
+    static has url: str = "http://www.jac-lang.org";
+    static has aliases: list[str] = ["jac"];
+    static has filenames: list[str] = ["*.jac"];
+    static has mimetypes: list[str] = [
         "text/x-jac",
         "application/x-jac",
-        "text/x-jac3",
-    ]
+        "text/x-jac3"
+    ];
+    static has uni_name: str = UNI_NAME;
 
-    uni_name = "[%s][%s]*" % (uni.xid_start, uni.xid_continue)
-
-    def innerstring_rules(ttype):
-        return [
-            # the old style '%s' % (...) string formatting (still valid in Py3)
-            (
-                r"%(\(\w+\))?[-#0 +]*([0-9]+|[*])?(\.([0-9]+|[*]))?"
-                "[hlL]?[E-GXc-giorsaux%]",
-                String.Interpol,
-            ),
-            # the new style '{}'.format(...) string formatting
-            (
-                r"\{"
-                r"((\w+)((\.\w+)|(\[[^\]]+\]))*)?"  # field name
-                r"(\![sra])?"  # conversion
-                r"(\:(.?[<>=\^])?[-+ ]?#?0?(\d+)?,?(\.\d+)?[E-GXb-gnosx%]?)?"
-                r"\}",
-                String.Interpol,
-            ),
-            # backslashes, quotes and formatting signs must be parsed one at a time
-            (r'[^\\\'"%{\n]+', ttype),
-            (r'[\'"\\]', ttype),
-            # unhandled string formatting sign
-            (r"%|(\{{1,2})", ttype),
-            # newlines are an error (use "nl" state)
-        ]
-
-    def fstring_rules(ttype):
-        return [
-            # Assuming that a '}' is the closing brace after format specifier.
-            # Sadly, this means that we won't detect syntax error. But it's
-            # more important to parse correct syntax correctly, than to
-            # highlight invalid syntax.
-            (r"\}", String.Interpol),
-            (r"\{", String.Interpol, "expr-inside-fstring"),
-            # backslashes, quotes and formatting signs must be parsed one at a time
-            (r'[^\\\'"{}\n]+', ttype),
-            (r'[\'"\\]', ttype),
-            # newlines are an error (use "nl" state)
-        ]
-
-    tokens = {
+    static has tokens: dict[str, list] = {
         "root": [
             (r"\n", Whitespace),
             (
@@ -469,7 +485,7 @@ class JacLexer(RegexLexer):
         "soft-keywords-inner": [
             # optional `_` keyword
             (r"(\s+)([^\n_]*)(_\b)", bygroups(Whitespace, using(this), Keyword)),
-            default("#pop"),
+            pyg_default("#pop"),
         ],
         "builtins": [
             (
@@ -778,17 +794,17 @@ class JacLexer(RegexLexer):
             (r"\d(?:_?\d)*", Number.Integer),
         ],
         "name": [
-            (r"@" + uni_name, Name.Decorator),
+            (r"@" + UNI_NAME, Name.Decorator),
             (r"@", Operator),  # new matrix multiplication operator
-            (uni_name, Name),
+            (UNI_NAME, Name),
         ],
         "funcname": [
             include("magicfuncs"),
-            (uni_name, Name.Function, "#pop"),
-            default("#pop"),
+            (UNI_NAME, Name.Function, "#pop"),
+            pyg_default("#pop"),
         ],
         "classname": [
-            (uni_name, Name.Class, "#pop"),
+            (UNI_NAME, Name.Class, "#pop"),
         ],
         "fromimport": [
             (r"(\s+)(import)\b", bygroups(Text, Keyword.Namespace), "#pop"),
@@ -801,8 +817,8 @@ class JacLexer(RegexLexer):
             # if None occurs here, it's "raise x from None", since None can
             # never be a module name
             (r"None\b", Keyword.Constant, "#pop"),
-            (uni_name, Name.Namespace),
-            default("#pop"),
+            (UNI_NAME, Name.Namespace),
+            pyg_default("#pop"),
         ],
         "import_from_braces": [
             (r"(\s*)(\{)(\s*)", bygroups(Text, Punctuation, Text), "import_from_items"),
@@ -879,26 +895,12 @@ class JacLexer(RegexLexer):
             include("strings-single"),
             (r"\n", String.Single),
         ],
+    };
+
+    def analyse_text(text: str) -> any {
+        return shebang_matches(text, r"pythonw?(3(\.\d)?)?") or "import " in text[:1000];
     }
-
-    def analyse_text(text):
-        return shebang_matches(text, r"pythonw?(3(\.\d)?)?") or "import " in text[:1000]
-
-
-# # Custom Plugin Definition
-# class JacLexerPlugin(BasePlugin):
-#     def on_config(self, config):
-#         # Registering the lexer
-#         # _mapping.LEXERS["JacLexer"] = (
-#         #     "jac",
-#         #     "Jac Lexer",
-#         #     ("jac",),
-#         #     ("*.jac",),
-#         #     (),
-#         # )
-#         load_lexer_from_file(__file__, "JacLexer")
-#         print(get_lexer_by_name("JacLexer"))
-#         return config
+}
 
 
 # --- Newsletter integration ---------------------------------------------------
@@ -907,16 +909,24 @@ class JacLexer(RegexLexer):
 # `pygments.lexers.get_lexer_by_name` (codehilite imports it at call time), which
 # avoids needing this module installed as a pip entry-point. Importing this
 # module from main.jac is all that's required.
-import pygments.lexers as _pyg_lexers
+import pygments.lexers as _pyg_lexers;
 
-_jac_orig_get_lexer_by_name = _pyg_lexers.get_lexer_by_name
-
-
-def _jac_get_lexer_by_name(_alias, **options):
-    if _alias in ("jac", "jaclang", "jaseci"):
-        return JacLexer(**options)
-    return _jac_orig_get_lexer_by_name(_alias, **options)
+# `any` alias: rebinding a module attribute that carries a precise function type
+# is an assignment across the untyped boundary, which the checker rejects (E1001).
+glob _pyg: any = _pyg_lexers;
+glob _jac_orig_get_lexer_by_name = _pyg.get_lexer_by_name;
 
 
-if getattr(_pyg_lexers.get_lexer_by_name, "__name__", "") != "_jac_get_lexer_by_name":
-    _pyg_lexers.get_lexer_by_name = _jac_get_lexer_by_name
+def:priv _jac_get_lexer_by_name(_alias: str, **options: any) -> any {
+    if _alias in ("jac", "jaclang", "jaseci") {
+        return JacLexer(**options);
+    }
+    return _jac_orig_get_lexer_by_name(_alias, **options);
+}
+
+
+with entry {
+    if getattr(_pyg.get_lexer_by_name, "__name__", "") != "_jac_get_lexer_by_name" {
+        _pyg.get_lexer_by_name = _jac_get_lexer_by_name;
+    }
+}
