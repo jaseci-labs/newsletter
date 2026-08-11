@@ -2,7 +2,7 @@
 <tr>
 <td align="center" style="padding: 20px 24px 0;">
 <a href="https://newsletter.jaseci.org" style="text-decoration:none;color:#1f160e;display:inline-block;">
-<img src="https://newsletter.jaseci.org/logo.png" width="28" height="28" alt="" style="vertical-align:middle;border:0;display:inline-block;">
+<img src="https://newsletter.jaseci.org/img/logo.png" width="28" height="28" alt="" style="vertical-align:middle;border:0;display:inline-block;">
 <span style="display:inline-block;margin-left:8px;text-transform:uppercase;letter-spacing:0.18em;font-size:13px;font-weight:600;vertical-align:middle;color:#1f160e;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">Jaseci Digest &middot; June 18, 2026</span>
 </a>
 </td>
@@ -179,7 +179,7 @@ A new KEDA autoscaler engine (`autoscaler_engine = 'keda'`) scales on real deman
 <td valign="middle" style="font-size:13px;color:#6a5f50;letter-spacing:0.02em;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">&copy; 2026 Jaseci Digest. Part of the Jaseci open-source ecosystem.</td>
 <td valign="middle" align="right" style="width:60px;">
 <a href="https://www.jaseci.org" target="_blank" rel="noopener" style="text-decoration:none;">
-<img src="https://newsletter.jaseci.org/logo.png" width="40" height="40" alt="Jaseci" style="border:0;display:block;">
+<img src="https://newsletter.jaseci.org/img/logo.png" width="40" height="40" alt="Jaseci" style="border:0;display:block;">
 </a>
 </td>
 </tr>

@@ -27,7 +27,7 @@ def:pub app(props: any) -> JsxElement {
             icon: any = document.createElement("link");
             icon.rel = "icon";
             icon.type = "image/png";
-            icon.href = "/logo.png";
+            icon.href = "/img/logo.png";
             head: any = document.head;
             head.appendChild(icon);
         }

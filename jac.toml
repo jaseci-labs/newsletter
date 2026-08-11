@@ -5,7 +5,14 @@ description = "Biweekly newsletter for the Jaseci & Jac open-source ecosystem."
 
 [serve]
 base_route_app = "app"
-cl_route_prefix = "/"
+# Keep this at the default "cl". Setting it to "/" registers the per-page route
+# as "///{page_name}", which ends up matching every one-segment root path ahead
+# of the static-asset handler: on the deployed site /logo.png, /about and
+# /issues all returned "<h1>404 Not Found</h1>" while two-segment paths
+# (/issues/005, /styles/main.css, /issues/001/workspace.png) resolved fine.
+# The SPA still mounts at "/" via base_route_app, so this prefix only affects
+# the direct per-page render endpoint, which nothing here links to.
+cl_route_prefix = "cl"
 
 # CONFIG NAMESPACE: these are [scale.*] / [client.*], NOT [plugins.scale.*] /
 # [plugins.client.*]. The one-binary toolchain folded jac-scale into core

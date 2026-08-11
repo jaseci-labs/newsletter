@@ -10,7 +10,7 @@ def:pub layout() -> JsxLayout {
                     <div className="brand-row">
                         <Link to="/" className="brand">
                             <img
-                                src="/logo.png"
+                                src="/img/logo.png"
                                 alt=""
                                 width={28}
                                 height={28}
@@ -54,7 +54,7 @@ def:pub layout() -> JsxLayout {
                     </p>
                     <a href="https://www.jaseci.org" target="_blank" rel="noopener">
                         <img
-                            src="/logo.png"
+                            src="/img/logo.png"
                             alt="Jaseci"
                             width={40}
                             height={40}

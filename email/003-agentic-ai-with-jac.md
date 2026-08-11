@@ -4,7 +4,7 @@
 <tr>
 <td align="center" style="padding: 20px 24px 0;">
 <a href="https://newsletter.jaseci.org" style="text-decoration:none;color:#1f160e;display:inline-block;">
-<img src="https://newsletter.jaseci.org/logo.png" width="28" height="28" alt="" style="vertical-align:middle;border:0;display:inline-block;">
+<img src="https://newsletter.jaseci.org/img/logo.png" width="28" height="28" alt="" style="vertical-align:middle;border:0;display:inline-block;">
 <span style="display:inline-block;margin-left:8px;text-transform:uppercase;letter-spacing:0.18em;font-size:13px;font-weight:600;vertical-align:middle;color:#1f160e;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">Jaseci Digest &middot; July 1, 2026</span>
 </a>
 </td>
@@ -20,7 +20,7 @@ Welcome to **Issue N.03** of [Jaseci Digest](https://newsletter.jaseci.org), a b
 
 **This issue's lead:** building an AI agent is mostly scaffolding, not the agent. [Building Agentic AI with Jac](https://blogs.jaseci.org/blog/posts/building-agentic-ai-with-jac) shows how Jac builds that scaffolding into the language, so the only code you write is the agent itself.
 
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:38px auto 6px;"><tr><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td><td valign="middle" align="center" style="padding:0 12px;"><img src="https://newsletter.jaseci.org/logo.png" width="24" height="24" alt="" style="display:block;border:0;"></td><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td></tr></table> <!--secdiv-->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:38px auto 6px;"><tr><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td><td valign="middle" align="center" style="padding:0 12px;"><img src="https://newsletter.jaseci.org/img/logo.png" width="24" height="24" alt="" style="display:block;border:0;"></td><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td></tr></table> <!--secdiv-->
 
 <h2 style="text-align:center;font-family:'Kaushan Script','Brush Script MT','Segoe Script',cursive;font-size:40px;font-weight:700;color:#ff6b35;text-transform:none;letter-spacing:0;line-height:1.05;margin:4px 24px 10px;">Featured</h2>
 
@@ -80,7 +80,7 @@ Welcome to **Issue N.03** of [Jaseci Digest](https://newsletter.jaseci.org), a b
   </tr>
 </table>
 
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:38px auto 6px;"><tr><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td><td valign="middle" align="center" style="padding:0 12px;"><img src="https://newsletter.jaseci.org/logo.png" width="24" height="24" alt="" style="display:block;border:0;"></td><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td></tr></table> <!--secdiv-->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:38px auto 6px;"><tr><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td><td valign="middle" align="center" style="padding:0 12px;"><img src="https://newsletter.jaseci.org/img/logo.png" width="24" height="24" alt="" style="display:block;border:0;"></td><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td></tr></table> <!--secdiv-->
 
 ## Tutorials
 
@@ -98,7 +98,7 @@ The Jaseci team just kicked off a video series that teaches Jac from the ground 
   <img src="https://i.ytimg.com/vi/EB4vtXbO5Js/maxresdefault.jpg" width="100%" alt="Watch Jac Tutorial: Lesson 1 on YouTube" style="display:block;border:1px solid rgba(31,22,14,0.18);border-radius:8px;width:100%;max-width:100%;height:auto;">
 </a>
 
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:38px auto 6px;"><tr><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td><td valign="middle" align="center" style="padding:0 12px;"><img src="https://newsletter.jaseci.org/logo.png" width="24" height="24" alt="" style="display:block;border:0;"></td><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td></tr></table> <!--secdiv-->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:38px auto 6px;"><tr><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td><td valign="middle" align="center" style="padding:0 12px;"><img src="https://newsletter.jaseci.org/img/logo.png" width="24" height="24" alt="" style="display:block;border:0;"></td><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td></tr></table> <!--secdiv-->
 
 ## Community
 
@@ -126,7 +126,7 @@ The fastest way to talk to the team and other builders. RFC chatter, debugging h
   </td></tr>
 </table>
 
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:38px auto 6px;"><tr><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td><td valign="middle" align="center" style="padding:0 12px;"><img src="https://newsletter.jaseci.org/logo.png" width="24" height="24" alt="" style="display:block;border:0;"></td><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td></tr></table> <!--secdiv-->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:38px auto 6px;"><tr><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td><td valign="middle" align="center" style="padding:0 12px;"><img src="https://newsletter.jaseci.org/img/logo.png" width="24" height="24" alt="" style="display:block;border:0;"></td><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td></tr></table> <!--secdiv-->
 
 ## Articles
 
@@ -134,7 +134,7 @@ The fastest way to talk to the team and other builders. RFC chatter, debugging h
 
 Over one Winter semester, 75+ students in Michigan's EECS 449 shipped 17 full-stack AI applications, most of them in Jac. These were real, working products, not chatbot demos, from an adaptive scheduling assistant to a research terminal for prediction-market traders. They got there in a single term because Jac handles the interface, the logic, the data, and the AI in one language, so the teams spent their time building instead of wiring tools together.
 
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:38px auto 6px;"><tr><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td><td valign="middle" align="center" style="padding:0 12px;"><img src="https://newsletter.jaseci.org/logo.png" width="24" height="24" alt="" style="display:block;border:0;"></td><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td></tr></table> <!--secdiv-->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:38px auto 6px;"><tr><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td><td valign="middle" align="center" style="padding:0 12px;"><img src="https://newsletter.jaseci.org/img/logo.png" width="24" height="24" alt="" style="display:block;border:0;"></td><td valign="middle" style="width:44%;"><div style="border-top:1px solid rgba(31,22,14,0.22);height:1px;line-height:1px;font-size:1px;">&nbsp;</div></td></tr></table> <!--secdiv-->
 
 ## Releases
 
@@ -168,7 +168,7 @@ The headline of the 0.30 series: jaclang now ships as a single self-contained `j
 <td valign="middle" style="font-size:13px;color:#6a5f50;letter-spacing:0.02em;font-family:'Inter','Helvetica Neue',Arial,sans-serif;">&copy; 2026 Jaseci Digest. Part of the Jaseci open-source ecosystem.</td>
 <td valign="middle" align="right" style="width:60px;">
 <a href="https://www.jaseci.org" target="_blank" rel="noopener" style="text-decoration:none;">
-<img src="https://newsletter.jaseci.org/logo.png" width="40" height="40" alt="Jaseci" style="border:0;display:block;">
+<img src="https://newsletter.jaseci.org/img/logo.png" width="40" height="40" alt="Jaseci" style="border:0;display:block;">
 </a>
 </td>
 </tr>
