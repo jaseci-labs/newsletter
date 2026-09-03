@@ -137,7 +137,7 @@ walker:pub GetIssues {
         }
 
         items: list[dict[str, any]] = [];
-        for path in sorted(dir_path.glob("*.md")) {
+        for path in sorted(dir_path.`glob("*.md")) {
             if path.name.startswith("_") {
                 continue;
             }
@@ -372,7 +372,7 @@ walker:pub Subscribe {
 
     can subscribe with Root entry {
         addr = self.email.strip();
-        if not addr or not EMAIL_RE.match(addr) or len(addr) > 254 {
+        if not addr or not EMAIL_RE.`match(addr) or len(addr) > 254 {
             report {"ok": False, "error": "Please enter a valid email address."};
             return;
         }

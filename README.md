@@ -13,7 +13,7 @@ The visual design follows the team's editorial template — cream background, al
 jac install
 
 # run the dev server
-jac start
+jac run --serve main.jac
 
 # type-check the sources
 jac check main.jac
@@ -158,14 +158,14 @@ BUTTONDOWN_API_KEY=                # required: single opt-in needs the API
 The site runs as a Jac server on EKS, not as static files (because the subscribe endpoint
 needs a runtime). Pushing to `main` triggers
 [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml), which installs the jac
-toolchain and runs `jac start --scale`. There is no container build and no Node runtime;
+toolchain and runs `jac scale deploy`. There is no container build and no Node runtime;
 the jac binary is shipped to the pods over the bundle PVC.
 
 **Quick local sanity check before pushing:**
 
 ```bash
 jac check main.jac
-jac start
+jac run --serve main.jac
 ```
 
 **Kubernetes manifest:** [`deploy/k8s.yaml`](./deploy/k8s.yaml) — Namespace, Deployment

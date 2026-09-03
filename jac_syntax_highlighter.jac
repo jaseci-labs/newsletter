@@ -16,7 +16,7 @@ import keyword;
 import pygments.lexer as pyglex;
 import from pygments.lexer {
     RegexLexer,
-    include,
+    `include,
     bygroups,
     using,
     words,
@@ -39,7 +39,7 @@ import from pygments { unistring as uni }
 
 # `default` cannot be brace-imported: that spelling is the client-only JS
 # default-import form and raises E5002. Bind it off the module instead.
-glob pyg_default: any = pyglex.default;
+glob pyg_default: any = pyglex.`default;
 
 glob UNI_NAME = "[%s][%s]*" % (uni.xid_start, uni.xid_continue);
 
@@ -129,9 +129,9 @@ class JacLexer(RegexLexer) {
             (r"#.*$", Comment.Single),
             (r"\\\n", Text),
             (r"\\", Text),
-            include("jsx"),
-            include("keywords"),
-            include("soft-keywords"),
+            `include("jsx"),
+            `include("keywords"),
+            `include("soft-keywords"),
             (r"(static\s+can)((?:\s|\\\s)+)", bygroups(Keyword, Text), "funcname"),
             (r"(static\s+def)((?:\s|\\\s)+)", bygroups(Keyword, Text), "funcname"),
             (r"(can)((?:\s|\\\s)+)", bygroups(Keyword, Text), "funcname"),
@@ -173,7 +173,7 @@ class JacLexer(RegexLexer) {
                 bygroups(Keyword.Namespace, Text, Name.Namespace),
                 "fromimport",
             ),
-            include("expr"),
+            `include("expr"),
         ],
         "jsx": [
             # JSX Fragment: <>...</>
@@ -188,7 +188,7 @@ class JacLexer(RegexLexer) {
         ],
         "jsx-fragment": [
             (r"(</>)", Punctuation, "#pop"),
-            include("jsx-children"),
+            `include("jsx-children"),
         ],
         "jsx-tag": [
             # Self-closing tag end: />
@@ -217,11 +217,11 @@ class JacLexer(RegexLexer) {
         ],
         "jsx-spread": [
             (r"\}", Punctuation, "#pop"),
-            include("expr"),
+            `include("expr"),
         ],
         "jsx-expr-attr": [
             (r"\}", Punctuation, "#pop:2"),
-            include("expr"),
+            `include("expr"),
         ],
         "jsx-children-tag": [
             # Closing tag: </Component>
@@ -235,11 +235,11 @@ class JacLexer(RegexLexer) {
                 bygroups(Punctuation, Name.Tag, Punctuation),
                 "#pop:2",
             ),
-            include("jsx-children"),
+            `include("jsx-children"),
         ],
         "jsx-children": [
             # Nested JSX elements
-            include("jsx"),
+            `include("jsx"),
             # JSX expressions: {expr}
             (r"\{", Punctuation, "jsx-expr-child"),
             # Text content (anything except < > { })
@@ -248,7 +248,7 @@ class JacLexer(RegexLexer) {
         ],
         "jsx-expr-child": [
             (r"\}", Punctuation, "#pop"),
-            include("expr"),
+            `include("expr"),
         ],
         "expr": [
             # raw f-strings
@@ -341,7 +341,7 @@ class JacLexer(RegexLexer) {
                 combined("bytesescape", "sqs"),
             ),
             (r"[^\S\n]+", Text),
-            include("numbers"),
+            `include("numbers"),
             (
                 r"(in|is|and|or|not|to|by)\b",
                 Operator.Word,
@@ -352,11 +352,11 @@ class JacLexer(RegexLexer) {
             ),
             (r"\?:|\?|:\+:|!=|==|<<|>>|:=|[-~+/*%=<>&^|.]", Operator),
             (r"[]{}:(),;[]", Punctuation),
-            include("expr-keywords"),
-            include("builtins"),
-            include("magicfuncs"),
-            include("magicvars"),
-            include("name"),
+            `include("expr-keywords"),
+            `include("builtins"),
+            `include("magicfuncs"),
+            `include("magicvars"),
+            `include("name"),
         ],
         "expr-inside-fstring": [
             (r"[{([]", Punctuation, "expr-inside-fstring-inner"),
@@ -378,13 +378,13 @@ class JacLexer(RegexLexer) {
                 "#pop",
             ),
             (r"\s+", Whitespace),  # allow new lines
-            include("expr"),
+            `include("expr"),
         ],
         "expr-inside-fstring-inner": [
             (r"[{([]", Punctuation, "expr-inside-fstring-inner"),
             (r"[])}]", Punctuation, "#pop"),
             (r"\s+", Whitespace),  # allow new lines
-            include("expr"),
+            `include("expr"),
         ],
         "expr-keywords": [
             # Based on https://docs.python.org/3/reference/expressions.html
@@ -799,7 +799,7 @@ class JacLexer(RegexLexer) {
             (UNI_NAME, Name),
         ],
         "funcname": [
-            include("magicfuncs"),
+            `include("magicfuncs"),
             (UNI_NAME, Name.Function, "#pop"),
             pyg_default("#pop"),
         ],
@@ -841,15 +841,15 @@ class JacLexer(RegexLexer) {
             (r"\}\}", String.Escape),
         ],
         "fstringescape": [
-            include("rfstringescape"),
-            include("stringescape"),
+            `include("rfstringescape"),
+            `include("stringescape"),
         ],
         "bytesescape": [
             (r'\\([\\abfnrtv"\']|\n|x[a-fA-F0-9]{2}|[0-7]{1,3})', String.Escape)
         ],
         "stringescape": [
             (r"\\(N\{.*?\}|u[a-fA-F0-9]{4}|U[a-fA-F0-9]{8})", String.Escape),
-            include("bytesescape"),
+            `include("bytesescape"),
         ],
         "fstrings-single": fstring_rules(String.Single),
         "fstrings-double": fstring_rules(String.Double),
@@ -858,41 +858,41 @@ class JacLexer(RegexLexer) {
         "dqf": [
             (r'"', String.Double, "#pop"),
             (r'\\\\|\\"|\\\n', String.Escape),  # included here for raw strings
-            include("fstrings-double"),
+            `include("fstrings-double"),
         ],
         "sqf": [
             (r"'", String.Single, "#pop"),
             (r"\\\\|\\'|\\\n", String.Escape),  # included here for raw strings
-            include("fstrings-single"),
+            `include("fstrings-single"),
         ],
         "dqs": [
             (r'"', String.Double, "#pop"),
             (r'\\\\|\\"|\\\n', String.Escape),  # included here for raw strings
-            include("strings-double"),
+            `include("strings-double"),
         ],
         "sqs": [
             (r"'", String.Single, "#pop"),
             (r"\\\\|\\'|\\\n", String.Escape),  # included here for raw strings
-            include("strings-single"),
+            `include("strings-single"),
         ],
         "tdqf": [
             (r'"""', String.Double, "#pop"),
-            include("fstrings-double"),
+            `include("fstrings-double"),
             (r"\n", String.Double),
         ],
         "tsqf": [
             (r"'''", String.Single, "#pop"),
-            include("fstrings-single"),
+            `include("fstrings-single"),
             (r"\n", String.Single),
         ],
         "tdqs": [
             (r'"""', String.Double, "#pop"),
-            include("strings-double"),
+            `include("strings-double"),
             (r"\n", String.Double),
         ],
         "tsqs": [
             (r"'''", String.Single, "#pop"),
-            include("strings-single"),
+            `include("strings-single"),
             (r"\n", String.Single),
         ],
     };
