@@ -1,9 +1,12 @@
 """Render a Buttondown email source into the two browser-preview HTML files.
 Run after editing the .md so previews stay in sync.
 
-    jac run tools/render_previews.jac                  # default: 003
-    jac run tools/render_previews.jac 005              # email/005.md -> 005.html + 005-preview.html
-    jac run tools/render_previews.jac 004-jachacks-sf  # any stem works
+    jac run --no-serve tools/render_previews.jac 006   # email/006.md -> 006.html + 006-preview.html
+    jac run --no-serve tools/render_previews.jac 004-jachacks-sf   # any stem works
+
+--no-serve is required. [project] kind is "web-app", and since jaclang 0.37 a
+named file resolves the project kind too, so a bare `jac run <file>` here starts
+the dev server and hangs instead of executing the script.
 
 This lives in tools/ rather than next to the sources it renders. A .jac file
 inside email/ makes Jac register that directory as a package named `email`,
