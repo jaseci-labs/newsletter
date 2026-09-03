@@ -64,7 +64,7 @@ def:priv h2(text: str, fmt: str) -> str {
 
 
 def:priv h3(text: str, fmt: str) -> str {
-    m = re.match(r"\[([^\]]+)\]\(([^)]+)\)", text);
+    m = re.`match(r"\[([^\]]+)\]\(([^)]+)\)", text);
     label = m.group(1) if m else text;
     url = m.group(2) if m else "#";
     if fmt == "email" {
@@ -84,9 +84,24 @@ def:priv para(text: str, fmt: str) -> str {
 }
 
 
+"""Split the leading <style> block off the source: returns (css, rest).
+
+The Buttondown source opens with a <style> block carrying the font @import and
+the .desk/.mob/.stack media query. That belongs in <head>, not in the rendered
+body, and it spans several lines, so it is matched with DOTALL rather than by
+the line-at-a-time loop in render_body (which looks for a close tag at column 0
+and would otherwise swallow the whole file).
+"""
+def:priv split_head_css(source: str) -> tuple[str, str] {
+    m = re.`match(r"(?s)\s*<style>(.*?)</style>\s*", source);
+    if m {
+        return (m.group(1).strip(), source[m.end():]);
+    }
+    return ("", source);
+}
+
+
 def:priv render_body(source: str, fmt: str) -> str {
-    # drop the leading font <style> line (it lives in <head>)
-    source = re.sub(r"^\s*<style>@import[^\n]*</style>\s*", "", source, count=1);
     lines = source.split("\n");
     out: list[str] = [];
     i = 0;
@@ -109,7 +124,7 @@ def:priv render_body(source: str, fmt: str) -> str {
             }
             out.append("\n".join(block));
         } elif s[0] == "<" {  # raw HTML block at column 0
-            m = re.match(r"<(\w+)", s);
+            m = re.`match(r"<(\w+)", s);
             tag = m.group(1) if m else "";
             block = [s];
             single = ("</%s>" % tag) in s or s.rstrip().endswith("/>") or tag in VOID_TAGS;
@@ -149,11 +164,14 @@ def:priv render_body(source: str, fmt: str) -> str {
 }
 
 
-def:priv build_email(body: str, issue_no: str) -> str {
+def:priv build_email(body: str, issue_no: str, head_css: str) -> str {
+    # The source's own <style> already carries the @import, so it stands in for
+    # FONT_IMPORT when present. It goes first: CSS ignores a late @import.
+    css = head_css if head_css else FONT_IMPORT;
     head = ('<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width, initial-scale=1">'
             '<meta name="x-apple-disable-message-reformatting"><style>\n%s%s\n</style>'
-            '<title>Jaseci Digest · Issue N.%s</title></head>' % (FONT_IMPORT, INTER, issue_no));
+            '<title>Jaseci Digest · Issue N.%s</title></head>' % (css, INTER, issue_no));
     open_ = ('<body style="margin:0;padding:0;background:#e6e0d4;-webkit-text-size-adjust:100%;'
              "font-family:'Inter','Helvetica Neue',Arial,sans-serif;color:#1f160e;\">"
              '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" '
@@ -167,13 +185,14 @@ def:priv build_email(body: str, issue_no: str) -> str {
 }
 
 
-def:priv build_preview(body: str) -> str {
+def:priv build_preview(body: str, head_css: str) -> str {
+    css = head_css if head_css else FONT_IMPORT;
     head = ('<!DOCTYPE html><html><head><meta charset="utf-8"><style>\n%s%s\n</style>'
             "<style>body{margin:0;background:#cfc8ba;font-family:'Inter','Helvetica Neue',Arial,sans-serif;color:#1f160e;}"
             ".wrap{max-width:600px;margin:24px auto;background:#ffffff;padding:0 0 8px;font-family:'Inter','Helvetica Neue',Arial,sans-serif;color:#1f160e;}"
             ".wrap h2{font-size:22px;text-transform:uppercase;margin:32px 24px 12px;padding-top:18px;}"
             ".wrap h3{font-size:17px;margin:20px 24px 6px;}.wrap h3 a{color:#160f0a;text-decoration:none;}"
-            ".wrap p,.wrap ul{margin:10px 24px;font-size:15px;line-height:1.55;}.wrap a{color:#c0531f;}</style></head>" % (FONT_IMPORT, INTER));
+            ".wrap p,.wrap ul{margin:10px 24px;font-size:15px;line-height:1.55;}.wrap a{color:#c0531f;}</style></head>" % (css, INTER));
     return head + '<body><div class="wrap">' + body + "</div></body></html>";
 }
 
@@ -191,22 +210,26 @@ def:pub render(stem: str) -> str {
     # Issue number for the <title>: leading digits of the stem, else 03.
     # `0*(\d+)` matches exactly when the stem starts with a digit, so narrowing
     # on the match is equivalent to the Python original's separate `\d` guard.
-    lead = re.match(r"0*(\d+)", stem);
+    lead = re.`match(r"0*(\d+)", stem);
     issue_no = lead.group(1).zfill(2) if lead else "03";
     # 003 keeps its "-preview" sibling name; numeric-only stems use "NNN-preview".
     preview_stem = "%s-preview" % stem.split("-")[0];
 
     src = HERE / ("%s.md" % stem);
     source = src.read_text(encoding="utf-8");
+    # The leading <style> block is hoisted into <head>; the rest is the body.
+    split = split_head_css(source);
+    head_css = split[0];
+    body_src = split[1];
 
     email_out = HERE / ("%s.html" % stem);
     preview_out = HERE / ("%s.html" % preview_stem);
     email_out.write_text(
-        localize_images(build_email(render_body(source, "email"), issue_no)),
+        localize_images(build_email(render_body(body_src, "email"), issue_no, head_css)),
         encoding="utf-8"
     );
     preview_out.write_text(
-        localize_images(build_preview(render_body(source, "preview"))),
+        localize_images(build_preview(render_body(body_src, "preview"), head_css)),
         encoding="utf-8"
     );
     return "regenerated %s and %s from %s" % (email_out.name, preview_out.name, src.name);

@@ -97,7 +97,7 @@ jobs:
           # declare has to be listed in [dependencies] -- see the python-dotenv
           # entry in jac.toml.
           #
-          # No --dry-run rehearsal below: `jac start --scale --dry-run` is only
+          # No --dry-run rehearsal below: `jac scale deploy --dry-run` is only
           # implemented for the kubernetes-microservice target and no-ops with a
           # warning on the plain `kubernetes` target this app uses.
           jac install --scale
@@ -169,7 +169,7 @@ jobs:
               --ignore-not-found --force --grace-period=0 2>/dev/null || true
             kubectl wait --for=delete pod/newsletter-code-sync -n "$NS" \
               --timeout=60s 2>/dev/null || true
-            if jac start main.jac --scale; then
+            if jac scale deploy main.jac; then
               echo "::endgroup::"
               echo "Deployed successfully on attempt ${attempt}."
               exit 0
