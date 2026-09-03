@@ -9,6 +9,12 @@ description = "Biweekly newsletter for the Jaseci & Jac open-source ecosystem."
 # "web-app" is server walkers + client UI, which is what this is. Verify with
 # `jac run --show` -- it must say action: serve, not action: execute.
 kind = "web-app"
+# Pin the compiler. Without this the deploy logs "downloading the latest
+# published (stable) jac release", so pods silently take whatever jaclang is
+# newest -- which is how production broke when 0.37 shipped, with no repo
+# change involved. 0.35.1 is the exact version of the last fully-working
+# deploy (2026-08-12). Raise this deliberately, after verifying a deploy.
+jac-version = "0.35.1"
 
 [serve]
 base_route_app = "app"
