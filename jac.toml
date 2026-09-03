@@ -2,6 +2,13 @@
 name = "jaseci-digest"
 version = "0.1.0"
 description = "Biweekly newsletter for the Jaseci & Jac open-source ecosystem."
+# REQUIRED since jaclang 0.37: the project kind decides execute-vs-serve, and an
+# undeclared kind defaults to "cli". That is what took the site down after the
+# 0.37 upgrade: `jac scale deploy` sealed the app as kind=cli, so the pod ran
+# main.jac as a script, exited, and every request 503'd (including /healthz).
+# "web-app" is server walkers + client UI, which is what this is. Verify with
+# `jac run --show` -- it must say action: serve, not action: execute.
+kind = "web-app"
 
 [serve]
 base_route_app = "app"
@@ -63,7 +70,13 @@ GH_TOKEN = "${GITHUB_TOKEN}"
 
 [dependencies]
 markdown = ">=3.5"
-pyyaml = ">=6.0"
+# Floor is 6.0.3, not 6.0: the 0.37 runtime bundles CPython 3.14, and 6.0.3 is
+# the first (and so far only) PyYAML release publishing cp314 wheels. Anything
+# older has no matching distribution for the target ABI, which is what made the
+# deploy log say "Could not find a version that satisfies the requirement
+# pyyaml>=6.0 (from versions: none)" and fall back to a thin bundle. PyYAML is
+# the only C-extension dependency here; the rest are pure Python.
+pyyaml = ">=6.0.3"
 # Required by jac_syntax_highlighter.jac (RegexLexer + the token types) and by
 # markdown's `codehilite` extension. It currently resolves anyway because the jac
 # runtime bundles pygments in its own site directory, but that is an implementation
@@ -73,7 +86,7 @@ pygments = ">=2.17"
 # imports dotenv. jaclang's Kubernetes realizer does, at module scope
 # (jaclang/scale/runtime/realizer/kubernetes_realizer.jac:3 --
 # `import from dotenv { load_dotenv }`), but neither the shipped runtime nor
-# `jac install --scale` installs python-dotenv, so `jac scale deploy` dies with
+# `jac install --scale` installs python-dotenv, so `jac start --scale` dies with
 # ModuleNotFoundError before it reaches the cluster. Declaring it here puts it in
 # .jac/venv, which is on the import path for the deploy. Drop this once jaclang
 # declares its own scale dependency.
